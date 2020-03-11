@@ -7,13 +7,17 @@ Create a table in spanner
         Value INT64 NOT NULL)
 ```
 For running the program use the following command
-```sh
+
 Atomic transaction demo run:
-
-mvn clean compile exec:java -Dexec.mainClass=com.example.spanner.ReadWriteTransactionMultiThreadTest -Dexec.args="demo test atomic 10" -Dexec.cleanupDaemonThreads=false
-
+```sh
+mvn clean compile exec:java -Dexec.mainClass=com.example.spanner.ReadWriteTransactionMultiThreadTest \ 
+-Dexec.args="demo test atomic 10" -Dexec.cleanupDaemonThreads=false
+```
 Non-atomic transaction demo run:
-mvn clean compile exec:java -Dexec.mainClass=com.example.spanner.ReadWriteTransactionMultiThreadTest -Dexec.args="demo test nonatomic 10" -Dexec.cleanupDaemonThreads=false
+
+```sh
+mvn clean compile exec:java -Dexec.mainClass=com.example.spanner.ReadWriteTransactionMultiThreadTest \ 
+-Dexec.args="demo test nonatomic 10" -Dexec.cleanupDaemonThreads=false
 ```
 
 ##Results are shown as:
