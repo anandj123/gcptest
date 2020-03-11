@@ -20,7 +20,7 @@ mvn clean compile exec:java -Dexec.mainClass=com.example.spanner.ReadWriteTransa
 -Dexec.args="demo test nonatomic 10" -Dexec.cleanupDaemonThreads=false
 ```
 
-##Results are shown as:
+## Results are shown as:
 
 ### Atomic test
 ```sh
@@ -82,6 +82,7 @@ Value after the update : 5
 As you saw during the non-atomic run values are overwritten by some of the threads.
 
 Opencensus tracing is also enabled in the project. So you could go to stackdriver tracing to see the tracing examples.
+
 ![Tracing screenshot](./images/trace.png)
 
  
