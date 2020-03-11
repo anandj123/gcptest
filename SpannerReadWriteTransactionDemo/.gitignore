@@ -7,7 +7,7 @@
 *.log
 *.classpath
 .vscode/*
-
+bin/*
 # BlueJ files
 *.ctxt
 
