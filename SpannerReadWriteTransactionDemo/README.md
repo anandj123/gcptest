@@ -79,7 +79,7 @@ Updating value to : 5
 
 Value after the update : 5
 ```
-As you saw during the non-atomic run values are overwritten by some of the threads.
+As seen during the non-atomic run values are overwritten by some of the threads.
 
 Opencensus tracing is also enabled in the project. So you could go to stackdriver tracing to see the tracing examples.
 
