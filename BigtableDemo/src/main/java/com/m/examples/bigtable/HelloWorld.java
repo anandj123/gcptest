@@ -46,6 +46,20 @@ import java.io.IOException;
  * </ul>
  * 
  * mvn clean compile exec:java -Dexec.mainClass=com.m.examples.bigtable.HelloWorld -Dexec.args="anand-spanner demo-instance" -Dexec.cleanupDaemonThreads=false
+ * 
+ * Quickstart with HBase shell
+ * https://cloud.google.com/bigtable/docs/quickstart-hbase
+ * 
+ * git clone https://github.com/GoogleCloudPlatform/cloud-bigtable-examples.git
+ * cd cloud-bigtable-examples/quickstart
+ * 
+ * then run
+ * ./quickstart.sh
+ * 
+ * Command you can use in the shell
+ * list
+ * scan 'test-table'
+ * get 'test-table', 'rowKey0'
  */
 public class HelloWorld {
 
@@ -97,7 +111,7 @@ public class HelloWorld {
     writeToTable();
     readSingleRow();
     readTable();
-    deleteTable();
+    //deleteTable();
     dataClient.close();
     adminClient.close();
   }
