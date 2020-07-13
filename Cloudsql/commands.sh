@@ -16,6 +16,11 @@ chmod +x cloud_sql_proxy
 pip3 install pymysql
 
 ```
+## Finding out if the cloud sql proxy is running
 
+```sh
+lsof -i :3306
+
+```
 
 
