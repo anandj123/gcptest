@@ -7,19 +7,20 @@
   <groupId>tomcat-sample</groupId>
   <artifactId>test</artifactId>
   <version>1.0-SNAPSHOT</version>
-
   <packaging>war</packaging>
-
-
-
   <name>test Maven Webapp</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
-
+  <parent>
+    <groupId>com.google.cloud.samples</groupId>
+    <artifactId>shared-configuration</artifactId>
+    <version>1.0.18</version>
+    <relativePath></relativePath>
+  </parent>
   <properties>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
   </properties>
 
   <dependencies>
@@ -37,7 +38,31 @@
       <type>jar</type>
       <scope>provided</scope>
     </dependency>
-  
+    
+    
+    <dependency>
+      <groupId>io.opencensus</groupId>
+      <artifactId>opencensus-api</artifactId>
+      <version>0.26.0</version>
+    </dependency>
+    <dependency>
+      <groupId>io.opencensus</groupId>
+      <artifactId>opencensus-exporter-trace-stackdriver</artifactId>
+      <version>0.26.0</version>
+    </dependency>
+    <dependency>
+      <groupId>io.opencensus</groupId>
+      <artifactId>opencensus-impl</artifactId>
+      <version>0.26.0</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+       <groupId>joda-time</groupId>
+       <artifactId>joda-time</artifactId>
+       <version>2.10.6</version>
+    </dependency>
+    <!-- [END trace_setup_java_maven] -->
+    
   </dependencies>
 
   <build>

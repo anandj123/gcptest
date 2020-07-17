@@ -30,3 +30,4 @@ Cloudsql/cloud_sql_proxy
 Cloudsql/.vscode/settings.json
 java-python/.jython_cache/*
 tomcat-sample/test/target/*
+tomcat-sample/.vscode/settings.json
