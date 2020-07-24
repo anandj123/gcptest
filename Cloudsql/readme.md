@@ -95,4 +95,11 @@ gcloud sql instances patch mysqlm --enable-bin-log --backup-start-time 12:00
 
 gcloud sql instances patch mysqlm
 ```
+### Running sysbench for load testing CloudSQL
 
+``` sh
+
+sysbench /usr/local/share/sysbench/oltp_read_write.lua --mysql-host=127.0.0.1 --mysql-port=3307 --mysql-user=root --mysql-password='root' --mysql-db=test --db-driver=mysql --table-size=10000000 --delete_inserts=10 --index_updates=10 --non_index_updates=10 --report-interval=10 --time=60 run
+
+
+```
