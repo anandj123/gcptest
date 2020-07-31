@@ -1,0 +1,5 @@
+{
+    "query": "fetch cloudsql_database :: cloudsql.googleapis.com/database/mysql/queries 
+    | filter resource.project_id == '701417641712' && (resource.database_id == 'anand-bq-test-2:mysqm3-r1' && resource.region == 'us-west1')
+    | window 60m"
+}
