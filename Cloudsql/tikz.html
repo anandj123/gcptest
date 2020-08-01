@@ -1,0 +1,24 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="http://tikzjax.com/v1/fonts.css">
+    <script src="http://tikzjax.com/v1/tikzjax.js"></script>
+</head>
+<body>
+    <script type="text/tikz">
+        \begin{tikzpicture}
+       
+            \draw[step=1cm,gray,very thin] (-4,-4) grid (18,18);
+            \draw[thick,->] (0,0) -- (4.5,0) node[anchor=north west] {x axis};
+            \draw[thick,->] (0,0) -- (0,4.5) node[anchor=south east] {y axis};
+
+            \foreach \x in {0,1,2,3,4}
+                \draw (\x cm,1pt) -- (\x cm,-1pt) node[anchor=north] {$\x$};
+            \foreach \y in {0,1,2,3,4}
+                \draw (1pt,\y cm) -- (-1pt,\y cm) node[anchor=east] {$\y$};
+
+            \draw[step=1cm,gray,very thin]  (0,0) -- (4,0);
+            \draw[step=1cm,gray,very thin]  (0,0) circle (4);
+            \draw[step=1cm,gray,very thick]  (0,0) .. controls (0,4) and (4,0) .. (4,4);
+
+        \end{tikzpicture}
+      </script>
+</body>
