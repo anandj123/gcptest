@@ -162,3 +162,11 @@ curl -X POST \
 -H "Authorization: Bearer "$(gcloud auth application-default print-access-token) \
 -H "Content-Type: application/json; charset=utf-8" \
 https://monitoring.googleapis.com/v3/projects/anand-bq-test-2/timeSeries:query -d @request2.json
+
+### YCSB spanner loads
+
+```sh
+
+./bin/ycsb run cloudspanner -P cloudspanner/conf/cloudspanner.properties -P workloads/workloadb -p recordcount=100 -p operationcount=10 -threads 1 -s
+
+```
