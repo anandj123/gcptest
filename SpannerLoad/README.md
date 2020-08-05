@@ -17,12 +17,14 @@ Use YCSB to load test spanner
      cloudspanner.instance = test-1
      cloudspanner.database = hello
 
-
-#compile the YCSB library
-mvn -pl com.yahoo.ycsb:cloudspanner-binding -am clean install
+# compile YCSB all library
+# from the top level use
+mvn package -DskipTests=true
 
 #login to gcloud and run the workloada (insert a million record to the cloud spanner)
 gcloud auth application-default login; ./bin/ycsb load cloudspanner -P cloudspanner/conf/cloudspanner.properties -P workloads/workloada -p recordcount=10000000 -p cloudspanner.batchinserts=1000 -threads 100 -s
 
 
 ```
+
+# Spanner Admin client demo in Golang
