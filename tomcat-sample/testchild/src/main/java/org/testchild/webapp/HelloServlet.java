@@ -1,43 +1,33 @@
-package org.test.webapp;
+package org.testchild.webapp;
 
 import com.google.auth.oauth2.AccessToken;
 import com.google.auth.oauth2.GoogleCredentials;
 import io.opencensus.common.Scope;
 import io.opencensus.exporter.trace.stackdriver.StackdriverTraceConfiguration;
 import io.opencensus.exporter.trace.stackdriver.StackdriverTraceExporter;
+import io.opencensus.trace.AttributeValue;
+import io.opencensus.trace.Link;
+import io.opencensus.trace.Span;
+import io.opencensus.trace.SpanBuilder;
+import io.opencensus.trace.SpanContext;
 import io.opencensus.trace.Tracer;
 import io.opencensus.trace.Tracing;
+import io.opencensus.trace.propagation.SpanContextParseException;
+import io.opencensus.trace.propagation.TextFormat;
 import io.opencensus.trace.samplers.Samplers;
 // Import required java libraries
 import java.io.*;
-//import java.io.IOException;
-//import java.io.IOException;
-//import java.net.URI;
-/*
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-*/
-import java.net.HttpURLConnection;
-import java.net.URL;
-
-import io.opencensus.trace.propagation.TextFormat;
+import java.io.IOException;
 import java.util.Date;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 import javax.servlet.*;
 import javax.servlet.http.*;
-
-// import org.apache.http.Header;
-// import org.apache.http.HttpEntity;
-// import org.apache.http.client.methods.CloseableHttpResponse;
-// import org.apache.http.client.methods.HttpGet;
-// import org.apache.http.impl.client.CloseableHttpClient;
-// import org.apache.http.impl.client.HttpClients;
-// import org.apache.http.util.EntityUtils;
 import org.joda.time.DateTime;
 
 // Extend HttpServlet class
 public class HelloServlet extends HttpServlet {
-  private String message;
   // [START trace_setup_java_custom_span]
   private static final Tracer tracer = Tracing.getTracer();
 
@@ -46,6 +36,14 @@ public class HelloServlet extends HttpServlet {
     tracer.getCurrentSpan().addAnnotation("Doing initial work");
     // ...
   }
+
+  // private static void doFinalWork() {
+  //   // ...
+  //   tracer.getCurrentSpan().addAnnotation("Hello world!");
+  //   // ...
+  // }
+
+  private String message;
 
   public void init() throws ServletException {
     try {
@@ -57,13 +55,13 @@ public class HelloServlet extends HttpServlet {
     // Do required initialization
     try (
       Scope ss = tracer
-        .spanBuilder("Initial Load Span init()")
+        .spanBuilder("Initial load Child Microservice init()")
         .setSampler(Samplers.alwaysSample())
         .startScopedSpan()
     ) {
       doInitialWork();
       message =
-        "Hello World from Anand Servlet with Stackdriver Opencensus tracing enabled.";
+        "Test child microservice with Stackdriver Opencensus tracing enabled.";
     }
   }
 
@@ -92,7 +90,6 @@ public class HelloServlet extends HttpServlet {
         .build()
     );
   }
-
   // [END trace_setup_java_create_and_register_with_token]
 
   // [START trace_setup_java_register_exporter]
@@ -102,50 +99,62 @@ public class HelloServlet extends HttpServlet {
       StackdriverTraceConfiguration.builder().setProjectId(projectId).build()
     );
   }
-
   // [END trace_setup_java_register_exporter]
 
-  private static final TextFormat textFormat = Tracing.getPropagationComponent().getB3Format();
-    private static final TextFormat.Setter setter = new TextFormat.Setter<HttpURLConnection>() {
-        public void put(HttpURLConnection carrier, String key, String value) {
-            carrier.setRequestProperty(key, value);
-        }
-    };
+  private static final TextFormat textFormat = Tracing
+    .getPropagationComponent()
+    .getB3Format();
+  private static final TextFormat.Getter<HttpServletRequest> getter = new TextFormat.Getter<HttpServletRequest>() {
+
+    @Override
+    public String get(HttpServletRequest httpRequest, String s) {
+      return httpRequest.getHeader(s);
+    }
+  };
 
   public void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-    try (
-      Scope ss = tracer
-        .spanBuilder("Parent_Span_doGet")
-        .setSampler(Samplers.alwaysSample())
-        .startScopedSpan()
-    ) {
-      tracer.getCurrentSpan().addAnnotation("Start parent work");
-      
-      response.setContentType("text/html");      
-      PrintWriter out = response.getWriter();
-      out.println(message + "<br>");
-      
-      out.println("starting child call <br>");
+    SpanContext spanContext;
+    SpanBuilder spanBuilder;
 
-      HttpURLConnection conn = (HttpURLConnection) new URL("http://localhost:8080/testchild/hello").openConnection();
-      
-      // Inject current span context to header for remote distributed tracing
-      textFormat.inject(tracer.getCurrentSpan().getContext(), conn, setter);
+    String spanName = request.getMethod() + " " + request.getRequestURI();
 
-      StringBuilder result = new StringBuilder();
-      BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-      String line;
-      while ((line = rd.readLine()) != null) {
-          result.append(line);
-      }
-      rd.close();
-      out.println(result.toString());
-      tracer.getCurrentSpan().addAnnotation("Finished parent work");
+    try {
+      spanContext = textFormat.extract(request, getter);
+      spanBuilder =
+        tracer.spanBuilderWithRemoteParent("Child_Span_doGet", spanContext);
+    } catch (SpanContextParseException e) {
+      spanBuilder = tracer.spanBuilder(spanName);
+      System.out.println("Parent Span is not present");
     }
-  }
 
-  public void destroy() {
-    // do nothing.
+    Span span = spanBuilder
+      .setRecordEvents(true)
+      .setSampler(Samplers.alwaysSample())
+      .startSpan();
+
+    PrintWriter out = response.getWriter();
+
+    span.addAnnotation("Starting child work");
+
+    response.setContentType("text/html");
+    out.println(message + "<br>");
+    
+    @SuppressWarnings("unchecked")
+    Enumeration<String> headerNames = request.getHeaderNames();
+    if (headerNames != null) {
+      while (headerNames.hasMoreElements()) {
+        String key = headerNames.nextElement();
+        String value = request.getHeader(key);
+        System.out.println(
+          "Header: Key [" + key + "] value [" + value + "] <br>"
+        );
+        out.println("Header: Key [" + key + "] value [" + value + "] <br>");
+      }
+    }
+
+    span.addAnnotation("Finished child work");
+
+    span.end();
   }
 }

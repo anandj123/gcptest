@@ -1,5 +1,5 @@
 <html>
 <body>
-<h2>Hello World from Anand!</h2>
+<h2>Test main app</h2>
 </body>
 </html>

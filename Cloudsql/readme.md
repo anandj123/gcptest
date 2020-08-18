@@ -89,6 +89,13 @@ gcloud beta sql instances create mysqlm3-r1 \
 gcloud sql instances describe mysqlm3 --format="default(ipAddresses)"
 
 
+# Promote the replica as master
+gcloud sql instances promote-replica mysqm3-r1
+
+
+# Make the master the read-replica of the slave
+gcloud sql instances create mysqlm3 --master-instance-name=mysqm3-r1
+
 ```
 ### Running sysbench for load testing CloudSQL
 
