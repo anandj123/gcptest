@@ -7,6 +7,7 @@ import io.opencensus.exporter.trace.stackdriver.StackdriverTraceConfiguration;
 import io.opencensus.exporter.trace.stackdriver.StackdriverTraceExporter;
 import io.opencensus.trace.Tracer;
 import io.opencensus.trace.Tracing;
+import io.opencensus.trace.propagation.TextFormat;
 import io.opencensus.trace.samplers.Samplers;
 // Import required java libraries
 import java.io.*;
@@ -20,12 +21,9 @@ import java.net.http.HttpResponse;
 */
 import java.net.HttpURLConnection;
 import java.net.URL;
-
-import io.opencensus.trace.propagation.TextFormat;
 import java.util.Date;
 import javax.servlet.*;
 import javax.servlet.http.*;
-
 // import org.apache.http.Header;
 // import org.apache.http.HttpEntity;
 // import org.apache.http.client.methods.CloseableHttpResponse;
@@ -105,12 +103,15 @@ public class HelloServlet extends HttpServlet {
 
   // [END trace_setup_java_register_exporter]
 
-  private static final TextFormat textFormat = Tracing.getPropagationComponent().getB3Format();
-    private static final TextFormat.Setter setter = new TextFormat.Setter<HttpURLConnection>() {
-        public void put(HttpURLConnection carrier, String key, String value) {
-            carrier.setRequestProperty(key, value);
-        }
-    };
+  private static final TextFormat textFormat = Tracing
+    .getPropagationComponent()
+    .getB3Format();
+  private static final TextFormat.Setter setter = new TextFormat.Setter<HttpURLConnection>() {
+
+    public void put(HttpURLConnection carrier, String key, String value) {
+      carrier.setRequestProperty(key, value);
+    }
+  };
 
   public void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
@@ -121,23 +122,28 @@ public class HelloServlet extends HttpServlet {
         .startScopedSpan()
     ) {
       tracer.getCurrentSpan().addAnnotation("Start parent work");
-      
-      response.setContentType("text/html");      
+
+      response.setContentType("text/html");
       PrintWriter out = response.getWriter();
       out.println(message + "<br>");
-      
+
       out.println("starting child call <br>");
 
-      HttpURLConnection conn = (HttpURLConnection) new URL("http://localhost:8080/testchild/hello").openConnection();
-      
+      HttpURLConnection conn = (HttpURLConnection) new URL(
+        "http://localhost:8080/testchild/hello"
+      )
+      .openConnection();
+
       // Inject current span context to header for remote distributed tracing
       textFormat.inject(tracer.getCurrentSpan().getContext(), conn, setter);
 
       StringBuilder result = new StringBuilder();
-      BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+      BufferedReader rd = new BufferedReader(
+        new InputStreamReader(conn.getInputStream())
+      );
       String line;
       while ((line = rd.readLine()) != null) {
-          result.append(line);
+        result.append(line);
       }
       rd.close();
       out.println(result.toString());

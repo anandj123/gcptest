@@ -32,16 +32,8 @@ public class HelloServlet extends HttpServlet {
   private static final Tracer tracer = Tracing.getTracer();
 
   private static void doInitialWork() {
-    // ...
     tracer.getCurrentSpan().addAnnotation("Doing initial work");
-    // ...
   }
-
-  // private static void doFinalWork() {
-  //   // ...
-  //   tracer.getCurrentSpan().addAnnotation("Hello world!");
-  //   // ...
-  // }
 
   private String message;
 
@@ -71,7 +63,6 @@ public class HelloServlet extends HttpServlet {
       StackdriverTraceConfiguration.builder().build()
     );
   }
-
   // [END trace_setup_java_create_and_register]
 
   // [START trace_setup_java_create_and_register_with_token]
@@ -139,7 +130,7 @@ public class HelloServlet extends HttpServlet {
 
     response.setContentType("text/html");
     out.println(message + "<br>");
-    
+
     @SuppressWarnings("unchecked")
     Enumeration<String> headerNames = request.getHeaderNames();
     if (headerNames != null) {
