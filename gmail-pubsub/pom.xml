@@ -1,0 +1,166 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+ 
+  <groupId>com.google.cloud.pso</groupId>
+  <artifactId>stateful-dataflow</artifactId>
+  <version>1.0-SNAPSHOT</version>
+ 
+  <properties>
+    <maven.compiler.source>1.7</maven.compiler.source>
+    <maven.compiler.target>1.7</maven.compiler.target>
+  </properties>
+ 
+
+
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.google.cloud</groupId>
+        <artifactId>libraries-bom</artifactId>
+        <version>9.1.0</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+
+
+  <dependencies>
+    
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>23.6-jre</version>
+    </dependency> 
+    
+<!--GMAIL API -->
+<dependency>
+  <groupId>com.google.api-client</groupId>
+  <artifactId>google-api-client</artifactId>
+  <version>1.23.0</version>
+</dependency>
+<dependency>
+  <groupId>com.google.oauth-client</groupId>
+  <artifactId>google-oauth-client-jetty</artifactId>
+  <version>1.23.0</version>
+</dependency>
+<dependency>
+  <groupId>com.google.apis</groupId>
+  <artifactId>google-api-services-gmail</artifactId>
+  <version>v1-rev83-1.23.0</version>
+</dependency>
+
+<!-- PUBSUB API -->
+
+<dependency>
+  <groupId>com.google.cloud</groupId>
+  <artifactId>google-cloud-shared-dependencies</artifactId>
+  <version>0.10.0</version>
+  <type>pom</type>
+  <scope>import</scope>
+</dependency>
+
+
+<dependency>
+    <groupId>com.google.cloud</groupId>
+    <artifactId>google-cloud-pubsub</artifactId>
+  </dependency>
+
+<dependency>
+  <groupId>com.google.errorprone</groupId>
+  <artifactId>error_prone_annotations</artifactId>
+  <version>2.4.0</version>
+</dependency>
+
+
+<!-- https://mvnrepository.com/artifact/com.google.protobuf/protobuf-java -->
+<dependency>
+  <groupId>com.google.protobuf</groupId>
+  <artifactId>protobuf-java</artifactId>
+  <version>4.0.0-rc-2</version>
+</dependency>
+
+
+
+
+
+<!-- https://mvnrepository.com/artifact/com.google.auth/google-auth-library-oauth2-http -->
+<dependency>
+  <groupId>com.google.auth</groupId>
+  <artifactId>google-auth-library-oauth2-http</artifactId>
+  <version>0.21.1</version>
+</dependency>
+
+
+
+
+
+<dependency>
+  <groupId>org.apache.httpcomponents</groupId>
+  <artifactId>httpcore</artifactId>
+  <version>4.4.8</version>
+</dependency>
+
+
+
+
+  <dependency>
+   <groupId>io.grpc</groupId>
+   <artifactId>grpc-netty</artifactId>
+   <version>1.1.2</version>
+ </dependency>
+
+<dependency>
+ <groupId>io.grpc</groupId>
+ <artifactId>grpc-protobuf</artifactId>
+ <version>1.1.2</version>
+</dependency>
+
+<dependency>
+ <groupId>io.grpc</groupId>
+ <artifactId>grpc-stub</artifactId>
+ <version>1.1.2</version>
+</dependency>
+
+
+
+
+  
+
+  
+  
+
+  <dependency>
+    <groupId>com.google.code.gson</groupId>
+    <artifactId>gson</artifactId>
+    <version>2.8.5</version>
+  </dependency>
+
+
+
+
+
+
+  <dependency>
+    <groupId>org.json</groupId>
+    <artifactId>json</artifactId>
+    <version>20190722</version>
+  </dependency>
+
+
+
+
+
+
+
+
+</dependencies>
+
+
+
+
+
+</project>
