@@ -1,15 +1,11 @@
 package com.google.cloud.pso.pipeline;
+
 import com.google.api.core.ApiFuture;
-import com.google.cloud.pubsub.v1.MessageReceiver;
 import com.google.cloud.pubsub.v1.stub.GrpcSubscriberStub;
 import com.google.cloud.pubsub.v1.stub.SubscriberStub;
 import com.google.cloud.pubsub.v1.stub.SubscriberStubSettings;
 import com.google.cloud.pubsub.v1.Publisher;
 import com.google.common.collect.ImmutableMap;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
 import com.google.protobuf.ByteString;
 import com.google.pubsub.v1.AcknowledgeRequest;
 import com.google.pubsub.v1.ProjectSubscriptionName;
@@ -18,29 +14,23 @@ import com.google.pubsub.v1.PullRequest;
 import com.google.pubsub.v1.PullResponse;
 import com.google.pubsub.v1.ReceivedMessage;
 import com.google.pubsub.v1.TopicName;
-
-import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
-
-
-
-
-
+import java.util.Map;
 public class test2 {
 
   public static void main(String... args) throws Exception {
     String projectId = "anand-1-291314";
     String subscriptionId = "gmail-push-sub";
     Integer numOfMessages = 10;
+    while(true) {
+      subscribeSyncExample(projectId, subscriptionId, numOfMessages);
+      Thread.sleep(5000);
+    }
     
-
-    subscribeSyncExample(projectId, subscriptionId, numOfMessages);
   }
 
   public static void subscribeSyncExample(String projectId, String subscriptionId, Integer numOfMessages) throws IOException {
@@ -73,7 +63,8 @@ public class test2 {
         JSONObject email = new JSONObject(m);
         System.out.println(email.get("emailAddress"));
         System.out.println(email.get("historyId"));
-        List<String> m4 = t.printMessage((String)email.get("emailAddress"), (int) email.get("historyId"));
+        Thread.sleep(2000);
+        Map<String, String> m4 = t.printMessage((String)email.get("emailAddress"), (int) email.get("historyId"));
 
         String targetTopicId = "gmail-messages";
         publishWithCustomAttributesExample(projectId, targetTopicId, m4);
@@ -92,11 +83,13 @@ public class test2 {
         // Use acknowledgeCallable().futureCall to asynchronously perform this operation.
         subscriber.acknowledgeCallable().call(acknowledgeRequest);
       }
+    } catch(Exception e){
+      e.printStackTrace();
     }
   }
 
 
-  public static void publishWithCustomAttributesExample(String projectId, String topicId, List<String>m4){
+  public static void publishWithCustomAttributesExample(String projectId, String topicId, Map<String,String>m4){
     
     TopicName topicName = TopicName.of(projectId, topicId);
     Publisher publisher = null;
@@ -104,7 +97,7 @@ public class test2 {
     try {
       // Create a publisher instance with default settings bound to the topic
       publisher = Publisher.newBuilder(topicName).build();
-      for(String m : m4){
+      for(String m : m4.values()){
         
         ByteString data = ByteString.copyFromUtf8(m);
         PubsubMessage pubsubMessage =

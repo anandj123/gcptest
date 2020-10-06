@@ -21,7 +21,9 @@ import java.math.BigInteger;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class test {
     private static final String APPLICATION_NAME = "Gmail API Java Quickstart";
@@ -55,8 +57,8 @@ public class test {
         HttpRequestInitializer requestInitializer = new HttpCredentialsAdapter(credentials);
         return requestInitializer;
     }
-    public List<String> printMessage(String user, int historyId){
-        List<String> retval = new ArrayList<String>();
+    public Map<String,String> printMessage(String user, int historyId){
+        HashMap<String,String> retval = new HashMap<String,String>();
         try{
             final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
             Gmail service = new Gmail.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentialsSA())
@@ -71,7 +73,7 @@ public class test {
             List<com.google.api.services.gmail.model.History> hi = response.getHistory();
             
             
-            if (hi.isEmpty()) {
+            if (hi== null || hi.isEmpty()) {
                 System.out.println("No labels found.");
             } else {
                 System.out.println("threads:");
@@ -84,12 +86,14 @@ public class test {
                         Message m2 = service.users().messages().get(user, m3).execute();
                         String m4 = new Gson().toJson(m2);
                         
-                        System.out.printf("Email raw - %s\n", m4);
-                        retval.add(m4);
+                        //System.out.printf("Email raw - %s\n", m4);
+                        retval.put(m3, m4);
+                        
                     }
                 }
             } 
         } catch(IOException  | GeneralSecurityException e){
+            e.printStackTrace();
         } 
         return retval;
     }
