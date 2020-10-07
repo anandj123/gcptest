@@ -30,7 +30,6 @@ public class test2 {
       subscribeSyncExample(projectId, subscriptionId, numOfMessages);
       Thread.sleep(5000);
     }
-    
   }
 
   public static void subscribeSyncExample(String projectId, String subscriptionId, Integer numOfMessages) throws IOException {
@@ -55,11 +54,8 @@ public class test2 {
       PullResponse pullResponse = subscriber.pullCallable().call(pullRequest);
       List<String> ackIds = new ArrayList<>();
       for (ReceivedMessage message : pullResponse.getReceivedMessagesList()) {
-        // Handle received message
-        // ...
         String m = message.getMessage().getData().toStringUtf8();
-        //m=m.replace("\"", "");
-        //m = m.replace("\\", "");
+        
         JSONObject email = new JSONObject(m);
         System.out.println(email.get("emailAddress"));
         System.out.println(email.get("historyId"));
@@ -79,7 +75,6 @@ public class test2 {
             .setSubscription(subscriptionName)
             .addAllAckIds(ackIds)
             .build();
-
         // Use acknowledgeCallable().futureCall to asynchronously perform this operation.
         subscriber.acknowledgeCallable().call(acknowledgeRequest);
       }
@@ -88,17 +83,14 @@ public class test2 {
     }
   }
 
-
-  public static void publishWithCustomAttributesExample(String projectId, String topicId, Map<String,String>m4){
-    
+  public static void publishWithCustomAttributesExample(String projectId, String topicId, Map<String,String>m4){ 
     TopicName topicName = TopicName.of(projectId, topicId);
     Publisher publisher = null;
 
     try {
       // Create a publisher instance with default settings bound to the topic
       publisher = Publisher.newBuilder(topicName).build();
-      for(String m : m4.values()){
-        
+      for(String m : m4.values()){  
         ByteString data = ByteString.copyFromUtf8(m);
         PubsubMessage pubsubMessage =
             PubsubMessage.newBuilder()
@@ -111,8 +103,6 @@ public class test2 {
         String messageId = messageIdFuture.get();
         System.out.println("Published a message with custom attributes: " + messageId);
       }
-      
-
     } catch(Exception e) {} finally {
       try {
         if (publisher != null) {
@@ -121,8 +111,6 @@ public class test2 {
           publisher.awaitTermination(1, TimeUnit.MINUTES);
         }
       } catch(Exception e2){}
-      
     }
   }
-
 }
