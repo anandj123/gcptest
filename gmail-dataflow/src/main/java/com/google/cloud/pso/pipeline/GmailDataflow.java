@@ -37,11 +37,9 @@ import org.joda.time.Duration;
 /**
  * Build and execute the pipeline as follows: 
 
- RUNNER=DataflowRunner
+RUNNER=DirectRunner
 
- RUNNER=DirectRunner
-
- 
+RUNNER=DataflowRunner 
 PROJECT_ID=anand-1-291314
 BUCKET_NAME=anand-1
 TOPIC_NAME="gmail-push"
@@ -77,8 +75,8 @@ mvn clean compile exec:java -Dexec.mainClass=com.google.cloud.pso.pipeline.Gmail
 # Once the template location is populated with the jar files then they can be launched
 # using the gcloud dataflow command as below
 
-export GOOGLE_APPLICATION_CREDENTIALS=src/resources/anand-1-sa.json
-gcloud auth activate-service-account --key-file=src/resources/anand-1-sa.json
+export GOOGLE_APPLICATION_CREDENTIALS=src/main/java/com/google/cloud/pso/pipeline/anand-1-sa.json
+gcloud auth activate-service-account --key-file=src/main/java/com/google/cloud/pso/pipeline/anand-1-sa.json
 
 JOB_NAME=gmail-push-$USER-`date +"%Y%m%d-%H%M%S%z"`
 TOPIC_NAME="gmail-push"
@@ -141,19 +139,14 @@ public class GmailDataflow {
             ParDo.of(
                 new GmailGet()))
         .apply("Write to PubSub", PubsubIO.writeStrings().to(options.getOutputTopic()));
-        
-
-    // Execute the pipeline and wait until it finishes running.
-    pipeline.run();//.waitUntilFinish();
+    pipeline.run();
   }
 
   public static class GmailGet extends DoFn<String,String> {
-    
+    private static final long serialVersionUID = 1234567L;
     @ProcessElement
     public void processElement(ProcessContext c) {
-      
       //TODO: Create the class during setup
-
       GmailApiDriver t = new GmailApiDriver();
       String json = c.element();
       JsonObject message = new JsonParser().parse(json).getAsJsonObject();
@@ -164,7 +157,6 @@ public class GmailDataflow {
       for(String m : m4.values()){
         c.output(m);
       }
-      
     }
   }
 }
