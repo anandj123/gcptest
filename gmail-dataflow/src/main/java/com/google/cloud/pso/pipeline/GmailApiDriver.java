@@ -26,10 +26,7 @@ import com.google.api.services.gmail.GmailScopes;
 import com.google.api.services.gmail.model.ListHistoryResponse;
 import com.google.api.services.gmail.model.Message;
 import com.google.auth.oauth2.GoogleCredentials;
-import com.google.auth.oauth2.ImpersonatedCredentials;
-import com.google.auth.oauth2.ServiceAccountCredentials;
 import com.google.gson.Gson;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.security.GeneralSecurityException;
@@ -37,29 +34,16 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.io.File;
-import java.net.URL;
-import java.io.InputStream;
-import java.util.Properties;
 
-
-
-
-public class test {
+public class GmailApiDriver {
     private static final String APPLICATION_NAME = "Gmail testing";
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
-    /**
-     * Global instance of the scopes required by this quickstart.
-     * If modifying these scopes, delete your previously saved tokens/ folder.
-     */
     private static final List<String> SCOPES = Collections.singletonList(GmailScopes.MAIL_GOOGLE_COM);
-    
-    /** Path to the Service Account's Json Key file */
     private static final String SERVICE_ACCOUNT_JSON_FILE_PATH = "/anand-1-sa.json";
 
     private static HttpRequestInitializer getCredentialsSA(String user) throws IOException,GeneralSecurityException {
         GoogleCredentials credentials = GoogleCredentials
-        .fromStream(test.class.getResourceAsStream(SERVICE_ACCOUNT_JSON_FILE_PATH))
+        .fromStream(GmailApiDriver.class.getResourceAsStream(SERVICE_ACCOUNT_JSON_FILE_PATH))
         .createScoped(SCOPES)
         .createDelegated(user);
         HttpRequestInitializer requestInitializer = new HttpCredentialsAdapter(credentials);
@@ -102,7 +86,7 @@ public class test {
         return retval;
     }
     public static void main(String[] args)   {
-        test t = new test();
+        GmailApiDriver t = new GmailApiDriver();
         t.printMessage("anandj@eqxdemo.com", "2608");
     }
 }

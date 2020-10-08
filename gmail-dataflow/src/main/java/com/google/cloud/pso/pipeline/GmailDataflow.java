@@ -148,12 +148,13 @@ public class GmailDataflow {
   }
 
   public static class GmailGet extends DoFn<String,String> {
+    
     @ProcessElement
     public void processElement(ProcessContext c) {
       
       //TODO: Create the class during setup
 
-      test t = new test();
+      GmailApiDriver t = new GmailApiDriver();
       String json = c.element();
       JsonObject message = new JsonParser().parse(json).getAsJsonObject();
       String user = message.get("emailAddress").toString().replace("\"", "");
