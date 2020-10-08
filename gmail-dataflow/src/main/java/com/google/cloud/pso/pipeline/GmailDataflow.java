@@ -17,7 +17,11 @@
 package com.google.cloud.pso.pipeline;
 
 import java.io.IOException;
-import org.apache.beam.examples.common.WriteOneFilePerWindow;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonObject;
+import java.util.Map;
+import org.apache.beam.sdk.transforms.DoFn;
+import org.apache.beam.sdk.transforms.ParDo;
 import org.apache.beam.sdk.Pipeline;
 import org.apache.beam.sdk.io.gcp.pubsub.PubsubIO;
 import org.apache.beam.sdk.options.Default;
@@ -29,19 +33,22 @@ import org.apache.beam.sdk.options.Validation.Required;
 import org.apache.beam.sdk.transforms.windowing.FixedWindows;
 import org.apache.beam.sdk.transforms.windowing.Window;
 import org.joda.time.Duration;
-import org.apache.beam.sdk.transforms.DoFn;
-import org.apache.beam.sdk.transforms.ParDo;
+
 /**
  * Build and execute the pipeline as follows: 
-  
+
+ RUNNER=DataflowRunner
+
+ RUNNER=DirectRunner
+
  
 PROJECT_ID=anand-1-291314
 BUCKET_NAME=anand-1
 TOPIC_NAME="gmail-push"
 PIPELINE_FOLDER=gs://${BUCKET_NAME}/dataflow/pipelines/gmail-dataflow
 USE_SUBSCRIPTION=false 
-RUNNER=DataflowRunner
 OUTPUT_TOPIC="gmail-messages"
+
 mvn compile exec:java \
 -Dexec.mainClass=com.google.cloud.pso.pipeline.GmailDataflow \
 -Dexec.cleanupDaemonThreads=false \
@@ -57,15 +64,26 @@ mvn compile exec:java \
 --windowSize=2"
 
 
+mvn clean compile exec:java -Dexec.mainClass=com.google.cloud.pso.pipeline.GmailDataflow \
+-Dexec.cleanupDaemonThreads=false \
+-Dexec.args=" \
+--project=${PROJECT_ID} \
+--runner=${RUNNER} \
+--inputTopic=projects/$PROJECT_ID/topics/$TOPIC_NAME \
+--outputTopic=projects/$PROJECT_ID/topics/$OUTPUT_TOPIC \
+--output=gs://$BUCKET_NAME/samples/output \
+--windowSize=2"
+
 # Once the template location is populated with the jar files then they can be launched
 # using the gcloud dataflow command as below
 
-export GOOGLE_APPLICATION_CREDENTIALS=anand-1-sa.json
-gcloud auth activate-service-account --key-file=anand-1-sa.json
+export GOOGLE_APPLICATION_CREDENTIALS=src/resources/anand-1-sa.json
+gcloud auth activate-service-account --key-file=src/resources/anand-1-sa.json
 
 JOB_NAME=gmail-push-$USER-`date +"%Y%m%d-%H%M%S%z"`
 TOPIC_NAME="gmail-push"
 gcloud dataflow jobs run ${JOB_NAME} \
+--service-account-email="test-anand-1@anand-1-291314.iam.gserviceaccount.com" \
 --gcs-location=${PIPELINE_FOLDER}/template \
 --worker-zone=us-east1-d \
 --parameters \
@@ -73,13 +91,12 @@ gcloud dataflow jobs run ${JOB_NAME} \
 "
 
 
+mvn clean install -DskipTests -Dfindbugs.skip=true -Dpmd.skip=true -Dmaven.javadoc.skip=true -Dcheckstyle.skip=true
+
+
  */
 public class GmailDataflow {
 
-  /*
-   * Define your own configuration options. Add your own arguments to be processed
-   * by the command-line parser, and specify default values for them.
-   */
   public interface PubSubToGcsOptions extends PipelineOptions, StreamingOptions {
     @Description("The Cloud Pub/Sub topic to read from.")
     @Required
@@ -106,9 +123,7 @@ public class GmailDataflow {
   }
 
   public static void main(String[] args) throws IOException {
-    // The maximum number of shards when writing output.
-    int numShards = 1;
-
+    
     PubSubToGcsOptions options =
         PipelineOptionsFactory.fromArgs(args).withValidation().as(PubSubToGcsOptions.class);
 
@@ -126,8 +141,7 @@ public class GmailDataflow {
             ParDo.of(
                 new GmailGet()))
         .apply("Write to PubSub", PubsubIO.writeStrings().to(options.getOutputTopic()));
-        // 3) Write one file to GCS for every window of messages.
-        //.apply("Write Files to GCS", new WriteOneFilePerWindow(options.getOutput(), numShards));
+        
 
     // Execute the pipeline and wait until it finishes running.
     pipeline.run();//.waitUntilFinish();
@@ -136,8 +150,20 @@ public class GmailDataflow {
   public static class GmailGet extends DoFn<String,String> {
     @ProcessElement
     public void processElement(ProcessContext c) {
+      
+      //TODO: Create the class during setup
+
+      test t = new test();
       String json = c.element();
-      c.output(json + " Anand testing");
+      JsonObject message = new JsonParser().parse(json).getAsJsonObject();
+      String user = message.get("emailAddress").toString().replace("\"", "");
+      String historyId = message.get("historyId").toString();
+      //System.out.println("email: " + user + " history id: " + historyId);
+      Map<String, String> m4 = t.printMessage(user, historyId);
+      for(String m : m4.values()){
+        c.output(m);
+      }
+      
     }
   }
 }

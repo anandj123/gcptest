@@ -33,3 +33,8 @@ tomcat-sample/test/target/*
 tomcat-sample/.vscode/settings.json
 gmail-pubsub/anand-1-sa.json
 gmail-dataflow/anand-1-sa.json
+gmail-dataflow/src/my-resources/anand-1-sa.json
+gmail-dataflow/src/main/java/com/google/cloud/pso/pipeline/anand-1-sa.json
+gmail-dataflow/target/classes/anand-1-sa.json
+gmail-pubsub/src/main/java/com/google/cloud/pso/pipeline/anand-1-sa.json
+gmail-pubsub/target/classes/anand-1-sa.json

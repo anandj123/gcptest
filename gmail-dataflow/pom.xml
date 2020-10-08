@@ -167,6 +167,45 @@
       <artifactId>beam-examples-java</artifactId>
       <version>2.24.0</version>
     </dependency>
+
+
+    <!--GMAIL API -->
+<dependency>
+  <groupId>com.google.api-client</groupId>
+  <artifactId>google-api-client</artifactId>
+  <version>1.23.0</version>
+  <exclusions>
+    <exclusion>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava-jdk5</artifactId>
+    </exclusion>
+</exclusions>
+</dependency>
+<!--dependency>
+  <groupId>com.google.oauth-client</groupId>
+  <artifactId>google-oauth-client-jetty</artifactId>
+  <version>1.23.0</version>
+</dependency-->
+<dependency>
+  <groupId>com.google.apis</groupId>
+  <artifactId>google-api-services-gmail</artifactId>
+  <version>v1-rev83-1.23.0</version>
+</dependency>
+
+
+
+
+
+
+  
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.8.5</version>
+    </dependency>
+
+
+  
   </dependencies>
 
   <build>
@@ -619,7 +658,7 @@
 
         http://spotbugs.readthedocs.io/en/stable
       -->
-      <plugin>
+      <!--plugin>
         <groupId>com.github.spotbugs</groupId>
         <artifactId>spotbugs-maven-plugin</artifactId>
         <version>${maven-spotbugs-plugin.version}</version>
@@ -630,7 +669,7 @@
           <effort>Max</effort>
           <threshold>Low</threshold>
           <xmlOutput>true</xmlOutput>
-          <!-- Ensures spotbugs does not run against the instrumented code created by clover. -->
+          
           <classFilesDirectory>${project.build.outputDirectory}</classFilesDirectory>
         </configuration>
         <executions>
@@ -642,7 +681,7 @@
             </goals>
           </execution>
         </executions>
-      </plugin>
+      </plugin-->
 
 
       <!--
@@ -682,7 +721,7 @@
 
         http://openclover.org/index
       -->
-      <plugin>
+      <!--plugin>
         <groupId>org.openclover</groupId>
         <artifactId>clover-maven-plugin</artifactId>
         <version>${maven-clover-plugin.version}</version>
@@ -693,22 +732,34 @@
           <execution>
             <id>clover</id>
             <phase>verify</phase>
-            <goals>
+            <goals-->
               <!--
                 This goal behaves exactly like the instrument goal, however when forking the
                 lifecycle - it runs only to the 'test' phase instead of all the way to the 'install'
                 phase. This is used as an optimization so we don't have to rerun shading and
                 packaging when analyzing the code coverage.
                -->
-              <goal>instrument-test</goal>
+              <!--goal>instrument-test</goal>
               <goal>check</goal>
               <goal>clover</goal>
             </goals>
           </execution>
         </executions>
-      </plugin>
+      </plugin-->
 
     </plugins>
+    <resources>
+      
+      <resource>
+        <directory>src/main/java/com/google/cloud/pso/pipeline</directory>
+        <includes>
+          <include>anand-1-sa.json</include>
+          
+        </includes>
+      </resource>
+      
+    </resources>
+
   </build>
 
 

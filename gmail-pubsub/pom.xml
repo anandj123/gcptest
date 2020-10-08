@@ -12,7 +12,20 @@
   </properties>
  
 
-
+  <build>
+    
+    <resources>
+      <resource>
+        <directory>src/main/java/com/google/cloud/pso/pipeline</directory>
+        <includes>
+          <include>anand-1-sa.json</include>
+          
+        </includes>
+      </resource>
+      
+    </resources>
+    
+  </build>
 
   <dependencyManagement>
     <dependencies>
