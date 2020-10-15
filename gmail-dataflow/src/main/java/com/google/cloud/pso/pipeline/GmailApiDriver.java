@@ -71,12 +71,24 @@ public class GmailApiDriver {
                     List<Message> messages = h.getMessages();
                     for(Message m : messages){
                         String m3 =  m.get("id").toString();
-                        //System.out.printf("Message ID %s\n", m3);
-                        try{
-                            Message m2 = service.users().messages().get(user, m3).execute();
-                            String m4 = new Gson().toJson(m2);
-                            retval.put(m3, m4);
-                        } catch(Exception e1) {}
+                        int retry = 0;
+                        while(true){
+                            try{
+                                if(retry >= 3) {break;}
+                                Message m2 = service.users().messages().get(user, m3).execute();
+                                String m4 = new Gson().toJson(m2);
+                                retval.put(m3, m4);
+                                break;
+                            } catch(Exception e1) {
+                                retry++;
+                                try{
+                                    int sleeptime = (2^retry) * 1000;
+                                    //System.out.println("Exponential backoff, Sleeping for : " + sleeptime);
+                                    Thread.sleep(sleeptime);
+                                } catch(Exception e2){}
+                            }
+                        }
+                        
                     }
                 }
             } 

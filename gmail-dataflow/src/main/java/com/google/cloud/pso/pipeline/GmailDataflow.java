@@ -37,8 +37,8 @@ import org.joda.time.Duration;
 /**
  * Build and execute the pipeline as follows: 
 
-RUNNER=DirectRunner
 
+// Compile and upload the template to GCS for dataflow
 RUNNER=DataflowRunner 
 PROJECT_ID=anand-1-291314
 BUCKET_NAME=anand-1
@@ -61,7 +61,8 @@ mvn compile exec:java \
 --output=gs://$BUCKET_NAME/samples/output \
 --windowSize=2"
 
-
+// Run locally
+RUNNER=DirectRunner
 mvn clean compile exec:java -Dexec.mainClass=com.google.cloud.pso.pipeline.GmailDataflow \
 -Dexec.cleanupDaemonThreads=false \
 -Dexec.args=" \
@@ -72,6 +73,7 @@ mvn clean compile exec:java -Dexec.mainClass=com.google.cloud.pso.pipeline.Gmail
 --output=gs://$BUCKET_NAME/samples/output \
 --windowSize=2"
 
+
 # Once the template location is populated with the jar files then they can be launched
 # using the gcloud dataflow command as below
 
@@ -81,6 +83,7 @@ gcloud auth activate-service-account --key-file=src/main/java/com/google/cloud/p
 JOB_NAME=gmail-push-$USER-`date +"%Y%m%d-%H%M%S%z"`
 TOPIC_NAME="gmail-push"
 gcloud dataflow jobs run ${JOB_NAME} \
+--region=us-central1 \
 --service-account-email="test-anand-1@anand-1-291314.iam.gserviceaccount.com" \
 --gcs-location=${PIPELINE_FOLDER}/template \
 --worker-zone=us-east1-d \
