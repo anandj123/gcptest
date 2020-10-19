@@ -1,5 +1,28 @@
 # Commands setup for using cloud sql proxy to cloud sql
 
+## Setup cloudsql read replica from master database backup in another region for disaster recovery
+
+```sh
+gcloud config list
+gcloud config set account anandjain@google.com
+gcloud config set project anand-bq-test-2
+
+gcloud sql backups list --instance mysqlm-r1
+
+replica_name=mysqlm-r2
+master_name=mysqlm-r1
+gcloud beta sql instances create $replica_name \
+--master-instance-name=$master_name \
+--master-username=[USERNAME] --prompt-for-master-password \
+--master-dump-file-path=gs://[BUCKET]/[PATH_TO_DUMP] \
+--master-ca-certificate-path=[SOURCE_SERVER_CA_PATH] \
+--client-certificate-path=[CLIENT_CERT_PATH] \
+--client-key-path=[PRIVATE_KEY_PATH] \
+--tier=[MACHINE_TYPE] --storage-size=[DISK_SIZE]
+
+
+
+```
 ## Setup and run the cloud sql proxy so that it can talk to cloud sql
 
 ```sh
