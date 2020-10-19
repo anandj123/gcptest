@@ -119,15 +119,15 @@ gcloud dataflow jobs run ${JOB_NAME} \
 ```
 ## App script setup
 
-1. Goto [your scripts project page](https://script.google.com/home).
+1. Go to [your scripts project page](https://script.google.com/home).
 2. Create a new project and copy-paste the [App Script](code.gs) content to that page.
-3. Create a google sheet where you would provide the domain names to monitor.
+3. Create a Google sheet where you would provide the domain names to monitor.
 
    1. Create 2 tabs with names (domains, users).
 
    2. In the domains tab, create the first column with name (Domain) and from A2 you could add all the domain names that you would want to monitor.
 
-   3. On the user tab on row 1 you could create these columns where the output of the app script will be stored after each run. The output are overwritten every time the script runs.
+   3. On the user tab on row 1 you could create these columns where the output of the app script will be stored after each run. The outputs are overwritten every time the script runs.
 
       1. User Name
 
