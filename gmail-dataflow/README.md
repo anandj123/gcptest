@@ -3,8 +3,8 @@
 
 There are 2 components involved in setting his up.
 
-1. [App Script] (code.gs) which can be scheduled to read from a worksheet with all the domain names for which the gmail push needs to be enabled.
-2. [Dataflow job] (src/main/java/com/google/cloud/pso/pipeline/GmailDataflow.java) which monitors the pubsub topic for the pusbusb event from gmail and reads all the email with that historyId and publishes all the messages to another pubsub topic.
+1. [App Script](code.gs) which can be scheduled to read from a worksheet with all the domain names for which the gmail push needs to be enabled.
+2. [Dataflow job](src/main/java/com/google/cloud/pso/pipeline/GmailDataflow.java) which monitors the pubsub topic for the pusbusb event from gmail and reads all the email with that historyId and publishes all the messages to another pubsub topic.
 
 # Setup Instruction
 
