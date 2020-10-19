@@ -29,10 +29,11 @@ There are 2 components involved in setting his up.
         4. User registration response	
 
         5. Registration expiration date time (EST)
+
     4. Copy the sheet id from the URL bar of the google sheet you just created. 
     Example: 
-    For a sheet like this: https://docs.google.com/spreadsheets/d/1SBB_xf7KudS4l5vkoSH-udFlbOmt--4WNXTwCrhZ22g/edit#gid=0
-    
+    For a sheet: https://docs.google.com/spreadsheets/d/1SBB_xf7KudS4l5vkoSH-udFlbOmt--4WNXTwCrhZ22g/edit#gid=0
+
     Sheet id: 1SBB_xf7KudS4l5vkoSH-udFlbOmt--4WNXTwCrhZ22g
     5. Paste the sheet id 
 
