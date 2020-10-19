@@ -6,5 +6,20 @@ There are 2 components involved in setting his up.
 1. [App Script](code.gs) which can be scheduled to read from a worksheet with all the domain names for which the gmail push needs to be enabled.
 2. [Dataflow job](src/main/java/com/google/cloud/pso/pipeline/GmailDataflow.java) which monitors the pubsub topic for the pusbusb event from gmail and reads all the email with that historyId and publishes all the messages to another pubsub topic.
 
-# Setup Instruction
+# Setup Instructions
+
+## App script setup
+
+1. Goto [your scripts project page](https://script.google.com/home). 
+2. Create a new project and copy-paste the [App Script](code.gs) content to that page.
+3. Create a google sheet where you would provide the domain names to monitor.
+  a. Create 2 tabs with names (domains, users).
+  b. In the domains tab, create the first column with name (Domain) and from A2 you could add all the domain names that you would want to monitor
+  c. On the user tab on row 1 you could create these columns where the output of the app script will be stored after each run. The output are overwritten every time the script runs.
+    i. User Name	
+    ii. Email	
+    iii. Date updated	
+    iv. User registration response	
+    v. Registration expiration date time (EST)
+
 
