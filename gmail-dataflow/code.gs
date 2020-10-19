@@ -1,15 +1,10 @@
+var SHEET_ID     = "YOUR_SHEET_ID";
+var PRIVATE_KEY  = "-----YOUR_PRIVATE_KEY";
+var CLIENT_EMAIL = "EMAIL_OF_SERVICE_ACCOUNT";
+var TOPIC_NAME   = "projects/YOUR_PROJECT_ID/topics/TOPIC_NAME";
+
 function myFunction() {
-  
-  // Gets the script property
-  //var userProperties = PropertiesService.getScriptProperties();
-  //var nickname = userProperties.getProperty('nickname');
-  //Logger.log(nickname);
-  
-  
-  // Provide the sheet id from which to read the domains
-  // When you open the sheet the id is in the URL
-  
-  var sheetid = "YOUR_SHEET_ID";
+  var sheetid = SHEET_ID;
   var ss = SpreadsheetApp.openById(sheetid);
   
   // Sheet name from which it will read the domains
@@ -87,11 +82,6 @@ function enrollEmail(email){
   //Logger.log(results);
   return results;
 }
-
-// Private key and client email of the service account.
-var PRIVATE_KEY  = "-----YOUR_PRIVATE_KEY";
-var CLIENT_EMAIL = "EMAIL_OF_SERVICE_ACCOUNT";
-var TOPIC_NAME   = "projects/YOUR_PROJECT_ID/topics/TOPIC_NAME";
 
 function getService(email) {
   return OAuth2.createService('Gmail Service:' + email)
