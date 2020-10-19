@@ -47,7 +47,9 @@ There are 2 components involved in setting his up.
 
 8. From the Google Cloud Platform project copy the "Private Key", "Client Email" of the service account which you have setup earlier and update the [PRIVATE_KEY] and [CLIENT_EMAIL] in the app script.
 
-9. Copy the fully qualified topic name from the pubsub topic where the gmail push notification is received.
+9. Copy the fully qualified topic name from the pubsub topic where the gmail push notification is received and update the [TOPIC_NAME] variable in the app script project.
+
+Example of a fully qualified topic name:
 
 Topic name: projects/YOUR_PROJECT_ID/topics/TOPIC_NAME
 
