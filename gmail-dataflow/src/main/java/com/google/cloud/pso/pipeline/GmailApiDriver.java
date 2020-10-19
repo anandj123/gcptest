@@ -38,7 +38,7 @@ import java.util.Map;
 public class GmailApiDriver {
     private static final String APPLICATION_NAME = "Gmail testing";
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
-    private static final List<String> SCOPES = Collections.singletonList(GmailScopes.MAIL_GOOGLE_COM);
+    private static final List<String> SCOPES = Collections.singletonList(GmailScopes.GMAIL_READONLY);
     private static final String SERVICE_ACCOUNT_JSON_FILE_PATH = "/anand-1-sa.json";
 
     private static HttpRequestInitializer getCredentialsSA(String user) throws IOException,GeneralSecurityException {

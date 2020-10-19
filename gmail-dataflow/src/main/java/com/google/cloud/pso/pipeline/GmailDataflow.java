@@ -80,6 +80,7 @@ mvn clean compile exec:java -Dexec.mainClass=com.google.cloud.pso.pipeline.Gmail
 export GOOGLE_APPLICATION_CREDENTIALS=src/main/java/com/google/cloud/pso/pipeline/anand-1-sa.json
 gcloud auth activate-service-account --key-file=src/main/java/com/google/cloud/pso/pipeline/anand-1-sa.json
 
+
 JOB_NAME=gmail-push-$USER-`date +"%Y%m%d-%H%M%S%z"`
 TOPIC_NAME="gmail-push"
 gcloud dataflow jobs run ${JOB_NAME} \
@@ -91,9 +92,7 @@ gcloud dataflow jobs run ${JOB_NAME} \
 "inputTopic=projects/${PROJECT_ID}/topics/${TOPIC_NAME},\
 "
 
-
 mvn clean install -DskipTests -Dfindbugs.skip=true -Dpmd.skip=true -Dmaven.javadoc.skip=true -Dcheckstyle.skip=true
-
 
  */
 public class GmailDataflow {

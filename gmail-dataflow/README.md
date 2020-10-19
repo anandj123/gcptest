@@ -9,6 +9,109 @@ There are 2 components involved in setting his up.
 
 # Setup Instructions
 
+## GCP project setup
+
+1. Create a new Google Cloud Platform project of use an existing project that would receive the pubsub push messages from GSuite.
+
+2. [Create a Service Account](https://cloud.google.com/iam/docs/creating-managing-service-accounts) 
+
+3. On Google Cloud Platform console go to [API& Services - > Credentials]. Here you should see the service account that you created. Select your service account and [Add Key]. Select "JSON" for your private key download and it will download the JSON private key file to your local computer. This is needed for setting up both the dataflow job and app-script job. 
+
+4. Follow the [private key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) creation and management documentation for best practics.
+
+5. On the service account page click [Domain Wide Delegation] button and select [Enable G Suite Domain-wide Delegation] radio button to enable domain wide delegation for the service account. This will create OAuth2 client id for the service account that will be given Domain-wide delegation privilege.
+
+6. Go back to Credentials screen and you should see the newly created Oauth2 Client id. Save [Client ID] value for setting up Domain-wide delegation in later section.
+
+7. From the main menu select [IAM & admin - > IAM]. On the service account you just created use the [Edit Member] pencil icon to add the following roles.
+
+    1. Service Account Token Creator
+
+    2. Pub/Sub Editor
+8. Create a pub/sub topic to receive the gmail push notification. Create another topic to push the email theads that are read by the dataflow job. Save the fully qualified topic names
+
+## Google Admin setup
+
+1. Login to your Google Admin console to grantt domain wide delegation privilege to the service account you just created.
+
+2. On the menu select [Security] to go to the security menu. 
+
+3. Select [API controls] from security menu to go to API controls menu. You should see [Domain wide delegation] tab at the bottom. Click the [Manage Domain wide delegation] to go to the domain wide delegation page.
+
+4. Click [Add new] and paste the [Client ID] that you saved for the service account that you created earlier.
+
+5. For the scopes use the following scope:
+
+    1. https://www.googleapis.com/auth/gmail.readonly
+
+## Dataflow script setup
+
+1. Git clone this repo to your local computer.
+
+2. Copy the service account private key file which you download earlier to src/main/java/com/google/pso/pipelines folder.
+
+3. Open the GmailApiDriver.java and change the [SERVICE_ACCOUNT_JSON_FILE_PATH] to point to the service account private key JSON file.
+
+4. Use the following command to compile and run the dataflow job either locally (for testing) or on Google Cloud Platform for real-time monitoring.
+
+```sh
+
+
+# Compile and upload the template to GCS for dataflow
+RUNNER=DataflowRunner 
+PROJECT_ID=[YOUR_PROJECT_ID]
+BUCKET_NAME=[YOUR_GCP_BUCKET_NAME]
+TOPIC_NAME="YOUR_TOPIC_NAME_NOT_FULLY_QUALIFIED"
+PIPELINE_FOLDER=gs://${BUCKET_NAME}/dataflow/pipelines/gmail-dataflow
+USE_SUBSCRIPTION=false 
+OUTPUT_TOPIC="YOUR_OUTPUT_TOPIC_NAME_NOT_FULLY_QUALIFIED"
+
+mvn compile exec:java \
+-Dexec.mainClass=com.google.cloud.pso.pipeline.GmailDataflow \
+-Dexec.cleanupDaemonThreads=false \
+-Dexec.args=" \
+--project=${PROJECT_ID} \
+--tempLocation=${PIPELINE_FOLDER}/temp \
+--stagingLocation=${PIPELINE_FOLDER}/staging \
+--templateLocation=${PIPELINE_FOLDER}/template \
+--runner=${RUNNER} \
+--inputTopic=projects/$PROJECT_ID/topics/$TOPIC_NAME \
+--outputTopic=projects/$PROJECT_ID/topics/$OUTPUT_TOPIC \
+--output=gs://$BUCKET_NAME/samples/output \
+--windowSize=2"
+
+// Run locally
+RUNNER=DirectRunner
+mvn clean compile exec:java -Dexec.mainClass=com.google.cloud.pso.pipeline.GmailDataflow \
+-Dexec.cleanupDaemonThreads=false \
+-Dexec.args=" \
+--project=${PROJECT_ID} \
+--runner=${RUNNER} \
+--inputTopic=projects/$PROJECT_ID/topics/$TOPIC_NAME \
+--outputTopic=projects/$PROJECT_ID/topics/$OUTPUT_TOPIC \
+--output=gs://$BUCKET_NAME/samples/output \
+--windowSize=2"
+
+
+# Once the template location is populated with the jar files then they can be launched
+# using the gcloud dataflow command as below
+
+export GOOGLE_APPLICATION_CREDENTIALS=[YOUR_SERVICE_ACCOUNT_PRIVATE_KEY_FILE_LOCATION]
+gcloud auth activate-service-account --key-file=[YOUR_SERVICE_ACCOUNT_PRIVATE_KEY_FILE_LOCATION]
+
+
+JOB_NAME=gmail-push-$USER-`date +"%Y%m%d-%H%M%S%z"`
+gcloud dataflow jobs run ${JOB_NAME} \
+--region=us-central1 \
+--service-account-email="test-anand-1@anand-1-291314.iam.gserviceaccount.com" \
+--gcs-location=${PIPELINE_FOLDER}/template \
+--worker-zone=us-east1-d \
+--parameters \
+"inputTopic=projects/${PROJECT_ID}/topics/${TOPIC_NAME},\
+"
+
+
+```
 ## App script setup
 
 1. Goto [your scripts project page](https://script.google.com/home).
@@ -49,9 +152,7 @@ There are 2 components involved in setting his up.
 
 9. Copy the fully qualified topic name from the pubsub topic where the gmail push notification is received and update the [TOPIC_NAME] variable in the app script project.
 
-Example of a fully qualified topic name:
-
-Topic name: projects/YOUR_PROJECT_ID/topics/TOPIC_NAME
+Example of a fully qualified topic name: [projects/YOUR_PROJECT_ID/topics/TOPIC_NAME]
 
 10. From the app services project use the menu [Resources -> Advanced Google Services] and enable [Admin SDK].
 
@@ -60,3 +161,4 @@ Topic name: projects/YOUR_PROJECT_ID/topics/TOPIC_NAME
 1B7FSrk5Zi6L1rSxxTDgDEUsPzlukDsi4KGuTMorsTQHhGBzBkMun4iDF
 
 12. If you want to schedule this script to run on a schedule time use the [documentation](https://developers.google.com/apps-script/guides/triggers/installable#time-driven_triggers) provided by the link.
+
