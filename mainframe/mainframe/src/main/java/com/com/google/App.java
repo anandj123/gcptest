@@ -21,7 +21,7 @@ import com.google.cloud.storage.StorageOptions;
 
 public class App 
 {
-    private static final int BUFFER_SIZE = 64 * 1024 * 1024;
+    private static final int BUFFER_SIZE = 100 * 1024 * 1024;
     public static void main(String args[]){
         // Instantiates a Storage client
         Storage storage = StorageOptions.getDefaultInstance().getService();
