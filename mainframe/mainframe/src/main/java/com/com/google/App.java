@@ -47,7 +47,7 @@ public class App
                 //outChannel.write(bytes);
                 bytes.clear();
                 cnt++;
-                if(cnt % 500 == 0) System.out.println("Batches processed " + cnt);
+                if(cnt % 10 == 0) System.out.println("Batches processed " + cnt);
             }
         }
     }
