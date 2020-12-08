@@ -1,4 +1,4 @@
-package mainframe.src.main.java.com.com.google;
+package com.google;
 
 public class data {
     int id;

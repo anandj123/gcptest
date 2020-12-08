@@ -1,27 +1,21 @@
-package mainframe.src.main.java.com.com.google;
+package com.google;
 
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-
-import com.google.gson.Gson;
-
-import java.io.IOException;
-import java.nio.ByteBuffer;
 import java.nio.channels.Channels;
 import java.nio.channels.WritableByteChannel;
 
 import com.google.cloud.ReadChannel;
-import com.google.cloud.storage.Bucket;
-import com.google.cloud.storage.BucketInfo;
 import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.StorageOptions;
+import com.google.gson.Gson;
 
 public class App 
 {
-    private static final int BUFFER_SIZE = 100 * 1024 * 1024;
+    private static final int BUFFER_SIZE = 64 * 1024; // 100 MB pull at one time
     public static void main(String args[]){
         // Instantiates a Storage client
         Storage storage = StorageOptions.getDefaultInstance().getService();
@@ -32,9 +26,15 @@ public class App
         String blobPath = "random100m.txt";
         try{
 
-            printBlob(storage, bucketName, blobPath);
-        } catch(Exception ex) {}
-        } 
+            //printBlob(storage, bucketName, blobPath);
+            pubsubasyncpull p = new pubsubasyncpull();
+            p.subscribeAsyncExample("anand-bq-test-2", "mfdemo-sub");
+        } catch(Exception ex) {
+            ex.printStackTrace();
+            System.out.println("Found exception calling pubsub");
+        }
+    }
+         
 
         // Reads from the specified blob present in the GCS bucket and prints the contents to STDOUT.
     private static void printBlob(Storage storage, String bucketName, String blobPath) throws IOException {

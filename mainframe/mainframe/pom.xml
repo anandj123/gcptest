@@ -41,6 +41,13 @@
       <version>1.113.4</version>
     </dependency>
 
+    <!-- https://mvnrepository.com/artifact/com.google.cloud/google-cloud-pubsub -->
+<dependency>
+  <groupId>com.google.cloud</groupId>
+  <artifactId>google-cloud-pubsub</artifactId>
+  <version>1.110.0</version>
+</dependency>
+
 
   </dependencies>
 
@@ -55,7 +62,7 @@
             <goals><goal>java</goal></goals>
           </execution></executions>
           <configuration>
-            <mainClass>mainframe.src.main.java.com.com.google.App</mainClass>
+            <mainClass>com.google.App</mainClass>
           </configuration>
         </plugin>
 
