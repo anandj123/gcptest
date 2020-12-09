@@ -1,9 +1,6 @@
 package com.google;
 
 public class data {
-    int id;
-    int count;
-    String address;
     
     public void printAscii(byte[] input)  {
         try{

@@ -1,0 +1,11 @@
+{
+    "filter":
+        {
+            "state":["MT", "IN"],
+            "score":600
+        }
+    ,
+    "sortOrder":["score"],
+    "limit":20,
+    "reloadGCS":1
+}
