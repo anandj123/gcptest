@@ -169,13 +169,10 @@ public class App
                 //myWriter = new FileWriter("test"+fileN+".data");
                 myWriter = new BufferedWriter(new FileWriter(fileName));
                 for(int i=0;i<nRecords;i++){
-                    String writebuff = "";
-                    for(int j=0;j<100;j++){
-                        person p = new person();
-                        writebuff+=gson.toJson(p)+"\n";
-                    }
+                    person p = new person();
+                    myWriter.write(gson.toJson(p)+"\n");
                     //System.out.println(gson.toJson(p));
-                    myWriter.write(writebuff);
+                    
                 }
                 myWriter.close();
         } catch (IOException e) {
