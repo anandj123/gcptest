@@ -1,6 +1,7 @@
 package com.google;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
@@ -163,10 +164,10 @@ public class App
 
     public static void createTestData(int nRecords, String fileName){
         Gson gson = new Gson();
-        FileWriter myWriter;
+        BufferedWriter myWriter;
 		try {
                 //myWriter = new FileWriter("test"+fileN+".data");
-                myWriter = new FileWriter(fileName);
+                myWriter = new BufferedWriter(new FileWriter(fileName) );
                 for(int i=0;i<nRecords;i++){
                     person p = new person();
                     //System.out.println(gson.toJson(p));
