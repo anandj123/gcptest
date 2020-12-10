@@ -2,12 +2,16 @@
 
 nohup mvn clean compile exec:java -Dexec.args="generate 800000000 testTB.db" > nohup_TB_Gen.out 2>&1 &
 
-mvn clean compile exec:java -Dexec.args="generate 10000 testS.db" > nohup_S_Gen.out
+mvn clean compile exec:java -Dexec.args="generate 10000000 testS.db" > nohup_S_Gen.out
+
+#run the process program
+mvn clean compile exec:java -Dexec.args="process testS.db query.json" 
 
 #change priority of the job
 sudo renice -19 24182
 
-
+#set java memory options
+export MAVEN_OPTS="-Xms16384m -Xmx16384m"
 
 # format and mount the nvme ssd drives
 sudo apt update && sudo apt install mdadm --no-install-recommends

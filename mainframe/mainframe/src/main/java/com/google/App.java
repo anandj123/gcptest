@@ -126,25 +126,29 @@ public class App
         ArrayList<person> out = new ArrayList<person>();
         BufferedReader reader = new BufferedReader(new FileReader(DBFile));
         String line = reader.readLine();
-
+        boolean skip = false;
         while(line != null) {
             line = reader.readLine();
-            person p;
+            person p = null;
             try{
-                p = gson.fromJson(line, person.class);
+                if (!skip) p = gson.fromJson(line, person.class);
             } catch(Exception ex) {
                 System.out.println("Malformed data file...Exiting.");
                 break;
             }
             
-            for(int j=0;j<q.filter.state.size();j++) {
-                if(p!= null && p.state !=null && p.state.equals(q.filter.state.get(j)) ) {
-                    if (p.score > q.filter.score){
-                        out.add(p);
-                        break;
+            if (!skip) {
+                for(int j=0;j<q.filter.state.size();j++) {
+                    if(p!= null && p.state !=null && p.state.equals(q.filter.state.get(j)) ) {
+                        if (p.score > q.filter.score){
+                            out.add(p);
+                            break;
+                        }
                     }
                 }
             }
+            skip = true;
+            
         }
         reader.close();
         Collections.sort(out, new Comparator<person>(){
