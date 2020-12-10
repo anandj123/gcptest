@@ -74,7 +74,7 @@ public class App
                 System.out.println("Please provide number of records and output file name.");
                 return;
             }
-            int nRecords = Integer.parseInt(args[1]);
+            Long nRecords = Long.parseLong(args[1]);
             String fileName = args[2];
             createTestData(nRecords, fileName);
         }
@@ -173,7 +173,7 @@ public class App
         }
     }
 
-    public static void createTestData(int nRecords, String fileName){
+    public static void createTestData(Long nRecords, String fileName){
         Gson gson = new Gson();
         BufferedWriter myWriter;
         person p = new person();

@@ -1,6 +1,6 @@
 #submit job for generating Terabyte test data
 
-nohup time mvn clean compile exec:java -Dexec.args="generate 9000000000 testTB.db" > nohup_TB_Gen.out 2>&1 &
+nohup time mvn clean compile exec:java -Dexec.args="generate 7000000000 testTB.db" > nohup_TB_Gen.out 2>&1 &
 
 mvn clean compile exec:java -Dexec.args="generate 10000000 testS.db" > nohup_S_Gen.out
 
