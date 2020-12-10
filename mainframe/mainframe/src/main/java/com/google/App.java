@@ -128,7 +128,7 @@ public class App
         String line = reader.readLine();
         boolean skip = false;
         person p = null;
-
+        int cnt = -1;
         while(line != null) {
             try{
                 if (!skip) {
@@ -148,6 +148,8 @@ public class App
             }
             skip = true;
             line = reader.readLine();
+            cnt++;
+            if(cnt % 1000000 == 0) System.out.println("processed 1M records");
         }
         reader.close();
         Collections.sort(out, new Comparator<person>(){
@@ -157,7 +159,7 @@ public class App
             }
         });
 
-        int cnt =-1;
+        cnt =-1;
         while(true) {
             cnt++;
             if (cnt > q.limit || cnt >= out.size()) break;
