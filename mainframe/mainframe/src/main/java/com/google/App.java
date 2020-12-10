@@ -177,13 +177,14 @@ public class App
         Gson gson = new Gson();
         BufferedWriter myWriter;
         person p = new person();
+        int nDup = 10 * 1000 * 1000;
 		try {
                 myWriter = new BufferedWriter(new FileWriter(fileName));
                 
-                for(int i=0;i<nRecords/100000;i++){
+                for(int i=0;i<nRecords/nDup;i++){
                     p.update(); 
                     String w = gson.toJson(p)+"\n";
-                    for(int j=0;j<100000;j++) {
+                    for(int j=0;j<nDup;j++) {
                         myWriter.write(w);
                     }
                 }
