@@ -150,9 +150,9 @@ public class App
             skip = true;
             line = reader.readLine();
             cnt++;
-            if(cnt % 10000000 == 0) {
+            if(cnt % 20000000 == 0) {
                 savec++;
-                System.out.println("processed " + savec * 10 + "M records");
+                System.out.println("processed " + savec * 20 + "M records");
             }
         }
         reader.close();
