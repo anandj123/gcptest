@@ -167,7 +167,7 @@ public class App
         BufferedWriter myWriter;
 		try {
                 //myWriter = new FileWriter("test"+fileN+".data");
-                myWriter = new BufferedWriter(new FileWriter(fileName), 4096);
+                myWriter = new BufferedWriter(new FileWriter(fileName));
                 for(int i=0;i<nRecords;i++){
                     String writebuff = "";
                     for(int j=0;j<100;j++){
