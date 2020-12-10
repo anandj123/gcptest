@@ -21,7 +21,15 @@ public class person {
         setName();
         setAddress();
     }
-
+    public void update(){
+        setId();
+        setState();
+        setZip();
+        setScore();
+        setHasBankruptcy();
+        setName();
+        setAddress();
+    }
     private void setId(){
         int n1, n2, n3;
         n1 = (int)(Math.random()*(999-111) + 111);

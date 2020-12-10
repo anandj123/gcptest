@@ -1,9 +1,11 @@
 package com.google;
 
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -165,14 +167,13 @@ public class App
     public static void createTestData(int nRecords, String fileName){
         Gson gson = new Gson();
         BufferedWriter myWriter;
+        person p = new person();
 		try {
-                //myWriter = new FileWriter("test"+fileN+".data");
                 myWriter = new BufferedWriter(new FileWriter(fileName));
                 for(int i=0;i<nRecords;i++){
-                    person p = new person();
+                    p.update(); 
                     myWriter.write(gson.toJson(p)+"\n");
                     //System.out.println(gson.toJson(p));
-                    
                 }
                 myWriter.close();
         } catch (IOException e) {
