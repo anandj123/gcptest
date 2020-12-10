@@ -174,9 +174,9 @@ public class App
 		try {
                 myWriter = new BufferedWriter(new FileWriter(fileName));
                 
-                for(int i=0;i<nRecords/1000;i++){
+                for(int i=0;i<nRecords/100000;i++){
                     p.update(); 
-                    for(int j=0;j<1000;j++) myWriter.write(gson.toJson(p)+"\n");
+                    for(int j=0;j<100000;j++) myWriter.write(gson.toJson(p)+"\n");
                     //System.out.println(gson.toJson(p));
                 }
                 
