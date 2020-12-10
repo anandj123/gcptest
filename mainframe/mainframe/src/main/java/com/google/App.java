@@ -176,8 +176,10 @@ public class App
                 
                 for(int i=0;i<nRecords/100000;i++){
                     p.update(); 
-                    for(int j=0;j<100000;j++) myWriter.write(gson.toJson(p)+"\n");
-                    //System.out.println(gson.toJson(p));
+                    String w = gson.toJson(p)+"\n";
+                    for(int j=0;j<100000;j++) {
+                        myWriter.write(w);
+                    }
                 }
                 
                 myWriter.close();
