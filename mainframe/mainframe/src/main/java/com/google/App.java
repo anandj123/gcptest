@@ -152,6 +152,7 @@ public class App
             cnt++;
             if(cnt % 20000000 == 0) {
                 savec++;
+                cnt = -1;
                 System.out.println("processed " + savec * 20 + "M records");
             }
         }
