@@ -127,9 +127,9 @@ public class App
         BufferedReader reader = new BufferedReader(new FileReader(DBFile));
         String line = reader.readLine();
         boolean skip = false;
+        person p = null;
+
         while(line != null) {
-            line = reader.readLine();
-            person p = null;
             try{
                 if (!skip) p = gson.fromJson(line, person.class);
             } catch(Exception ex) {
@@ -148,7 +148,7 @@ public class App
                 }
             }
             skip = true;
-            
+            line = reader.readLine();
         }
         reader.close();
         Collections.sort(out, new Comparator<person>(){
@@ -163,8 +163,7 @@ public class App
         while(true) {
             cnt++;
             if (cnt > q.limit || cnt >= out.size()) break;
-            person p = out.get(cnt);
-            System.out.println(gson.toJson(p, person.class));
+            System.out.println(gson.toJson(out.get(cnt), person.class));
         }
     }
 
@@ -174,11 +173,13 @@ public class App
         person p = new person();
 		try {
                 myWriter = new BufferedWriter(new FileWriter(fileName));
-                for(int i=0;i<nRecords;i++){
+                
+                for(int i=0;i<nRecords/1000;i++){
                     p.update(); 
-                    myWriter.write(gson.toJson(p)+"\n");
+                    for(int j=0;j<1000;j++) myWriter.write(gson.toJson(p)+"\n");
                     //System.out.println(gson.toJson(p));
                 }
+                
                 myWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
