@@ -131,21 +131,20 @@ public class App
 
         while(line != null) {
             try{
-                if (!skip) p = gson.fromJson(line, person.class);
-            } catch(Exception ex) {
-                System.out.println("Malformed data file...Exiting.");
-                break;
-            }
-            
-            if (!skip) {
-                for(int j=0;j<q.filter.state.size();j++) {
-                    if(p!= null && p.state !=null && p.state.equals(q.filter.state.get(j)) ) {
-                        if (p.score > q.filter.score){
-                            out.add(p);
-                            break;
+                if (!skip) {
+                    p = gson.fromJson(line, person.class);
+                    for(int j=0;j<q.filter.state.size();j++) {
+                        if(p!= null && p.state !=null && p.state.equals(q.filter.state.get(j)) ) {
+                            if (p.score > q.filter.score){
+                                out.add(p);
+                                break;
+                            }
                         }
                     }
                 }
+            } catch(Exception ex) {
+                System.out.println("Malformed data file...Exiting.");
+                break;
             }
             skip = true;
             line = reader.readLine();
@@ -158,7 +157,6 @@ public class App
             }
         });
 
-        
         int cnt =-1;
         while(true) {
             cnt++;
