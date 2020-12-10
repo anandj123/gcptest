@@ -27,44 +27,56 @@ public class App
 
     public static void main(String args[]){
         
-        // Instantiates a Storage client
-        Storage storage = StorageOptions.getDefaultInstance().getService();
-        // The name for the GCS bucket
+        //Storage storage = StorageOptions.getDefaultInstance().getService();
         String bucketName = "anand-bq-test-2";
-        // The path of the blob (i.e. GCS object) within the GCS bucket.
-        
-        //String blobPath = "efx-mf-test-data/testL.data";
-        
-        String blobPath = "efx-mf-test-data/"+args[0];
-        System.out.println("Processing file : " + blobPath);
-        
-        long start = System.currentTimeMillis();
+        String blobPath = "";
+        long start = 0;
         long finish = 0;
         long timeElapsed = 0;
-        try{
-
-            //createTestData();
-
-            printBlob(storage, bucketName, blobPath);
-            finish = System.currentTimeMillis();
-            timeElapsed = (finish - start)/1000;
-            System.out.println("Time elapsed Download GCS: " + timeElapsed + " seconds.");
-            start = System.currentTimeMillis();
-            processData();
-
-            //pubsubasyncpull p = new pubsubasyncpull();
-            //p.subscribeAsyncExample("anand-bq-test-2", "mfdemo-sub");
-
-        } catch(Exception ex) {
-            ex.printStackTrace();
-            System.out.println("Found exception calling pubsub");
+        if (args.length < 1) {
+            System.out.println("Please pass action argument.");
+            return;
         }
-        finish = System.currentTimeMillis();
-        timeElapsed = (finish - start)/1000;
-        System.out.println("Time elapsed Query Local: " + timeElapsed + " seconds.");
-        
+        if (args[0].equals("process")) {
+            if(args.length < 3) {
+                System.out.println("Please provide the DB file name.");
+                System.out.println("Please provide the query file name.");
+                return;
+            }
+            //blobPath = "efx-mf-test-data/"+args[1];
+            String DBFile = args[1];
+            System.out.println("Processing DB file : " + DBFile);
+            String qFile = args[2];
+            try{
+                start = System.currentTimeMillis();
+                //loadGCS(storage, bucketName, blobPath);
+                //finish = System.currentTimeMillis();
+                //timeElapsed = (finish - start)/1000;
+                //System.out.println("Time elapsed Download GCS: " + timeElapsed + " seconds.");
+                //start = System.currentTimeMillis();
+                processData(DBFile, qFile);
+                finish = System.currentTimeMillis();
+                timeElapsed = (finish - start)/1000;
+                System.out.println("Time elapsed Query Local: " + timeElapsed + " seconds.");
+                //pubsubasyncpull p = new pubsubasyncpull();
+                //p.subscribeAsyncExample("anand-bq-test-2", "mfdemo-sub");
+    
+            } catch(Exception ex) {
+                ex.printStackTrace();
+                System.out.println("Found exception calling process query file : " + qFile);
+            }
+        } else if (args[0].equals("generate")) {
+            System.out.println("Generating data.");
+            if (args.length < 3) {
+                System.out.println("Please provide number of records and output file name.");
+                return;
+            }
+            int nRecords = Integer.parseInt(args[1]);
+            String fileName = args[2];
+            createTestData(nRecords, fileName);
+        }
     }
-    private static void printBlob(Storage storage, String bucketName, String blobPath) throws IOException {
+    private static void loadGCS(Storage storage, String bucketName, String blobPath) throws IOException {
         try (ReadChannel reader = storage.reader(bucketName, blobPath)) {
             //WritableByteChannel outChannel = Channels.newChannel(System.out);
             ByteBuffer bytes = ByteBuffer.allocate(BUFFER_SIZE);
@@ -86,11 +98,11 @@ public class App
         }
     }
 
-    public static void processData() throws Exception{
+    public static void processData(String DBFile, String qFile) throws Exception{
         query1 q;
         String qString = "";
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("query.json"));
+            BufferedReader reader = new BufferedReader(new FileReader(qFile));
             String line = "";
 
             while(true) {
@@ -105,93 +117,72 @@ public class App
             ex.printStackTrace();
             return;
         }
-        //System.out.println(qString);
-
-        // System.out.println(q.sortOrder.get(0) 
-        // + " " 
-        // + q.limit
-        // + " "
-        // + q.filter.state.get(0)
-        // + " "
-        // + q.filter.score
-        // );
+        // System.out.println(qString);
+        // System.out.println(q.sortOrder.get(0) + " " + q.limit+ " "+ q.filter.state.get(0)+ " "+ q.filter.score);
         
-        // 
-        // ArrayList<String> data = new ArrayList<String>();
-        // int nRecords = 1*5000;
-        // for(int i=0;i<nRecords;i++){
-        //     person p = new person();
-        //     data.add(gson.toJson(p));
-        // }
-        
+        ArrayList<person> out = new ArrayList<person>();
+        BufferedReader reader = new BufferedReader(new FileReader(DBFile));
+        String line = reader.readLine();
 
-        ArrayList<String> out = new ArrayList<String>();
-
-        for(int i = 0;i<data.length;i++){
+        while(line != null) {
+            line = reader.readLine();
             person p;
             try{
-                p = gson.fromJson(data[i], person.class);
-            } catch(Exception ex) {break;}
+                p = gson.fromJson(line, person.class);
+            } catch(Exception ex) {
+                System.out.println("Malformed data file...Exiting.");
+                break;
+            }
+            
             for(int j=0;j<q.filter.state.size();j++) {
-                if(p.state.equals(q.filter.state.get(j))  ) {
+                if(p!= null && p.state !=null && p.state.equals(q.filter.state.get(j)) ) {
                     if (p.score > q.filter.score){
-                        out.add(data[i]);
+                        out.add(p);
                         break;
                     }
                 }
             }
         }
-
-        Collections.sort(out, new Comparator<String>(){
+        reader.close();
+        Collections.sort(out, new Comparator<person>(){
             @Override
-            public int compare(String j1, String j2) {
-                person p1 = gson.fromJson(j1,person.class);
-                person p2 = gson.fromJson(j2,person.class);
+            public int compare(person p1, person p2) {
                 return  p2.score - p1.score;
             }
         });
+
+        
         int cnt =-1;
         while(true) {
             cnt++;
             if (cnt > q.limit || cnt >= out.size()) break;
-
-            person p = gson.fromJson(out.get(cnt), person.class);
-            System.out.println("Score: " + p.score + " State :" + p.state);
+            person p = out.get(cnt);
+            System.out.println(gson.toJson(p, person.class));
         }
     }
-    
 
-    public static void createTestData(){
+    public static void createTestData(int nRecords, String fileName){
         Gson gson = new Gson();
         FileWriter myWriter;
-        int nRecords = 2 * 1000 * 1000;
-        int nFiles = 5;
 		try {
-            for(int j=0;j<nFiles;j++){
-                int fileN = j+1;
-                myWriter = new FileWriter("test"+fileN+".data");
+                //myWriter = new FileWriter("test"+fileN+".data");
+                myWriter = new FileWriter(fileName);
                 for(int i=0;i<nRecords;i++){
                     person p = new person();
                     //System.out.println(gson.toJson(p));
                     myWriter.write(gson.toJson(p)+"\n");
                 }
                 myWriter.close();
-            }
-            
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     
-
     public void readEbcdic(){
         data d = new data();
         try {
-            // create a reader
-            FileInputStream fis = new FileInputStream(
-                new File("ctest_1k.dat"));
+            FileInputStream fis = new FileInputStream(new File("ctest_1k.dat"));
         
-            // read one byte at a time
             int ch;
             int cnt=0;
             byte[] b = new byte[2];
@@ -199,21 +190,14 @@ public class App
                 b[cnt] = (byte) ch;
                 if(++cnt == 2) break;
             }
-
             ByteBuffer wrapped = ByteBuffer.wrap(b); // big-endian by default
             short num = wrapped.getShort(); // 1
             System.out.println("\n" + num + "\n");
 
             b = new byte[num];
-            for(int i=0;i<num;i++) {
-                b[i] = (byte) ch;
-            }
-
+            for(int i=0;i<num;i++) b[i] = (byte) ch;
             d.printAscii(b);
-            
-            // close the reader
             fis.close();
-        
         } catch (IOException ex) {
             ex.printStackTrace();
         }
