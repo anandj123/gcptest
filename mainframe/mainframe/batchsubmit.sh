@@ -1,11 +1,11 @@
 #submit job for generating Terabyte test data
 
-nohup time mvn clean compile exec:java -Dexec.args="generate 7000000000 testTB.db" > nohup_TB_Gen.out 2>&1 &
+nohup time mvn clean compile exec:java -Dexec.args="generate 8000000000 testTB.db" > nohup_TB_Gen.out 2>&1 &
 
 mvn clean compile exec:java -Dexec.args="generate 10000000 testS.db" > nohup_S_Gen.out
 
 #run the process program
-mvn clean compile exec:java -Dexec.args="process testS.db query.json" 
+nohup mvn clean compile exec:java -Dexec.args="process testTB.db query.json" > nohup_TB_PROC1.out 2>&1 &
 
 #change priority of the job
 sudo renice -19 24182
