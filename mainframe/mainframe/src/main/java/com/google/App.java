@@ -167,11 +167,15 @@ public class App
         BufferedWriter myWriter;
 		try {
                 //myWriter = new FileWriter("test"+fileN+".data");
-                myWriter = new BufferedWriter(new FileWriter(fileName) );
+                myWriter = new BufferedWriter(new FileWriter(fileName), 4096);
                 for(int i=0;i<nRecords;i++){
-                    person p = new person();
+                    String writebuff = "";
+                    for(int j=0;j<100;j++){
+                        person p = new person();
+                        writebuff+=gson.toJson(p)+"\n";
+                    }
                     //System.out.println(gson.toJson(p));
-                    myWriter.write(gson.toJson(p)+"\n");
+                    myWriter.write(writebuff);
                 }
                 myWriter.close();
         } catch (IOException e) {
