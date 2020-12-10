@@ -149,7 +149,7 @@ public class App
             skip = true;
             line = reader.readLine();
             cnt++;
-            if(cnt % 1000000 == 0) System.out.println("processed 1M records");
+            if(cnt % 10000000 == 0) System.out.println("processed 10M records");
         }
         reader.close();
         Collections.sort(out, new Comparator<person>(){
