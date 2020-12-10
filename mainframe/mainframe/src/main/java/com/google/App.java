@@ -129,6 +129,7 @@ public class App
         boolean skip = false;
         person p = null;
         int cnt = -1;
+        int savec = 0;
         while(line != null) {
             try{
                 if (!skip) {
@@ -149,7 +150,10 @@ public class App
             skip = true;
             line = reader.readLine();
             cnt++;
-            if(cnt % 10000000 == 0) System.out.println("processed 10M records");
+            if(cnt % 10000000 == 0) {
+                savec++;
+                System.out.println("processed " + savec * 10 + "M records");
+            }
         }
         reader.close();
         Collections.sort(out, new Comparator<person>(){
