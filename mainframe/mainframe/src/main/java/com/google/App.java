@@ -128,7 +128,7 @@ public class App
         String line = reader.readLine();
         boolean skip = false;
         person p = null;
-        int cnt = -1;
+        int cnt = 0;
         int savec = 0;
         while(line != null) {
             try{
