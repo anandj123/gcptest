@@ -16,26 +16,25 @@
 
 package com.google.cloud.pso.pipeline;
 
-import java.io.IOException;
-import com.google.gson.JsonParser;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import java.io.IOException;
 import java.util.Map;
-import org.apache.beam.sdk.transforms.DoFn;
-import org.apache.beam.sdk.transforms.ParDo;
 import org.apache.beam.sdk.Pipeline;
 import org.apache.beam.sdk.io.gcp.pubsub.PubsubIO;
 import org.apache.beam.sdk.options.Default;
 import org.apache.beam.sdk.options.Description;
-import org.apache.beam.sdk.options.PipelineOptions;
 import org.apache.beam.sdk.options.PipelineOptionsFactory;
 import org.apache.beam.sdk.options.StreamingOptions;
 import org.apache.beam.sdk.options.Validation.Required;
+import org.apache.beam.sdk.transforms.DoFn;
+import org.apache.beam.sdk.transforms.ParDo;
 import org.apache.beam.sdk.transforms.windowing.FixedWindows;
 import org.apache.beam.sdk.transforms.windowing.Window;
 import org.joda.time.Duration;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 /**
  * Build and execute the pipeline as follows: 
 
@@ -105,7 +104,7 @@ mvn clean install -DskipTests -Dfindbugs.skip=true -Dpmd.skip=true -Dmaven.javad
  */
 public class GmailDataflow {
 
-  public interface PubSubToGcsOptions extends PipelineOptions, StreamingOptions {
+  public interface GmailToPubsubOptions extends StreamingOptions {
     @Description("The Cloud Pub/Sub topic to read from.")
     @Required
     String getInputTopic();
@@ -115,6 +114,7 @@ public class GmailDataflow {
     @Description("Window size in number of minutes.")
     @Default.Integer(1)
     Integer getWindowSize();
+
     void setWindowSize(Integer value);
 
     @Description("Path of the output file including its filename prefix.")
@@ -122,62 +122,81 @@ public class GmailDataflow {
     String getOutput();
 
     void setOutput(String value);
-    
+
     @Description("The Cloud Pub/Sub topic to write the output to.")
     @Required
     String getOutputTopic();
+
     void setOutputTopic(String value);
 
     @Description("Truncate size of the output message.")
     @Default.Integer(1)
     Integer getTruncateSize();
+
     void setTruncateSize(Integer value);
   }
 
   public static void main(String[] args) throws IOException {
-    
-    PubSubToGcsOptions options =
-        PipelineOptionsFactory.fromArgs(args).withValidation().as(PubSubToGcsOptions.class);
+    GmailToPubsubOptions options = PipelineOptionsFactory
+      .fromArgs(args)
+      .withValidation()
+      .as(GmailToPubsubOptions.class);
 
     options.setStreaming(true);
 
     Pipeline pipeline = Pipeline.create(options);
 
     pipeline
-        // 1) Read string messages from a Pub/Sub topic.
-        .apply("Read PubSub Messages", PubsubIO.readStrings().fromTopic(options.getInputTopic()))
-        // 2) Group the messages into fixed-sized minute intervals.
-        .apply("Windowing", 
-                Window.into(
-                  FixedWindows.of(Duration.standardMinutes(options.getWindowSize()))
-                )
-              )
-        .apply(
-            "Gmail Message Get",
-            ParDo.of(
-                new GmailGet(options.getTruncateSize())))
-        .apply("Write to PubSub", PubsubIO.writeStrings().to(options.getOutputTopic()));
+      // 1) Read string messages from a Pub/Sub topic.
+      .apply(
+        "Read PubSub Messages",
+        PubsubIO.readStrings().fromTopic(options.getInputTopic())
+      )
+      // 2) Group the messages into fixed-sized minute intervals.
+      .apply(
+        "Windowing",
+        Window.into(
+          FixedWindows.of(Duration.standardMinutes(options.getWindowSize()))
+        )
+      )
+      .apply(
+        "Gmail Message Get",
+        ParDo.of(new GmailGet(options.getTruncateSize()))
+      )
+      .apply(
+        "Write to PubSub",
+        PubsubIO.writeStrings().to(options.getOutputTopic())
+      );
     pipeline.run();
   }
 
-  public static class GmailGet extends DoFn<String,String> {
+  public static class GmailGet extends DoFn<String, String> {
+
     private static final Logger LOG = LoggerFactory.getLogger(GmailGet.class);
-    public GmailGet(int truncateSize){
+
+    public GmailGet(int truncateSize) {
       this.truncateSize = truncateSize;
     }
+
     private int truncateSize = 4096;
     private static final long serialVersionUID = 1234567L;
+
     @ProcessElement
     public void processElement(ProcessContext c) {
-      //TODO: Create the class during setup
       GmailApiDriver t = new GmailApiDriver(truncateSize);
       String json = c.element();
       JsonObject message = new JsonParser().parse(json).getAsJsonObject();
       String user = message.get("emailAddress").toString().replace("\"", "");
       String historyId = message.get("historyId").toString();
-      LOG.debug("Processing for {user_email: " + user + ", history_id: " + historyId + "}");
+      LOG.debug(
+        "Processing for {user_email: " +
+        user +
+        ", history_id: " +
+        historyId +
+        "}"
+      );
       Map<String, String> m4 = t.printMessage(user, historyId);
-      for(String m : m4.values()){
+      for (String m : m4.values()) {
         c.output(m);
       }
     }
