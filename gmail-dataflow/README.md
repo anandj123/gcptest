@@ -135,7 +135,7 @@ gcloud dataflow jobs run ${JOB_NAME} \
 |output | Output bucket for Dataflow output.|
 |windowSize | Window size for streaming pipeline (in minutes).|
 |truncateSize | Truncate message size (in bytes).|
-|defaultWorkerLogLevel | DEBUG: if debug level logs are needed (for troubleshooting) |
+|defaultWorkerLogLevel | Optional parameter. DEBUG: if debug level logs are needed (for troubleshooting) |
 
 ## App script setup
 
