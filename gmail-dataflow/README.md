@@ -85,7 +85,8 @@ mvn compile exec:java \
 --outputTopic=projects/$PROJECT_ID/topics/$OUTPUT_TOPIC \
 --output=gs://$BUCKET_NAME/samples/output \
 --windowSize=2 \
---truncateSize=4096"
+--truncateSize=4096 \
+--defaultWorkerLogLevel=DEBUG"
 
 // Run locally
 RUNNER=DirectRunner
@@ -97,7 +98,8 @@ mvn clean compile exec:java -Dexec.mainClass=com.google.cloud.pso.pipeline.Gmail
 --inputTopic=projects/$PROJECT_ID/topics/$TOPIC_NAME \
 --outputTopic=projects/$PROJECT_ID/topics/$OUTPUT_TOPIC \
 --output=gs://$BUCKET_NAME/samples/output \
---windowSize=2"
+--windowSize=2 \
+--truncateSize=6" 
 
 
 # Once the template location is populated with the jar files then they can be launched
@@ -133,6 +135,7 @@ gcloud dataflow jobs run ${JOB_NAME} \
 |output | Output bucket for Dataflow output.|
 |windowSize | Window size for streaming pipeline (in minutes).|
 |truncateSize | Truncate message size (in bytes).|
+|defaultWorkerLogLevel | DEBUG: if debug level logs are needed (for troubleshooting) |
 
 ## App script setup
 
