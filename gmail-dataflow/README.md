@@ -15,15 +15,15 @@ There are 2 components involved in execution of the end to end pipeline.
 
 2. [Create a Service Account](https://cloud.google.com/iam/docs/creating-managing-service-accounts) 
 
-3. On Google Cloud Platform console go to [API & Services - > Credentials]. Here you should see the service account that you created. Select your service account and [Add Key]. Select "JSON" for your private key download and it will download the JSON private key file to your local computer. This is needed for setting up both the dataflow job and app-script job. 
+3. On Google Cloud Platform console go to `API & Services - > Credentials`. Here you should see the service account that you created. Select your service account and `Add Key`. Select `JSON` for your private key download and it will download the JSON private key file to your local computer. This is needed for setting up both the dataflow job and app-script job. 
 
 4. Follow the [private key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) creation and management documentation for best practices.
 
-5. On the service account page click [Domain Wide Delegation] button and select [Enable G Suite Domain-wide Delegation] radio button to enable domain wide delegation for the service account. This will create OAuth2 client id for the service account that will be given Domain-wide delegation privilege.
+5. On the service account page click `Domain Wide Delegation` button and select `Enable G Suite Domain-wide Delegation` radio button to enable domain wide delegation for the service account. This will create OAuth2 client id for the service account that will be given Domain-wide delegation privilege.
 
 6. Go back to Credentials screen and you should see the newly created Oauth2 Client id. Save `Client ID` value for setting up Domain-wide delegation in a later section.
 
-7. From the main menu select [IAM & admin - > IAM]. On the service account you just created use the [Edit Member] pencil icon to add the following roles.
+7. From the main menu select `IAM & admin - > IAM`. On the service account you just created use the `Edit Member` pencil icon to add the following roles.
 
     1. Service Account Token Creator
 
@@ -42,9 +42,9 @@ There are 2 components involved in execution of the end to end pipeline.
 
 2. On the menu select `Security` to go to the security menu. 
 
-3. Select [API controls] from security menu to go to API controls menu. You should see [Domain wide delegation] tab at the bottom. Click the [Manage Domain wide delegation] to go to the domain wide delegation page.
+3. Select `API controls` from security menu to go to API controls menu. You should see `Domain wide delegation` tab at the bottom. Click the `Manage Domain wide delegation` to go to the domain wide delegation page.
 
-4. Click [Add new] and paste the [Client ID] that you saved for the service account that you created earlier.
+4. Click `Add new` and paste the `Client ID` that you saved for the service account that you created earlier.
 
 5. For the scopes use the following scope:
 
