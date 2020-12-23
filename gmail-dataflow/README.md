@@ -99,7 +99,7 @@ mvn clean compile exec:java -Dexec.mainClass=com.google.cloud.pso.pipeline.Gmail
 --outputTopic=projects/$PROJECT_ID/topics/$OUTPUT_TOPIC \
 --output=gs://$BUCKET_NAME/samples/output \
 --windowSize=2 \
---truncateSize=6" 
+--truncateSize=4096" 
 
 
 # Once the template location is populated with the jar files then they can be launched
