@@ -177,7 +177,8 @@ public class App
         Gson gson = new Gson();
         BufferedWriter myWriter;
         person p = new person();
-        int nDup = 10 * 1000 * 1000;
+        int nDup = 1;
+        //nDup = 10 * 1000 * 1000;
 		try {
                 myWriter = new BufferedWriter(new FileWriter(fileName));
                 

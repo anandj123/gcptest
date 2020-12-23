@@ -200,3 +200,26 @@ https://monitoring.googleapis.com/v3/projects/anand-bq-test-2/timeSeries:query -
 ./bin/ycsb run cloudspanner -P cloudspanner/conf/cloudspanner.properties -P workloads/workloadb -p recordcount=100 -p operationcount=10 -threads 1 -s
 
 ```
+
+### CloudSQL for PostgreSQL disaster recovery commands
+
+```sh
+gcloud auth application-default login
+
+gcloud sql tiers list
+
+export primary_name=instance-1
+export primary_tier=db-n1-standard-2
+export primary_region=us-west1
+export primary_root_password=my-root-password
+export primary_backup_start_time=22:00   
+export cross_region_replica_name=instance-4
+export cross_region_replica_region=us-west2
+
+breaw install 
+echo 'export PATH="/usr/local/opt/libpq/bin:$PATH"' >> /Users/anandjain/.bash_profile
+
+source ~/.bash_profile
+
+
+```

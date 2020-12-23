@@ -34,9 +34,13 @@ import org.apache.beam.sdk.transforms.windowing.FixedWindows;
 import org.apache.beam.sdk.transforms.windowing.Window;
 import org.joda.time.Duration;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * Build and execute the pipeline as follows: 
 
+ // If you want to create a template and not run job then use the following option
+--templateLocation=${PIPELINE_FOLDER}/template \
 
 // Compile and upload the template to GCS for dataflow
 RUNNER=DataflowRunner 
@@ -54,12 +58,13 @@ mvn compile exec:java \
 --project=${PROJECT_ID} \
 --tempLocation=${PIPELINE_FOLDER}/temp \
 --stagingLocation=${PIPELINE_FOLDER}/staging \
---templateLocation=${PIPELINE_FOLDER}/template \
 --runner=${RUNNER} \
 --inputTopic=projects/$PROJECT_ID/topics/$TOPIC_NAME \
 --outputTopic=projects/$PROJECT_ID/topics/$OUTPUT_TOPIC \
 --output=gs://$BUCKET_NAME/samples/output \
---windowSize=2"
+--windowSize=2 \
+--truncateSize=6 \
+--defaultWorkerLogLevel=DEBUG"
 
 // Run locally
 RUNNER=DirectRunner
@@ -71,7 +76,9 @@ mvn clean compile exec:java -Dexec.mainClass=com.google.cloud.pso.pipeline.Gmail
 --inputTopic=projects/$PROJECT_ID/topics/$TOPIC_NAME \
 --outputTopic=projects/$PROJECT_ID/topics/$OUTPUT_TOPIC \
 --output=gs://$BUCKET_NAME/samples/output \
---windowSize=2"
+--windowSize=2 \
+--truncateSize=6" 
+
 
 
 # Once the template location is populated with the jar files then they can be launched
@@ -104,10 +111,9 @@ public class GmailDataflow {
 
     void setInputTopic(String value);
 
-    @Description("Output file's window size in number of minutes.")
+    @Description("Window size in number of minutes.")
     @Default.Integer(1)
     Integer getWindowSize();
-
     void setWindowSize(Integer value);
 
     @Description("Path of the output file including its filename prefix.")
@@ -116,10 +122,15 @@ public class GmailDataflow {
 
     void setOutput(String value);
     
-    @Description("Path of the output file including its filename prefix.")
+    @Description("The Cloud Pub/Sub topic to write the output to.")
     @Required
     String getOutputTopic();
     void setOutputTopic(String value);
+
+    @Description("Truncate size of the output message.")
+    @Default.Integer(1)
+    Integer getTruncateSize();
+    void setTruncateSize(Integer value);
   }
 
   public static void main(String[] args) throws IOException {
@@ -135,26 +146,35 @@ public class GmailDataflow {
         // 1) Read string messages from a Pub/Sub topic.
         .apply("Read PubSub Messages", PubsubIO.readStrings().fromTopic(options.getInputTopic()))
         // 2) Group the messages into fixed-sized minute intervals.
-        .apply(Window.into(FixedWindows.of(Duration.standardMinutes(options.getWindowSize()))))
+        .apply("Windowing", 
+                Window.into(
+                  FixedWindows.of(Duration.standardMinutes(options.getWindowSize()))
+                )
+              )
         .apply(
             "Gmail Message Get",
             ParDo.of(
-                new GmailGet()))
+                new GmailGet(options.getTruncateSize())))
         .apply("Write to PubSub", PubsubIO.writeStrings().to(options.getOutputTopic()));
     pipeline.run();
   }
 
   public static class GmailGet extends DoFn<String,String> {
+    private static final Logger LOG = LoggerFactory.getLogger(GmailGet.class);
+    public GmailGet(int truncateSize){
+      this.truncateSize = truncateSize;
+    }
+    private int truncateSize = 4096;
     private static final long serialVersionUID = 1234567L;
     @ProcessElement
     public void processElement(ProcessContext c) {
       //TODO: Create the class during setup
-      GmailApiDriver t = new GmailApiDriver();
+      GmailApiDriver t = new GmailApiDriver(truncateSize);
       String json = c.element();
       JsonObject message = new JsonParser().parse(json).getAsJsonObject();
       String user = message.get("emailAddress").toString().replace("\"", "");
       String historyId = message.get("historyId").toString();
-      //System.out.println("email: " + user + " history id: " + historyId);
+      LOG.debug("Processing for {user_email: " + user + ", history_id: " + historyId + "}");
       Map<String, String> m4 = t.printMessage(user, historyId);
       for(String m : m4.values()){
         c.output(m);
