@@ -21,7 +21,7 @@ There are 2 components involved in execution of the end to end pipeline.
 
 5. On the service account page click [Domain Wide Delegation] button and select [Enable G Suite Domain-wide Delegation] radio button to enable domain wide delegation for the service account. This will create OAuth2 client id for the service account that will be given Domain-wide delegation privilege.
 
-6. Go back to Credentials screen and you should see the newly created Oauth2 Client id. Save [Client ID] value for setting up Domain-wide delegation in a later section.
+6. Go back to Credentials screen and you should see the newly created Oauth2 Client id. Save `Client ID` value for setting up Domain-wide delegation in a later section.
 
 7. From the main menu select [IAM & admin - > IAM]. On the service account you just created use the [Edit Member] pencil icon to add the following roles.
 
@@ -40,7 +40,7 @@ There are 2 components involved in execution of the end to end pipeline.
 
 1. Login to your Google Admin console to grant domain wide delegation privilege to the service account you just created.
 
-2. On the menu select [Security] to go to the security menu. 
+2. On the menu select `Security` to go to the security menu. 
 
 3. Select [API controls] from security menu to go to API controls menu. You should see [Domain wide delegation] tab at the bottom. Click the [Manage Domain wide delegation] to go to the domain wide delegation page.
 
@@ -54,9 +54,9 @@ There are 2 components involved in execution of the end to end pipeline.
 
 1. Git clone this repo to your local computer.
 
-2. Copy the service account private key file which you download earlier to src/main/java/com/google/pso/pipelines folder.
+2. Copy the service account private key file which you download earlier to `src/main/java/com/google/pso/pipelines` folder.
 
-3. Open the GmailApiDriver.java and change the [SERVICE_ACCOUNT_JSON_FILE_PATH] to point to the service account private key JSON file.
+3. Open the GmailApiDriver.java and change the `SERVICE_ACCOUNT_JSON_FILE_PATH` to point to the service account private key JSON file.
 
 4. Use the following command to compile and run the dataflow job either locally (for testing) or on Google Cloud Platform for real-time monitoring.
 
@@ -167,21 +167,21 @@ gcloud dataflow jobs run ${JOB_NAME} \
 
    Sheet id: `1SBB_xf7KudS4l5vkoSH-udFlbOmt--4W`
 
-5. In the App script update the SHEET_ID variable with the sheet id of your sheet.
+5. In the App script update the `SHEET_ID` variable with the sheet id of your sheet.
 
 6. You need to set up a GCP project where the pub/sub is hosted. You also need a service account with Domain wide delegation privilege so that the service account can impersonate each email account and pull their email for analytics. Follow the setup instruction for those provided earlier.
 
-7. On the App script project, use the menu [Resource -> Cloud Platform project] and update the project number from your GCP project where the pub/sub topic is hosted.
+7. On the App script project, use the menu `Resource -> Cloud Platform project` and update the project number from your GCP project where the pub/sub topic is hosted.
 
-8. From the Google Cloud Platform project copy the "Private Key", "Client Email" of the service account which you have setup earlier and update the [PRIVATE_KEY] and [CLIENT_EMAIL] in the app script.
+8. From the Google Cloud Platform project copy the "Private Key", "Client Email" of the service account which you have setup earlier and update the `PRIVATE_KEY` and `CLIENT_EMAIL` in the app script.
 
-9. Copy the fully qualified topic name from the pub/sub topic where the Gmail push notification is received and update the [TOPIC_NAME] variable in the app script project.
+9. Copy the fully qualified topic name from the pub/sub topic where the Gmail push notification is received and update the `TOPIC_NAME` variable in the app script project.
 
-Example of a fully qualified topic name: [projects/YOUR_PROJECT_ID/topics/TOPIC_NAME]
+Example of a fully qualified topic name: `projects/YOUR_PROJECT_ID/topics/TOPIC_NAME`
 
-10. From the app services project use the menu [Resources -> Advanced Google Services] and enable [Admin SDK].
+10. From the app services project use the menu `Resources -> Advanced Google Services` and enable `Admin SDK`.
 
-11. Add the Oauth2 library. From the app services project use the menu [Resources -> Libraries] and on the [Add a library] search box past the following id to add the Oauth2 library.
+11. Add the Oauth2 library. From the app services project use the menu `Resources -> Libraries` and on the `Add a library` search box past the following id to add the Oauth2 library.
 
 `1B7FSrk5Zi6L1rSxxTDgDEUsPzlukDsi4KGuTMorsTQHhGBzBkMun4iDF`
 
