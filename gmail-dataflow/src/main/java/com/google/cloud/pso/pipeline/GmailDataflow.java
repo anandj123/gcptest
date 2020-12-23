@@ -42,6 +42,7 @@ import org.slf4j.LoggerFactory;
  // If you want to create a template and not run job then use the following option
 --templateLocation=${PIPELINE_FOLDER}/template \
 
+
 // Compile and upload the template to GCS for dataflow
 RUNNER=DataflowRunner 
 PROJECT_ID=anand-1-291314

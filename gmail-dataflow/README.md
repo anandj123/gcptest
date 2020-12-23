@@ -123,26 +123,16 @@ gcloud dataflow jobs run ${JOB_NAME} \
 
 |Parameter Name | Description |
 |---------------|-------------|
-|project|project id where dataflow will run|
-|tempLocation|Temporary GCS location for Dataflow compile|
-|stagingLocation|Staging location for dataflow output staging|
-|templateLocation|Use this option if you want to create a template and not run it|
-|runner|DataflowRunner for running dataflow, DirectRunner: for running local (developer mode) |
-|inputTopic|Input topic name|
-|outputTopic|Output topic name|
-|output|Output bucket (not used)|
-|windowSize|Window size for streaming pipeline (in minutes)|
-|truncateSize|Truncate message size (in bytes)|
-
-
---stagingLocation=${PIPELINE_FOLDER}/staging \
---templateLocation=${PIPELINE_FOLDER}/template \
---runner=${RUNNER} \
---inputTopic=projects/$PROJECT_ID/topics/$TOPIC_NAME \
---outputTopic=projects/$PROJECT_ID/topics/$OUTPUT_TOPIC \
---output=gs://$BUCKET_NAME/samples/output \
---windowSize=2 \
---truncateSize=4096"
+|project | Project id where dataflow will run.|
+|tempLocation | Temporary GCS location for Dataflow compile.|
+|stagingLocation | Staging location for dataflow output staging.|
+|templateLocation | Use this option if you want to create a template and not run it.|
+|runner | DataflowRunner for running dataflow, DirectRunner: for running local (developer mode). |
+|inputTopic | Input pub/sub topic name.|
+|outputTopic | Output pub/sub topic name.|
+|output | Output bucket for Dataflow output.|
+|windowSize | Window size for streaming pipeline (in minutes).|
+|truncateSize | Truncate message size (in bytes).|
 
 ## App script setup
 
