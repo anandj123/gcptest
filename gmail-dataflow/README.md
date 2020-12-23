@@ -163,9 +163,9 @@ gcloud dataflow jobs run ${JOB_NAME} \
 
    Example:
 
-   For a sheet: h_ttps://docs.google.com/spreadsheets/d/1SBB_xf7KudS4l5vkoSH-udFlbOmt--4W/edit#gid=0
+   For a sheet: `h_ttps://docs.google.com/spreadsheets/d/1SBB_xf7KudS4l5vkoSH-udFlbOmt--4W/edit#gid=0`
 
-   Sheet id: 1SBB_xf7KudS4l5vkoSH-udFlbOmt--4W
+   Sheet id: `1SBB_xf7KudS4l5vkoSH-udFlbOmt--4W`
 
 5. In the App script update the SHEET_ID variable with the sheet id of your sheet.
 
@@ -183,7 +183,7 @@ Example of a fully qualified topic name: [projects/YOUR_PROJECT_ID/topics/TOPIC_
 
 11. Add the Oauth2 library. From the app services project use the menu [Resources -> Libraries] and on the [Add a library] search box past the following id to add the Oauth2 library.
 
-1B7FSrk5Zi6L1rSxxTDgDEUsPzlukDsi4KGuTMorsTQHhGBzBkMun4iDF
+`1B7FSrk5Zi6L1rSxxTDgDEUsPzlukDsi4KGuTMorsTQHhGBzBkMun4iDF`
 
 12. If you want to schedule this script to run on a scheduled time use the [documentation](https://developers.google.com/apps-script/guides/triggers/installable#time-driven_triggers) provided by the link.
 
