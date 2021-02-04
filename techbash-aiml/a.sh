@@ -1,34 +1,17 @@
 # Part 1: In cloud shell go to the home directory and execute these scripts
 
 #gcloud auth list
-
 pushd  ~
 export PROJECT=$(gcloud config get-value project)
 export FIRST=$SECONDS
 export BUCKET_ID=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 30 | head -n 1)
 
-
-
 gcloud pubsub topics create ecommerce-events
 gcloud pubsub subscriptions create ecommerce-events-pull --topic=ecommerce-events
-#echo "step 5: $((SECONDS-FIRST)) seconds"
-bq mk retail_dataset
-bq mk retail_dataset.ecommerce_events ~/data_analytics/bq_schema_ecommerce_events.json
-#echo "step 6: $((SECONDS-FIRST)) seconds"
 
-gsutil mb gs://$(gcloud config get-value project)_videos_dftemplate
-gsutil mb gs://$(gcloud config get-value project)_dataflow_template_config
-export TT='{"image": "gcr.io/PROJECT_ID/dataflow-video-analytics","sdk_info":{"language": "JAVA"}}' 
-echo  ${TT/PROJECT_ID/$PROJECT}> dynamic_template_video_analytics.json
-gsutil cp  dynamic_template_video_analytics.json  gs://$(gcloud config get-value project)_dataflow_template_config/
-
-
-nohup sh c.sh &
-nohup sh d.sh &
 
 gcloud config set project $(gcloud config get-value project)
 gcloud services enable cloudbuild.googleapis.com
-
 
 printf '=%.0s' {1..100} 
 printf "\nStarting the first task\n\n"
@@ -55,7 +38,8 @@ case $CASE_VAR in
 gsutil cp gs://sureskills-ql/challenge-labs/tech-bash-2021/data-analytics/data_analytics.tar.gzip ~
 tar -xvf ~/data_analytics.tar.gzip -C ~
 pushd ~/data_analytics/pubsub_ecommerce
-#echo "step 1: $((SECONDS-FIRST)) seconds"
+bq mk retail_dataset
+bq mk retail_dataset.ecommerce_events ~/data_analytics/bq_schema_ecommerce_events.json
 gcloud builds submit --tag gcr.io/$PROJECT/pubsub-proxy
 #echo "step 2: $((SECONDS-FIRST)) seconds"
 gcloud run deploy pubsub-proxy --image gcr.io/$PROJECT/pubsub-proxy --platform managed --region=us-central1 --allow-unauthenticated
