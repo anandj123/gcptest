@@ -3,19 +3,11 @@
 #gcloud auth list
 
 pushd  ~
-git clone https://github.com/GoogleCloudPlatform/dataflow-video-analytics.git
-pushd ~/dataflow-video-analytics/
-gcloud pubsub topics create gcs-notification-topic
-gcloud pubsub subscriptions create gcs-notification-subscription --topic=gcs-notification-topic
-gsutil mb gs://$(gcloud config get-value project)_videos
-gsutil notification create -f json -t gcs-notification-topic gs://$(gcloud config get-value project)_videos
-gcloud pubsub topics create object-detection-topic
-gcloud pubsub subscriptions create object-detection-subscription --topic=object-detection-topic
-gcloud pubsub topics create error-topic
-gcloud pubsub subscriptions create error-subscription --topic=error-topic
+export PROJECT=$(gcloud config get-value project)
+export FIRST=$SECONDS
+export BUCKET_ID=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 30 | head -n 1)
 
-bq mk video_analytics
-bq mk video_analytics.object_tracking_analysis ~/dataflow-video-analytics/src/main/resources/table_schema.json
+
 
 gcloud pubsub topics create ecommerce-events
 gcloud pubsub subscriptions create ecommerce-events-pull --topic=ecommerce-events
@@ -37,9 +29,6 @@ nohup sh d.sh &
 gcloud config set project $(gcloud config get-value project)
 gcloud services enable cloudbuild.googleapis.com
 
-export PROJECT=$(gcloud config get-value project)
-export FIRST=$SECONDS
-export BUCKET_ID=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 30 | head -n 1)
 
 printf '=%.0s' {1..100} 
 printf "\nStarting the first task\n\n"

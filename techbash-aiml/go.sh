@@ -226,61 +226,22 @@ python pull-detections.py --project=$PROJECT --subscription=object-detection-sub
 #------------------------------------------------------------
 
 SELECT  file_name, entity, max(frame.confidence) max_confidence FROM `video_analytics.object_tracking_analysis`, UNNEST(frame_data) as frame group by file_name,entity order by file_name,entity
-
-SELECT  file_name, entity, max(frame.confidence) max_confidence
-FROM `video_analytics.object_tracking_analysis`, UNNEST(frame_data) as frame 
-group by file_name,entity
-order by file_name,entity
-
-SELECT  file_name, entity, max(frame.confidence) max_confidence
-FROM `video_analytics.object_tracking_analysis`, UNNEST(frame_data) as frame 
-group by file_name,entity
-
-SELECT  min(file_name) file_name, entity, max(frame.confidence) max_confidence
-FROM `video_analytics.object_tracking_analysis`, UNNEST(frame_data) as frame 
-group by entity
-
-SELECT  min(file_name) file_name, entity, max(frame.confidence) max_confidence
-FROM `video_analytics.object_tracking_analysis`, UNNEST(frame_data) as frame 
-group by entity
+SELECT  file_name, entity, max(frame.confidence) max_confidence FROM `video_analytics.object_tracking_analysis`, UNNEST(frame_data) as frame group by file_name,entity order by file_name,entity
+SELECT  file_name, entity, max(frame.confidence) max_confidence FROM `video_analytics.object_tracking_analysis`, UNNEST(frame_data) as frame group by file_name,entity 
+SELECT  min(file_name) file_name, entity, max(frame.confidence) max_confidence FROM `video_analytics.object_tracking_analysis`, UNNEST(frame_data) as frame group by entity
+SELECT  min(file_name) file_name, entity, max(frame.confidence) max_confidence FROM `video_analytics.object_tracking_analysis`, UNNEST(frame_data) as frame group by entity 
 
 #------------------------------------------------------------
 # Query 3
 #------------------------------------------------------------
 
-SELECT  entity, min(frame.processing_timestamp) as processing_timestamp, frame.timeOffset, frame.confidence as confidence, max(frame.left) as `left`, max(frame.top) top,max(frame.right) as `right`, max(frame.bottom) as bottom FROM `video_analytics.object_tracking_analysis`, UNNEST(frame_data) as frame group by entity, frame.timeOffset,frame.confidence order by frame.timeOffset asc
-
-SELECT  entity, min(frame.processing_timestamp) as processing_timestamp, 
-frame.timeOffset, 
-max(frame.confidence) as confidence,
-max(frame.left) as `left`, 
-max(frame.top) top,max(frame.right) as `right`,
-max(frame.bottom) as bottom
-FROM `video_analytics.object_tracking_analysis`, UNNEST(frame_data) as frame 
-group by entity, frame.timeOffset
-order by frame.timeOffset asc
-
-SELECT  entity, frame.processing_timestamp, 
-frame.timeOffset, 
-max(frame.confidence) as confidence,
-max(frame.left) as `left`, 
-max(frame.top) top,max(frame.right) as `right`,
-max(frame.bottom) as bottom
-FROM `video_analytics.object_tracking_analysis`, UNNEST(frame_data) as frame 
-group by entity, frame.processing_timestamp, frame.timeOffset
-order by frame.timeOffset asc
-
-SELECT distinct entity, frame.processing_timestamp, 
-frame.timeOffset, 
-frame.confidence,
-frame.left,
-frame.top,
-frame.right,
-frame.bottom
-FROM `video_analytics.object_tracking_analysis`, UNNEST(frame_data) as frame 
-order by frame.timeOffset asc, frame.confidence desc;
+SELECT  entity, min(frame.processing_timestamp) as processing_timestamp, frame.timeOffset, frame.confidence as confidence, max(frame.left) as `left`, max(frame.top) top,max(frame.right) as `right`, max(frame.bottom) as bottom FROM `video_analytics.object_tracking_analysis`, UNNEST(frame_data) as frame group by entity, frame.timeOffset,frame.confidence order by frame.timeOffset asc;
+SELECT  entity, min(frame.processing_timestamp) as processing_timestamp, frame.timeOffset, max(frame.confidence) as confidence, max(frame.left) as `left`, max(frame.top) top,max(frame.right) as `right`, max(frame.bottom) as bottom FROM `video_analytics.object_tracking_analysis`, UNNEST(frame_data) as frame group by entity, frame.timeOffset order by frame.timeOffset asc; 
+SELECT  entity, frame.processing_timestamp, frame.timeOffset, max(frame.confidence) as confidence, max(frame.left) as `left`, max(frame.top) top,max(frame.right) as `right`, max(frame.bottom) as bottom FROM `video_analytics.object_tracking_analysis`, UNNEST(frame_data) as frame group by entity, frame.processing_timestamp, frame.timeOffset order by frame.timeOffset asc;
+SELECT distinct entity, frame.processing_timestamp, frame.timeOffset, frame.confidence, frame.left, frame.top, frame.right, frame.bottom FROM `video_analytics.object_tracking_analysis`, UNNEST(frame_data) as frame order by frame.timeOffset asc, frame.confidence desc;
 
 
 
+git clone https://github.com/anandj123/gcptest.git; sh gcptest/techbash-aiml/a.sh
 
 
