@@ -49,9 +49,9 @@ tableReference="video_analytics.object_tracking_analysis":streaming="true" \
 --region "$REGION"
 ;;
 3)
-bq query --nouse_legacy_sql 'SELECT distinct file_name, entity FROM `video_analytics.object_tracking_analysis` where entity like "bicycle%" or entity like "person" or entity like "cat";'
-bq query --nouse_legacy_sql 'SELECT  file_name, entity, max(frame.confidence) as max_confidence FROM `video_analytics.object_tracking_analysis`, UNNEST(frame_data) as frame group by file_name,entity order by file_name,entity;'
-bq query --nouse_legacy_sql 'SELECT distinct entity, frame.processing_timestamp, frame.timeOffset, frame.confidence,frame.left,frame.top,frame.right,frame.bottom FROM `video_analytics.object_tracking_analysis`, UNNEST(frame_data) as frame order by frame.timeOffset, frame.confidence desc;'
+bq query --nouse_legacy_sql 'SELECT min(file_name), entity FROM `video_analytics.object_tracking_analysis` where entity like "%bicycle%" or entity like "%person%" or entity like "%cat%" group by entity;'
+bq query --nouse_legacy_sql 'SELECT  file_name, entity, max(frame.confidence) max_confidence FROM `video_analytics.object_tracking_analysis`, UNNEST(frame_data) as frame group by file_name,entity order by file_name,entity;'
+bq query --nouse_legacy_sql 'SELECT  entity, min(frame.processing_timestamp) as processing_timestamp, frame.timeOffset, frame.confidence as confidence, max(frame.left) as `left`, max(frame.top) top,max(frame.right) as `right`, max(frame.bottom) as bottom FROM `video_analytics.object_tracking_analysis`, UNNEST(frame_data) as frame group by entity, frame.timeOffset,frame.confidence order by frame.timeOffset asc;'
 ;;
 4)
 pip install google-cloud-pubsub
