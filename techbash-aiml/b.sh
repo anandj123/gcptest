@@ -50,15 +50,8 @@ tableReference="video_analytics.object_tracking_analysis":streaming="true" \
 ;;
 3)
 bq query --nouse_legacy_sql 'SELECT distinct file_name, entity FROM `video_analytics.object_tracking_analysis` where entity like "bicycle%" or entity like "person" or entity like "cat";'
-
-#SELECT  file_name, entity, max(frame.confidence) as max_confidence 
-#FROM `qwiklabs-gcp-04-f069fbc9c7ce.video_analytics.object_tracking_analysis`, UNNEST(frame_data) as frame 
-#group by file_name,entity
-#order by file_name,entity;
-
-#SELECT distinct entity, frame.processing_timestamp, frame.timeOffset, frame.confidence,frame.left,frame.top,frame.right,frame.bottom
-#FROM `qwiklabs-gcp-04-f069fbc9c7ce.video_analytics.object_tracking_analysis`, UNNEST(frame_data) as frame 
-#order by frame.timeOffset, frame.confidence desc;
+bq query --nouse_legacy_sql 'SELECT  file_name, entity, max(frame.confidence) as max_confidence FROM `qwiklabs-gcp-04-f069fbc9c7ce.video_analytics.object_tracking_analysis`, UNNEST(frame_data) as frame group by file_name,entity order by file_name,entity;'
+bq query --nouse_legacy_sql 'SELECT distinct entity, frame.processing_timestamp, frame.timeOffset, frame.confidence,frame.left,frame.top,frame.right,frame.bottom FROM `qwiklabs-gcp-04-f069fbc9c7ce.video_analytics.object_tracking_analysis`, UNNEST(frame_data) as frame order by frame.timeOffset, frame.confidence desc;'
 ;;
 4)
 pip install google-cloud-pubsub
