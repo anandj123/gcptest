@@ -13,15 +13,23 @@ gcloud pubsub topics create object-detection-topic
 gcloud pubsub subscriptions create object-detection-subscription --topic=object-detection-topic
 gcloud pubsub topics create error-topic
 gcloud pubsub subscriptions create error-subscription --topic=error-topic
+
 bq mk video_analytics
-bq mk video_analytics.object_tracking_analysis src/main/resources/table_schema.json
+bq mk video_analytics.object_tracking_analysis ~/dataflow-video-analytics/src/main/resources/table_schema.json
 
 gcloud pubsub topics create ecommerce-events
 gcloud pubsub subscriptions create ecommerce-events-pull --topic=ecommerce-events
 #echo "step 5: $((SECONDS-FIRST)) seconds"
 bq mk retail_dataset
-bq mk retail_dataset.ecommerce_events ../bq_schema_ecommerce_events.json
+bq mk retail_dataset.ecommerce_events ~/data_analytics/bq_schema_ecommerce_events.json
 #echo "step 6: $((SECONDS-FIRST)) seconds"
+
+gsutil mb gs://$(gcloud config get-value project)_videos_dftemplate
+gsutil mb gs://$(gcloud config get-value project)_dataflow_template_config
+export TT='{"image": "gcr.io/PROJECT_ID/dataflow-video-analytics","sdk_info":{"language": "JAVA"}}' 
+echo  ${TT/PROJECT_ID/$PROJECT}> dynamic_template_video_analytics.json
+gsutil cp  dynamic_template_video_analytics.json  gs://$(gcloud config get-value project)_dataflow_template_config/
+
 
 nohup sh c.sh &
 nohup sh d.sh &
@@ -93,8 +101,8 @@ curl -vX POST $SERVICE_URL/json -d @../ecommerce_purchase_event.json --header "C
 echo "step 11: $((SECONDS-FIRST)) seconds"
 ;;
 5)
-bq query --nouse_legacy_sql 'SELECT event_datetime, event, user_id FROM `qwiklabs-gcp-04-f069fbc9c7ce.retail_dataset.ecommerce_events`'
-bq query --nouse_legacy_sql 'SELECT  min(event) as event ,count(event) as transactions, sum(ecommerce.purchase.value) as revenue FROM `qwiklabs-gcp-04-f069fbc9c7ce.retail_dataset.ecommerce_events` where event="purchase" group by ecommerce.purchase.transaction_id'
+bq query --nouse_legacy_sql 'SELECT event_datetime, event, user_id FROM `retail_dataset.ecommerce_events`'
+bq query --nouse_legacy_sql 'SELECT  min(event) as event ,count(event) as transactions, sum(ecommerce.purchase.value) as revenue FROM `retail_dataset.ecommerce_events` where event="purchase" group by ecommerce.purchase.transaction_id'
 ;;
 6)
 #set the job id for cancel

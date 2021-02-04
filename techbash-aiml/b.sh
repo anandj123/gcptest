@@ -1,5 +1,6 @@
 # Part 2: In cloud shell go to the home directory and execute these scripts
 
+export PROJECT=$(gcloud config get-value project)
 
 export CASE_VAR=0
 while [ $CASE_VAR -lt 10 ] 
@@ -8,7 +9,7 @@ printf '=%.0s' {1..100}
 printf "\n1. Check All."
 printf "\n2. Run Dataflow job."
 printf "\n3. Run Bigquery."
-printf "\n6. Run Python."
+printf "\n4. Run Python."
 printf "\n10. Cleanup and exit.\n"
 printf '=%.0s' {1..100}
 printf "\nChoose your option: "
