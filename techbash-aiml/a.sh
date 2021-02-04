@@ -107,6 +107,6 @@ echo "step 14: $((SECONDS-FIRST)) seconds"
 gsutil rb gs://$BUCKET_ID
 popd
 popd
-sh b.sh
+sh ~/gcptest/techbash-aiml/b.sh
 esac
 done
