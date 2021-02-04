@@ -49,7 +49,7 @@ tableReference="video_analytics.object_tracking_analysis":streaming="true" \
 --region "$REGION"
 ;;
 3)
-bq query --nouse_legacy_sql 'SELECT distinct file_name, entity FROM `qwiklabs-gcp-04-f069fbc9c7ce.video_analytics.object_tracking_analysis` where entity like "bicycle%" or entity like "person" or entity like "cat";'
+bq query --nouse_legacy_sql 'SELECT distinct file_name, entity FROM `object_tracking_analysis` where entity like "bicycle%" or entity like "person" or entity like "cat";'
 
 #SELECT  file_name, entity, max(frame.confidence) as max_confidence 
 #FROM `qwiklabs-gcp-04-f069fbc9c7ce.video_analytics.object_tracking_analysis`, UNNEST(frame_data) as frame 
