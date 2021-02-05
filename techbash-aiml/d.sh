@@ -1,7 +1,7 @@
 pushd ~/dataflow-video-analytics/
 sudo apt-get install ffmpeg
 mkdir videos
-pushd ./videos/
+pushd ~/dataflow-video-analytics/videos/
 gsutil cp gs://dataflow-video-analytics-test-clips/* .
 export FILE="cat.mp4"
 ffmpeg -i "$FILE" -codec:a aac  -ac 2  -ar 48k -c copy -movflags faststart -f segment -segment_format mpegts   -segment_time 5 "${file%.*}~"%1d.mp4
