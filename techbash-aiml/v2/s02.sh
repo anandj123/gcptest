@@ -9,7 +9,7 @@ do
         while :
         do
             export JOB_ID=$(gcloud dataflow jobs list --region=us-central1 --status=active)
-            if [ $JOB_ID == "Listed 0 items." ]
+            if [[ $JOB_ID == "Listed 0 items." ]]
             then
                 break
             fi
