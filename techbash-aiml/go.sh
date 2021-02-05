@@ -246,5 +246,3 @@ git clone https://github.com/anandj123/gcptest.git; sh gcptest/techbash-aiml/a.s
 
 sh ~/gcptest/techbash-aiml/a.sh
 sh ~/gcptest/techbash-aiml/init.sh
-nohup sh ~/gcptest/techbash-aiml/c.sh &
-sh ~/gcptest/techbash-aiml/d.sh
