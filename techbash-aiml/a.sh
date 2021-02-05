@@ -22,12 +22,10 @@ export CASE_VAR=0
 while [ $CASE_VAR -lt 10 ] 
 do
 printf '=%.0s' {1..100} 
-printf "\n1. Build and Deploy cloud run service"
-printf "\n2. Run Dataflow job."
-printf "\n3. Check services are running."
-printf "\n4. Post events to cloud run service."
-printf "\n5. Check Bigquery."
-printf "\n6. Delete Dataflow."
+printf "\n1. Build and Deploy cloud run and dataflow service"
+printf "\n2. Check services are running."
+printf "\n3. Post events to cloud run service."
+printf "\n4. Delete Dataflow."
 printf "\n10. Cleanup and exit.\n"
 printf '=%.0s' {1..100}
 printf "\nChoose your option: "
@@ -41,13 +39,11 @@ pushd ~/data_analytics/pubsub_ecommerce
 bq mk retail_dataset
 bq mk retail_dataset.ecommerce_events ~/data_analytics/bq_schema_ecommerce_events.json
 gcloud builds submit --tag gcr.io/$PROJECT/pubsub-proxy
-#echo "step 2: $((SECONDS-FIRST)) seconds"
+
 gcloud run deploy pubsub-proxy --image gcr.io/$PROJECT/pubsub-proxy --platform managed --region=us-central1 --allow-unauthenticated
-#echo "step 4: $((SECONDS-FIRST)) seconds"
-;;
-2)
+
 gsutil mb gs://$BUCKET_ID
-#echo "step 7: $((SECONDS-FIRST)) seconds"
+
 gcloud dataflow jobs run ecommerce-events-ps-to-bq-stream \
     --gcs-location gs://dataflow-templates/latest/PubSub_Subscription_to_BigQuery \
     --region us-central1 \
@@ -56,16 +52,15 @@ gcloud dataflow jobs run ecommerce-events-ps-to-bq-stream \
 inputSubscription=projects/$PROJECT/subscriptions/ecommerce-events-pull,\
 outputTableSpec=$PROJECT:retail_dataset.ecommerce_events,\
 outputDeadletterTable=$PROJECT:retail_dataset.ecommerce_events_dead
-#echo "step 8: $((SECONDS-FIRST)) seconds"
 ;;
-3)
+2)
 #gcloud run services list --platform managed
 #copy and paste it here.
 export SERVICE_URL=$(gcloud run services list --platform managed |tail -1 |awk '{print $4}')
 gcloud run services list --platform managed
 gcloud dataflow jobs list --region=us-central1 --status=active
 ;;
-4)
+3)
 curl -vX POST $SERVICE_URL/json -d @../ecommerce_view_event.json --header "Content-Type: application/json"
 echo "step 9: $((SECONDS-FIRST)) seconds"
 curl -vX POST $SERVICE_URL/json -d @../ecommerce_add_to_cart_event.json --header "Content-Type: application/json"
@@ -73,11 +68,7 @@ echo "step 10: $((SECONDS-FIRST)) seconds"
 curl -vX POST $SERVICE_URL/json -d @../ecommerce_purchase_event.json --header "Content-Type: application/json"
 echo "step 11: $((SECONDS-FIRST)) seconds"
 ;;
-5)
-bq query --nouse_legacy_sql 'SELECT event_datetime, event, user_id FROM `retail_dataset.ecommerce_events`'
-bq query --nouse_legacy_sql 'SELECT  min(event) as event ,count(event) as transactions, sum(ecommerce.purchase.value) as revenue FROM `retail_dataset.ecommerce_events` where event="purchase" group by ecommerce.purchase.transaction_id'
-;;
-6)
+4)
 #set the job id for cancel
 export JOB_ID=$(gcloud dataflow jobs list --region=us-central1 --status=active| head -2 | tail -1|awk '{print $1}')
 gcloud dataflow jobs cancel $JOB_ID --region=us-central1
