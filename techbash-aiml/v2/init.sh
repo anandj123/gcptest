@@ -271,7 +271,7 @@ while :
 do
     if [ -f "$SRC_DIR/triggers/f04.f" ] && [ -f "$SRC_DIR/triggers/f05.f" ]
     then
-        if [ !-f $SRC_DIR/"triggers/f06.f" ]
+        if [ ! -f $SRC_DIR/"triggers/f06.f" ]
         then
             printf "Please select Y/n: "
             read input
