@@ -1,10 +1,7 @@
-touch ~/gcptest/techbash-ai/v2/triggers/f05.s
-export PROJECT=$(gcloud config get-value project)
-export BUCKET_ID=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 30 | head -n 1)
-gsutil mb gs://$BUCKET_ID
+touch $SRC_DIR/triggers/f05.s
 while :
 do
-    if [ -f "triggers/f01.f" ] 
+    if [ -f "$SRC_DIR/triggers/f01.f" ] 
     then
 
 # Todo: check if the service is accepting traffic
@@ -19,5 +16,5 @@ do
     sleep 2
 done
 
-touch ~/gcptest/techbash-ai/v2/triggers/f05.f
+touch $SRC_DIR/triggers/f05.f
 

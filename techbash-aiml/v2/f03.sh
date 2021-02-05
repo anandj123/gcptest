@@ -1,9 +1,8 @@
-touch ~/gcptest/techbash-ai/v2/triggers/f03.s
-export PROJECT=$(gcloud config get-value project)
+touch $SRC_DIR/triggers/f03.s
 
 while :
 do
-    if [ -f "triggers/f01.f" ] 
+    if [ -f "$SRC_DIR/triggers/f01.f" ] 
     then
         
         gcloud builds submit \ 
@@ -19,5 +18,5 @@ do
     sleep 2
 done
 
-touch ~/gcptest/techbash-ai/v2/triggers/f03.f
+touch $SRC_DIR/triggers/f03.f
 

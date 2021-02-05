@@ -1,9 +1,8 @@
-touch ~/gcptest/techbash-ai/v2/triggers/f02.s
-export PROJECT=$(gcloud config get-value project)
+touch $SRC_DIR/triggers/f02.s
 
 while :
 do
-    if [ -f "triggers/i01.f" ] && [ -f "triggers/i02.f" ]
+    if [ -f "$SRC_DIR/triggers/i01.f" ] && [ -f "$SRC_DIR/triggers/i02.f" ]
     then
         bq mk video_analytics
         bq mk video_analytics.object_tracking_analysis \ 
@@ -45,5 +44,5 @@ do
     sleep 2
 done
 
-touch ~/gcptest/techbash-ai/v2/triggers/f02.f
+touch $SRC_DIR/triggers/f02.f
 

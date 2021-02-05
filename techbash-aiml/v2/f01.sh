@@ -1,9 +1,8 @@
-touch ~/gcptest/techbash-aiml/v2/triggers/f01.s
-export PROJECT=$(gcloud config get-value project)
+touch $SRC_DIR/triggers/f01.s
 
 while :
 do
-    if [ -f "triggers/i01.f" ] && [ -f "triggers/i02.f" ]
+    if [ -f "$SRC_DIR/triggers/i01.f" ] && [ -f "$SRC_DIR/triggers/i02.f" ]
     then
         gcloud pubsub topics create ecommerce-events
         gcloud pubsub subscriptions create ecommerce-events-pull \ 
@@ -38,5 +37,5 @@ do
     sleep 2
 done
 
-touch ~/gcptest/techbash-aiml/v2/triggers/f01.f
+touch $SRC_DIR//triggers/f01.f
 

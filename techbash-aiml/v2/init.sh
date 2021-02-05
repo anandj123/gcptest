@@ -245,7 +245,10 @@ print_status() {
     print_style $TASK_DESC $COLOR
 
 }
-SRC_DIR="~/gcptest/techbash-aiml/v2"
+
+export SRC_DIR="~/gcptest/techbash-aiml/v2"
+export PROJECT=$(gcloud config get-value project)
+
 if [ -d "triggers" ]
 then
     rm -rf $SRC_DIR/triggers/
@@ -263,8 +266,6 @@ sh f04.sh > logs/f04.log 2>&1 &
 sh f05.sh > logs/f05.log 2>&1 &
 sh s01.sh > logs/s01.log 2>&1 &
 sh s02.sh > logs/s02.log 2>&1 &
-
-export PROJECT=$(gcloud config get-value project)
 
 while :
 do

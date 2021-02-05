@@ -1,9 +1,8 @@
-touch ~/gcptest/techbash-ai/v2/triggers/s02.s
-export PROJECT=$(gcloud config get-value project)
+touch $SRC_DIR/triggers/s02.s
 
 while :
 do
-    if [ -f "triggers/f06.f" ] && [ -f "triggers/s01.f"]
+    if [ -f "$SRC_DIR/triggers/f06.f" ] && [ -f "$SRC_DIR/triggers/s01.f"]
     then
         export JOB_ID=$(gcloud dataflow jobs list --region=us-central1 --status=active| head -2 | tail -1|awk '{print $1}')
         gcloud dataflow jobs cancel $JOB_ID --region=us-central1
@@ -39,5 +38,5 @@ do
     sleep 2
 done
 
-touch ~/gcptest/techbash-ai/v2/triggers/s02.f
+touch $SRC_DIR/triggers/s02.f
 

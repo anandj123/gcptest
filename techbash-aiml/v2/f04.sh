@@ -1,10 +1,9 @@
-touch ~/gcptest/techbash-ai/v2/triggers/f04.s
-export PROJECT=$(gcloud config get-value project)
+touch $SRC_DIR/triggers/f04.s
 export BUCKET_ID=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 30 | head -n 1)
 gsutil mb gs://$BUCKET_ID
 while :
 do
-    if [ -f "triggers/f01.f" ] 
+    if [ -f "$SRC_DIR/triggers/f01.f" ] 
     then
         
         gcloud dataflow jobs run ecommerce-events-ps-to-bq-stream \
@@ -22,5 +21,5 @@ do
     sleep 2
 done
 
-touch ~/gcptest/techbash-ai/v2/triggers/f04.f
+touch $SRC_DIR/triggers/f04.f
 
