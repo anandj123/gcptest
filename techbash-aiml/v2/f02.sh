@@ -4,6 +4,7 @@ while :
 do
     if [ -f "$SRC_DIR/triggers/i01.f" ] && [ -f "$SRC_DIR/triggers/i02.f" ]
     then
+        sleep 5
         bq mk video_analytics
         bq mk video_analytics.object_tracking_analysis \ 
             $HOME/dataflow-video-analytics/src/main/resources/table_schema.json
