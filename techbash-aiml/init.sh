@@ -1,5 +1,8 @@
 git clone https://github.com/GoogleCloudPlatform/dataflow-video-analytics.git
 
+gcloud config set project $(gcloud config get-value project)
+export PROJECT=$(gcloud config get-value project)
+
 gcloud pubsub topics create gcs-notification-topic
 gcloud pubsub subscriptions create gcs-notification-subscription --topic=gcs-notification-topic
 gsutil mb gs://$(gcloud config get-value project)_videos
