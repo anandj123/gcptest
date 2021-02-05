@@ -271,12 +271,15 @@ while :
 do
     if [ -f "$SRC_DIR/triggers/f04.f" ] && [ -f "$SRC_DIR/triggers/f05.f" ]
     then
-        printf "Please select Y/n: "
-        read input
-        if [ $input == "Y" ]
+        if [ !-f $SRC_DIR/"triggers/f08.f" ]
         then
+            printf "Please select Y/n: "
+            read input
+            if [ $input == "Y" ]
+            then
 
-            touch $SRC_DIR/triggers/f08.f
+                touch $SRC_DIR/triggers/f08.f
+            fi
         fi
     fi
     clear
