@@ -2,7 +2,7 @@ touch $SRC_DIR/triggers/s02.s
 
 while :
 do
-    if [ -f "$SRC_DIR/triggers/f06.f" ] && [ -f "$SRC_DIR/triggers/s01.f"]
+    if [ -f "$SRC_DIR/triggers/f06.f" ] && [ -f "$SRC_DIR/triggers/s01.f" ]
     then
         export JOB_ID=$(gcloud dataflow jobs list --region=us-central1 --status=active| head -2 | tail -1|awk '{print $1}')
         gcloud dataflow jobs cancel $JOB_ID --region=us-central1
