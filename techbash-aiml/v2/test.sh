@@ -23,7 +23,7 @@ print_style () {
 
 
 i01=1
-TASK_DESC="I01: Get tar file and extract.\n"
+TASK_DESC="I01_Get_tar_file_and_extract.\n"
 COLOR="Not Started"
 case $i01 in
     1)
@@ -35,7 +35,7 @@ esac
 print_style $TASK_DESC $COLOR
 
 i01=2
-TASK_DESC="I01: Get tar file and extract.\n"
+
 COLOR="Not Started"
 case $i01 in
     1)
