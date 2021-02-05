@@ -134,7 +134,7 @@ print_status() {
 
     get_status
 
-    TASK_DESC="I01: Get tar file and extract.\n"
+    TASK_DESC="I01:_Get_tar_file_and_extract.\n"
     COLOR="Not Started"
     case $i01 in
         1)
@@ -145,7 +145,7 @@ print_status() {
     esac
     print_style $TASK_DESC $COLOR
     
-    TASK_DESC="I02: Git Cloned.\n"
+    TASK_DESC="I02:_Git_Cloned.\n"
     COLOR="Not Started"
     case $i02 in
         1)
@@ -156,7 +156,7 @@ print_status() {
     esac
     print_style $TASK_DESC $COLOR
 
-    TASK_DESC="F01: Create pubsub topics and buckets.\n"
+    TASK_DESC="F01:_Create_pubsub_topics_and_buckets.\n"
     COLOR="Not Started"
     case $f01 in
         1)
@@ -167,7 +167,7 @@ print_status() {
     esac
     print_style $TASK_DESC $COLOR
 
-    TASK_DESC="F02: Create BQ tables and query them.\n"
+    TASK_DESC="F02:_Create_BQ_tables_and_query_them.\n"
     COLOR="Not Started"
     case $f02 in
         1)
@@ -178,7 +178,7 @@ print_status() {
     esac
     print_style $TASK_DESC $COLOR
 
-    TASK_DESC="F03: Cloud run build and submit.\n"
+    TASK_DESC="F03:_Cloud_run_build_and_submit.\n"
     COLOR="Not Started"
     case $f03 in
         1)
@@ -189,7 +189,7 @@ print_status() {
     esac
     print_style $TASK_DESC $COLOR
 
-    TASK_DESC="F04: Run dataflow job.\n"
+    TASK_DESC="F04:_Run_dataflow_job.\n"
     COLOR="Not Started"
     case $f04 in
         1)
@@ -200,7 +200,7 @@ print_status() {
     esac
     print_style $TASK_DESC $COLOR
 
-    TASK_DESC="F05: POST ecommerce files to cloudrun endpoint.\n"
+    TASK_DESC="F05:_POST_ecommerce_files_to_cloudrun_endpoint.\n"
     COLOR="Not Started"
     case $f05 in
         1)
@@ -211,7 +211,7 @@ print_status() {
     esac
     print_style $TASK_DESC $COLOR
 
-    TASK_DESC="F06: User input.\n"
+    TASK_DESC="F06:_User_input.\n"
     COLOR="Not Started"
     case $f06 in
         1)
@@ -222,7 +222,7 @@ print_status() {
     esac
     print_style $TASK_DESC $COLOR
 
-    TASK_DESC="S01: Create gradle job image for flex dataflow.\n"
+    TASK_DESC="S01:_Create_gradle_job_image_for_flex_dataflow.\n"
     COLOR="Not Started"
     case $s01 in
         1)
@@ -233,7 +233,7 @@ print_status() {
     esac
     print_style $TASK_DESC $COLOR
 
-    TASK_DESC="S02: Run the 2nd dataflow job (Flex from gradle image).\n"
+    TASK_DESC="S02:_Run_the_2nd_dataflow_job_(Flex_from_gradle_image).\n"
     COLOR="Not Started"
     case $s02 in
         1)
