@@ -134,7 +134,7 @@ print_status() {
 
     get_status
 
-    TASK_DESC="I01: Get tar file and extract"
+    TASK_DESC="I01: Get tar file and extract.\n"
     COLOR="Not Started"
     case $i01 in
         1)
@@ -143,9 +143,9 @@ print_status() {
         2)
         COLOR="success"
     esac
-    print_style TASK_DESC COLOR
+    print_style $TASK_DESC $COLOR
     
-    TASK_DESC="I02: Git Cloned"
+    TASK_DESC="I02: Git Cloned.\n"
     COLOR="Not Started"
     case $i02 in
         1)
@@ -154,9 +154,9 @@ print_status() {
         2)
         COLOR="success"
     esac
-    print_style TASK_DESC COLOR
+    print_style $TASK_DESC $COLOR
 
-    TASK_DESC="F01: Create pubsub topics and buckets"
+    TASK_DESC="F01: Create pubsub topics and buckets.\n"
     COLOR="Not Started"
     case $f01 in
         1)
@@ -165,9 +165,9 @@ print_status() {
         2)
         COLOR="success"
     esac
-    print_style TASK_DESC COLOR
+    print_style $TASK_DESC $COLOR
 
-    TASK_DESC="F02: Create BQ tables and query them."
+    TASK_DESC="F02: Create BQ tables and query them.\n"
     COLOR="Not Started"
     case $f02 in
         1)
@@ -176,9 +176,9 @@ print_status() {
         2)
         COLOR="success"
     esac
-    print_style TASK_DESC COLOR
+    print_style $TASK_DESC $COLOR
 
-    TASK_DESC="F03: Cloud run build and submit."
+    TASK_DESC="F03: Cloud run build and submit.\n"
     COLOR="Not Started"
     case $f03 in
         1)
@@ -187,9 +187,9 @@ print_status() {
         2)
         COLOR="success"
     esac
-    print_style TASK_DESC COLOR
+    print_style $TASK_DESC $COLOR
 
-    TASK_DESC="F04: Run dataflow job."
+    TASK_DESC="F04: Run dataflow job.\n"
     COLOR="Not Started"
     case $f04 in
         1)
@@ -198,9 +198,9 @@ print_status() {
         2)
         COLOR="success"
     esac
-    print_style TASK_DESC COLOR
+    print_style $TASK_DESC $COLOR
 
-    TASK_DESC="F05: POST ecommerce files to cloudrun endpoint."
+    TASK_DESC="F05: POST ecommerce files to cloudrun endpoint.\n"
     COLOR="Not Started"
     case $f05 in
         1)
@@ -209,9 +209,9 @@ print_status() {
         2)
         COLOR="success"
     esac
-    print_style TASK_DESC COLOR
+    print_style $TASK_DESC $COLOR
 
-    TASK_DESC="F06: User input."
+    TASK_DESC="F06: User input.\n"
     COLOR="Not Started"
     case $f06 in
         1)
@@ -220,9 +220,9 @@ print_status() {
         2)
         COLOR="success"
     esac
-    print_style TASK_DESC COLOR
+    print_style $TASK_DESC $COLOR
 
-    TASK_DESC="S01: Create gradle job image for flex dataflow."
+    TASK_DESC="S01: Create gradle job image for flex dataflow.\n"
     COLOR="Not Started"
     case $s01 in
         1)
@@ -231,9 +231,9 @@ print_status() {
         2)
         COLOR="success"
     esac
-    print_style TASK_DESC COLOR
+    print_style $TASK_DESC $COLOR
 
-    TASK_DESC="S02: Run the 2nd dataflow job (Flex from gradle image)."
+    TASK_DESC="S02: Run the 2nd dataflow job (Flex from gradle image).\n"
     COLOR="Not Started"
     case $s02 in
         1)
@@ -242,7 +242,7 @@ print_status() {
         2)
         COLOR="success"
     esac
-    print_style TASK_DESC COLOR
+    print_style $TASK_DESC $COLOR
 
 }
 pushd ~/gcptest/techbash-ai/v2
