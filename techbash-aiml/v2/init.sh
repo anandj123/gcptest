@@ -29,6 +29,7 @@ f05=0
 f06=0
 s01=0
 s02=0
+s03=0
 get_status() {
     i01=0
     i02=0
@@ -39,6 +40,7 @@ get_status() {
     f06=0
     s01=0
     s02=0
+    s03=0
 
     if [ -f "$SRC_DIR/triggers/i01.s" ]
     then
@@ -128,6 +130,15 @@ get_status() {
     if [ -f "$SRC_DIR/triggers/s02.f" ]
     then
         s02=2
+    fi
+
+    if [ -f "$SRC_DIR/triggers/s03.s" ]
+    then
+        s03=1
+    fi
+    if [ -f "$SRC_DIR/triggers/s03.f" ]
+    then
+        s03=2
     fi
 }
 print_status() {
@@ -244,6 +255,17 @@ print_status() {
     esac
     print_style $TASK_DESC $COLOR
 
+    TASK_DESC="S03:_Make_and_upload_video_files.\n"
+    COLOR="Not Started"
+    case $s03 in
+        1)
+        COLOR="warning"
+        ;;
+        2)
+        COLOR="success"
+    esac
+    print_style $TASK_DESC $COLOR
+
 }
 
 export SRC_DIR="$HOME/gcptest/techbash-aiml/v2"
@@ -260,6 +282,7 @@ fi
 mkdir $SRC_DIR/triggers
 mkdir $SRC_DIR/logs
 
+
 sh $SRC_DIR/i01.sh > $SRC_DIR/logs/i01.log 2>&1 &
 sh $SRC_DIR/i02.sh > $SRC_DIR/logs/i02.log 2>&1 &
 sh $SRC_DIR/f01.sh > $SRC_DIR/logs/f01.log 2>&1 &
@@ -269,6 +292,10 @@ sh $SRC_DIR/f04.sh > $SRC_DIR/logs/f04.log 2>&1 &
 sh $SRC_DIR/f05.sh > $SRC_DIR/logs/f05.log 2>&1 &
 sh $SRC_DIR/s01.sh > $SRC_DIR/logs/s01.log 2>&1 &
 sh $SRC_DIR/s02.sh > $SRC_DIR/logs/s02.log 2>&1 &
+
+sudo apt-get install ffmpeg
+sh $SRC_DIR/s03.sh > $SRC_DIR/logs/s03.log 2>&1 &
+
 
 while :
 do
@@ -280,7 +307,6 @@ do
             read input
             if [ $input == "Y" ]
             then
-
                 touch $SRC_DIR/triggers/f06.f
             fi
         fi

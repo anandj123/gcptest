@@ -10,7 +10,7 @@ do
         do
             export JOB_ID=$(gcloud dataflow jobs list --region=us-central1 --status=active)
             echo "Job id: "$JOB_ID
-            if [[ $JOB_ID = "" ]]
+            if [ $JOB_ID = "" ]
             then
                 break
             fi
@@ -32,6 +32,17 @@ features="OBJECT_TRACKING":entities="window,person":confidenceThreshold="0.9":wi
 tableReference="video_analytics.object_tracking_analysis":streaming="true" \
 --region "$REGION"
 
+        while :
+        do
+            export JOB_ID=$(gcloud dataflow jobs list --region=us-central1 --status=active)
+            echo "Job id: "$JOB_ID
+            if [ $JOB_ID = "" ]
+            then
+                sleep 2
+                continue
+            fi
+            break
+        done
 #TODO: wait for the dataflow job to get to started status
 
         break
