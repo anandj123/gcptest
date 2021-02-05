@@ -1,6 +1,8 @@
-touch ~/gcptest/techbash-ai/v2/triggers/i02.s
+SRC_DIR="~/gcptest/techbash-aiml/v2"
+
+touch $SRC_DIR/triggers/i02.s
 pushd ~
 git clone https://github.com/GoogleCloudPlatform/dataflow-video-analytics.git
 popd
-touch ~/gcptest/techbash-ai/v2/triggers/i02.f
+touch $SRC_DIR/triggers/i02.f
 

@@ -45,3 +45,6 @@ case $i01 in
     COLOR="success"
 esac
 print_style $TASK_DESC $COLOR
+
+export SRC_DIR="~/gcptest/techbash-aiml/"
+sh test2.sh > logs/test2.log 2>&1 &

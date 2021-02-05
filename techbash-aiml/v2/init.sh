@@ -245,14 +245,14 @@ print_status() {
     print_style $TASK_DESC $COLOR
 
 }
-pushd ~/gcptest/techbash-ai/v2
+SRC_DIR="~/gcptest/techbash-aiml/v2"
 if [ -d "triggers" ]
 then
-    rm -rf triggers/
+    rm -rf $SRC_DIR/triggers/
 fi
 
-mkdir triggers
-mkdir logs
+mkdir $SRC_DIR/triggers
+mkdir $SRC_DIR/logs
 
 sh i01.sh > logs/i01.log 2>&1 &
 sh i02.sh > logs/i02.log 2>&1 &
@@ -268,13 +268,13 @@ export PROJECT=$(gcloud config get-value project)
 
 while :
 do
-    if [ -f "triggers/f04.f" ] && [ -f "triggers/f05.f" ]
+    if [ -f "$SRC_DIR/triggers/f04.f" ] && [ -f "$SRC_DIR/triggers/f05.f" ]
     then
         read input
         if [ $input == "Y" ]
         then
 
-            touch ~/gcptest/techbash-ai/v2/triggers/f08.f
+            touch $SRC_DIR/triggers/f08.f
         fi
     fi
     clear

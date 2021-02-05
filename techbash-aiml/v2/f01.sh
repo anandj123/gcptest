@@ -1,4 +1,4 @@
-touch ~/gcptest/techbash-ai/v2/triggers/f01.s
+touch ~/gcptest/techbash-aiml/v2/triggers/f01.s
 export PROJECT=$(gcloud config get-value project)
 
 while :
@@ -38,5 +38,5 @@ do
     sleep 2
 done
 
-touch ~/gcptest/techbash-ai/v2/triggers/f01.f
+touch ~/gcptest/techbash-aiml/v2/triggers/f01.f
 

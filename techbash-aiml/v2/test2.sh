@@ -1,0 +1,1 @@
+echo $SRC_DIR
