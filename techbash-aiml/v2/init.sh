@@ -253,7 +253,10 @@ if [ -d "$SRC_DIR/triggers" ]
 then
     rm -rf $SRC_DIR/triggers/
 fi
-
+if [ -d "$SRC_DIR/logs" ]
+then
+    rm -rf $SRC_DIR/logs/
+fi
 mkdir $SRC_DIR/triggers
 mkdir $SRC_DIR/logs
 
