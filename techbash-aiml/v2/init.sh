@@ -140,8 +140,8 @@ print_status() {
         1)
         COLOR="warning"
         ;;
-        COLOR="success"
         2)
+        COLOR="success"
     esac
     print_style TASK_DESC COLOR
     
@@ -151,8 +151,8 @@ print_status() {
         1)
         COLOR="warning"
         ;;
-        COLOR="success"
         2)
+        COLOR="success"
     esac
     print_style TASK_DESC COLOR
 
@@ -162,8 +162,8 @@ print_status() {
         1)
         COLOR="warning"
         ;;
-        COLOR="success"
         2)
+        COLOR="success"
     esac
     print_style TASK_DESC COLOR
 
@@ -173,8 +173,8 @@ print_status() {
         1)
         COLOR="warning"
         ;;
-        COLOR="success"
         2)
+        COLOR="success"
     esac
     print_style TASK_DESC COLOR
 
@@ -184,8 +184,8 @@ print_status() {
         1)
         COLOR="warning"
         ;;
-        COLOR="success"
         2)
+        COLOR="success"
     esac
     print_style TASK_DESC COLOR
 
@@ -195,8 +195,8 @@ print_status() {
         1)
         COLOR="warning"
         ;;
-        COLOR="success"
         2)
+        COLOR="success"
     esac
     print_style TASK_DESC COLOR
 
@@ -206,8 +206,8 @@ print_status() {
         1)
         COLOR="warning"
         ;;
-        COLOR="success"
         2)
+        COLOR="success"
     esac
     print_style TASK_DESC COLOR
 
@@ -217,8 +217,8 @@ print_status() {
         1)
         COLOR="warning"
         ;;
-        COLOR="success"
         2)
+        COLOR="success"
     esac
     print_style TASK_DESC COLOR
 
@@ -228,8 +228,8 @@ print_status() {
         1)
         COLOR="warning"
         ;;
-        COLOR="success"
         2)
+        COLOR="success"
     esac
     print_style TASK_DESC COLOR
 
@@ -239,8 +239,8 @@ print_status() {
         1)
         COLOR="warning"
         ;;
-        COLOR="success"
         2)
+        COLOR="success"
     esac
     print_style TASK_DESC COLOR
 
