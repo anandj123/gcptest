@@ -4,9 +4,9 @@ mkdir videos
 pushd ~/dataflow-video-analytics/videos/
 gsutil cp gs://dataflow-video-analytics-test-clips/* .
 export FILE="cat.mp4"
-ffmpeg -i "$FILE" -codec:a aac  -ac 2  -ar 48k -c copy -movflags faststart -f segment -segment_format mpegts   -segment_time 5 "${file%.*}~"%1d.mp4
+ffmpeg -i "$FILE" -codec:a aac  -ac 2  -ar 48k -c copy -movflags faststart -f segment -segment_format mpegts   -segment_time 5 "${FILE%.*}~"%1d.mp4
 export FILE="gbikes_dinosaur.mp4"
-ffmpeg -i "$FILE" -codec:a aac  -ac 2  -ar 48k -c copy -movflags faststart -f segment -segment_format mpegts   -segment_time 5 "${file%.*}~"%1d.mp4
+ffmpeg -i "$FILE" -codec:a aac  -ac 2  -ar 48k -c copy -movflags faststart -f segment -segment_format mpegts   -segment_time 5 "${FILE%.*}~"%1d.mp4
 gsutil cp *~* gs://$(gcloud config get-value project)_videos/
 popd
 printf '=%.0s' {1..100} 
