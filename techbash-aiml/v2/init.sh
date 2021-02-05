@@ -257,15 +257,15 @@ fi
 mkdir $SRC_DIR/triggers
 mkdir $SRC_DIR/logs
 
-sh i01.sh > logs/i01.log 2>&1 &
-sh i02.sh > logs/i02.log 2>&1 &
-sh f01.sh > logs/f01.log 2>&1 &
-sh f02.sh > logs/f02.log 2>&1 &
-sh f03.sh > logs/f03.log 2>&1 &
-sh f04.sh > logs/f04.log 2>&1 &
-sh f05.sh > logs/f05.log 2>&1 &
-sh s01.sh > logs/s01.log 2>&1 &
-sh s02.sh > logs/s02.log 2>&1 &
+sh $SRC_DIR/i01.sh > $SRC_DIR/logs/i01.log 2>&1 &
+sh $SRC_DIR/i02.sh > $SRC_DIR/logs/i02.log 2>&1 &
+sh $SRC_DIR/f01.sh > $SRC_DIR/logs/f01.log 2>&1 &
+sh $SRC_DIR/f02.sh > $SRC_DIR/logs/f02.log 2>&1 &
+sh $SRC_DIR/f03.sh > $SRC_DIR/logs/f03.log 2>&1 &
+sh $SRC_DIR/f04.sh > $SRC_DIR/logs/f04.log 2>&1 &
+sh $SRC_DIR/f05.sh > $SRC_DIR/logs/f05.log 2>&1 &
+sh $SRC_DIR/s01.sh > $SRC_DIR/logs/s01.log 2>&1 &
+sh $SRC_DIR/s02.sh > $SRC_DIR/logs/s02.log 2>&1 &
 
 while :
 do
