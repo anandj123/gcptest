@@ -17,9 +17,9 @@ do
             sleep 2
         done
 
-        export REGION="us-central1"
-        export TEMPLATE_PATH=gs://$(gcloud config get-value project)_dataflow_template_config/dynamic_template_video_analytics.json
-        export SUBSCRIPTION=gcs-notification-subscription
+export REGION="us-central1"
+export TEMPLATE_PATH=gs://$(gcloud config get-value project)_dataflow_template_config/dynamic_template_video_analytics.json
+export SUBSCRIPTION=gcs-notification-subscription
 
 gcloud dataflow flex-template run "streaming-beam-sql-`date +%Y%m%d-%H%M%S`" \
 --template-file-gcs-location "$TEMPLATE_PATH" \

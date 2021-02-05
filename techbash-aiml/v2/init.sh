@@ -268,6 +268,9 @@ print_status() {
 
 }
 
+gcloud services enable videointelligence.googleapis.com
+gcloud services enable cloudbuild.googleapis.com
+
 export SRC_DIR="$HOME/gcptest/techbash-aiml/v2"
 export PROJECT=$(gcloud config get-value project)
 rm -rf $SRC_DIR/triggers/
