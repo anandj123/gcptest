@@ -1,1 +1,1 @@
-echo $SRC_DIR
+touch $SRC_DIR/triggers/test2.f
