@@ -11,9 +11,9 @@ do
             --region us-central1 \
             --staging-location gs://$BUCKET_ID/temp \
             --parameters \ 
-            inputSubscription=projects/$PROJECT/subscriptions/ecommerce-events-pull,\
-            outputTableSpec=$PROJECT:retail_dataset.ecommerce_events,\
-            outputDeadletterTable=$PROJECT:retail_dataset.ecommerce_events_dead
+inputSubscription=projects/$PROJECT/subscriptions/ecommerce-events-pull,\
+outputTableSpec=$PROJECT:retail_dataset.ecommerce_events,\
+outputDeadletterTable=$PROJECT:retail_dataset.ecommerce_events_dead
 
         break
     fi
