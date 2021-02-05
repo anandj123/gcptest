@@ -21,5 +21,27 @@ print_style () {
     printf "$STARTCOLOR%b$ENDCOLOR" "$1";
 }
 
-print_style "This is a green text " "success";
-print_style "This is a yellow text " "warning";
+
+i01=1
+TASK_DESC="I01: Get tar file and extract.\n"
+COLOR="Not Started"
+case $i01 in
+    1)
+    COLOR="warning"
+    ;;
+    2)
+    COLOR="success"
+esac
+print_style $TASK_DESC $COLOR
+
+i01=2
+TASK_DESC="I01: Get tar file and extract.\n"
+COLOR="Not Started"
+case $i01 in
+    1)
+    COLOR="warning"
+    ;;
+    2)
+    COLOR="success"
+esac
+print_style $TASK_DESC $COLOR
