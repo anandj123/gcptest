@@ -4,11 +4,11 @@ while :
 do
     if [ -f "$SRC_DIR/triggers/i01.f" ] && [ -f "$SRC_DIR/triggers/i02.f" ]
     then
-        sleep 5
+        bq rm -f -r -d video_analytics
         bq mk video_analytics
         bq mk video_analytics.object_tracking_analysis \ 
             $HOME/dataflow-video-analytics/src/main/resources/table_schema.json
-
+        bq rm -f -r -d retail_dataset
         bq mk retail_dataset
         bq mk retail_dataset.ecommerce_events \ 
             $HOME/data_analytics/bq_schema_ecommerce_events.json
