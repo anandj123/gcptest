@@ -246,7 +246,7 @@ print_status() {
 
 }
 
-export SRC_DIR="~/gcptest/techbash-aiml/v2"
+export SRC_DIR="$HOME/gcptest/techbash-aiml/v2"
 export PROJECT=$(gcloud config get-value project)
 
 if [ -d "triggers" ]

@@ -6,11 +6,11 @@ do
     then
         bq mk video_analytics
         bq mk video_analytics.object_tracking_analysis \ 
-            ~/dataflow-video-analytics/src/main/resources/table_schema.json
+            $HOME/dataflow-video-analytics/src/main/resources/table_schema.json
 
         bq mk retail_dataset
         bq mk retail_dataset.ecommerce_events \ 
-            ~/data_analytics/bq_schema_ecommerce_events.json
+            $HOME/data_analytics/bq_schema_ecommerce_events.json
 
         #------------------------------------------------------------
         # Query 1
