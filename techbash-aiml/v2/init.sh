@@ -294,6 +294,7 @@ sh $SRC_DIR/s01.sh > $SRC_DIR/logs/s01.log 2>&1 &
 sh $SRC_DIR/s02.sh > $SRC_DIR/logs/s02.log 2>&1 &
 
 sudo apt-get install ffmpeg
+touch $SRC_DIR/triggers/i03.f
 sh $SRC_DIR/s03.sh > $SRC_DIR/logs/s03.log 2>&1 &
 
 

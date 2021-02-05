@@ -2,7 +2,7 @@ touch $SRC_DIR/triggers/s03.s
 
 while :
 do
-    if [ -f "$SRC_DIR/triggers/f01.f" ] 
+    if [ -f "$SRC_DIR/triggers/i03.f" ] 
     then
         mkdir ~/dataflow-video-analytics/videos/
         pushd ~/dataflow-video-analytics/videos/
