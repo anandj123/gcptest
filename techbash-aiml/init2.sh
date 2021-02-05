@@ -1,3 +1,3 @@
-nohup sh ~/gcptest/techbast-aiml/c.sh &
+nohup sh ~/gcptesh/techbast-aiml/c.sh &
 
-sh ~/gcptest/techbast-aiml/d.sh 
+sh ~/gcptest/techbash-aiml/d.sh 
