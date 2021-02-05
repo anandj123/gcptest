@@ -10,7 +10,7 @@ do
         do
             export JOB_ID=$(gcloud dataflow jobs list --region=us-central1 --status=active)
             echo "Job id: "$JOB_ID
-            if [ $JOB_ID = "" ]
+            if [[ $JOB_ID = "" ]]
             then
                 break
             fi
@@ -36,7 +36,7 @@ tableReference="video_analytics.object_tracking_analysis":streaming="true" \
         do
             export JOB_ID=$(gcloud dataflow jobs list --region=us-central1 --status=active)
             echo "Job id: "$JOB_ID
-            if [ $JOB_ID = "" ]
+            if [[ $JOB_ID = "" ]]
             then
                 sleep 2
                 continue
