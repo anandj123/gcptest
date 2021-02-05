@@ -6,20 +6,13 @@ do
     then
 
 gcloud pubsub topics create ecommerce-events
-gcloud pubsub subscriptions create ecommerce-events-pull \ 
---topic=ecommerce-events
+gcloud pubsub subscriptions create ecommerce-events-pull --topic=ecommerce-events
 gcloud pubsub topics create gcs-notification-topic
-gcloud pubsub subscriptions create \ 
-gcs-notification-subscription \ 
---topic=gcs-notification-topic
+gcloud pubsub subscriptions create gcs-notification-subscription --topic=gcs-notification-topic
 gcloud pubsub topics create object-detection-topic
-gcloud pubsub subscriptions create \ 
-object-detection-subscription \ 
---topic=object-detection-topic
+gcloud pubsub subscriptions create object-detection-subscription --topic=object-detection-topic
 gcloud pubsub topics create error-topic
-gcloud pubsub subscriptions create \ 
-error-subscription \ 
---topic=error-topic
+gcloud pubsub subscriptions create error-subscription --topic=error-topic
 
         gsutil mb gs://$(gcloud config get-value project)_videos
 
