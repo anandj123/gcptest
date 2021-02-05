@@ -40,92 +40,92 @@ get_status() {
     s01=0
     s02=0
 
-    if [ -f "triggers/i01.s" ]
+    if [ -f "$SRC_DIR/triggers/i01.s" ]
     then
         i01=1
     fi
-    if [ -f "triggers/i01.f" ]
+    if [ -f "$SRC_DIR/triggers/i01.f" ]
     then
         i01=2
     fi
 
-    if [ -f "triggers/i02.s" ]
+    if [ -f "$SRC_DIR/triggers/i02.s" ]
     then
         i02=1
     fi
-    if [ -f "triggers/i02.f" ]
+    if [ -f "$SRC_DIR/triggers/i02.f" ]
     then
         i02=2
     fi
 
-    if [ -f "triggers/f01.s" ]
+    if [ -f "$SRC_DIR/triggers/f01.s" ]
     then
         f01=1
     fi
-    if [ -f "triggers/f01.f" ]
+    if [ -f "$SRC_DIR/triggers/f01.f" ]
     then
         f01=2
     fi
 
-    if [ -f "triggers/f02.s" ]
+    if [ -f "$SRC_DIR/triggers/f02.s" ]
     then
         f02=1
     fi
-    if [ -f "triggers/f02.f" ]
+    if [ -f "$SRC_DIR/triggers/f02.f" ]
     then
         f02=2
     fi
 
-    if [ -f "triggers/f03.s" ]
+    if [ -f "$SRC_DIR/triggers/f03.s" ]
     then
         f03=1
     fi
-    if [ -f "triggers/f03.f" ]
+    if [ -f "$SRC_DIR/triggers/f03.f" ]
     then
         f03=2
     fi
 
-    if [ -f "triggers/f04.s" ]
+    if [ -f "$SRC_DIR/triggers/f04.s" ]
     then
         f04=1
     fi
-    if [ -f "triggers/f04.f" ]
+    if [ -f "$SRC_DIR/triggers/f04.f" ]
     then
         f04=2
     fi
 
-    if [ -f "triggers/f05.s" ]
+    if [ -f "$SRC_DIR/triggers/f05.s" ]
     then
         f05=1
     fi
-    if [ -f "triggers/f05.f" ]
+    if [ -f "$SRC_DIR/triggers/f05.f" ]
     then
         f05=2
     fi
 
-    if [ -f "triggers/f06.s" ]
+    if [ -f "$SRC_DIR/triggers/f06.s" ]
     then
         f06=1
     fi
-    if [ -f "triggers/f06.f" ]
+    if [ -f "$SRC_DIR/triggers/f06.f" ]
     then
         f06=2
     fi
 
-    if [ -f "triggers/s01.s" ]
+    if [ -f "$SRC_DIR/triggers/s01.s" ]
     then
         s01=1
     fi
-    if [ -f "triggers/s01.f" ]
+    if [ -f "$SRC_DIR/triggers/s01.f" ]
     then
         s01=2
     fi
 
-    if [ -f "triggers/s02.s" ]
+    if [ -f "$SRC_DIR/triggers/s02.s" ]
     then
         s02=1
     fi
-    if [ -f "triggers/s02.f" ]
+    if [ -f "$SRC_DIR/triggers/s02.f" ]
     then
         s02=2
     fi
