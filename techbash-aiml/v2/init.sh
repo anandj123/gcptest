@@ -271,7 +271,7 @@ while :
 do
     if [ -f "$SRC_DIR/triggers/f04.f" ] && [ -f "$SRC_DIR/triggers/f05.f" ]
     then
-        echo "Please select Y/n: "
+        printf "Please select Y/n: "
         read input
         if [ $input == "Y" ]
         then
