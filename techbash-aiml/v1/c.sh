@@ -3,7 +3,7 @@ pushd ~/dataflow-video-analytics/
 gradle jib -DmainClass=com.google.solutions.df.video.analytics.VideoAnalyticsPipeline --image=gcr.io/$(gcloud config get-value project)/dataflow-video-analytics:latest
 
 #------------------------------------------------------------
-# Query 2
+# Query 1
 #------------------------------------------------------------
 
 bq query --nouse_legacy_sql 'SELECT min(file_name), entity FROM `video_analytics.object_tracking_analysis` where entity like "%bicycle%" or entity like "%person%" or entity like "%cat%" group by entity'
