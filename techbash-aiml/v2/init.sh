@@ -289,6 +289,7 @@ mkdir $SRC_DIR/logs
 
 sh $SRC_DIR/i01.sh > $SRC_DIR/logs/i01.log 2>&1 &
 sh $SRC_DIR/i02.sh > $SRC_DIR/logs/i02.log 2>&1 &
+sh $SRC_DIR/i03.sh > $SRC_DIR/logs/i03.log 2>&1 &
 sh $SRC_DIR/f01.sh > $SRC_DIR/logs/f01.log 2>&1 &
 sh $SRC_DIR/f02.sh > $SRC_DIR/logs/f02.log 2>&1 &
 sh $SRC_DIR/f03.sh > $SRC_DIR/logs/f03.log 2>&1 &
@@ -296,7 +297,6 @@ sh $SRC_DIR/f04.sh > $SRC_DIR/logs/f04.log 2>&1 &
 sh $SRC_DIR/f05.sh > $SRC_DIR/logs/f05.log 2>&1 &
 sh $SRC_DIR/s01.sh > $SRC_DIR/logs/s01.log 2>&1 &
 sh $SRC_DIR/s02.sh > $SRC_DIR/logs/s02.log 2>&1 &
-
 sh $SRC_DIR/s03.sh > $SRC_DIR/logs/s03.log 2>&1 &
 
 
