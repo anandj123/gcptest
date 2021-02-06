@@ -12,6 +12,9 @@ bq rm -f -r -d retail_dataset
 bq mk retail_dataset
 bq mk retail_dataset.ecommerce_events $HOME/data_analytics/bq_schema_ecommerce_events.json
 
+bq query --nouse_legacy_sql 'SELECT event_datetime, event, user_id FROM `retail_dataset.ecommerce_events`'
+bq query --nouse_legacy_sql 'SELECT  min(event) as event ,count(event) as transactions, sum(ecommerce.purchase.value) as revenue FROM `retail_dataset.ecommerce_events` where event="purchase" group by ecommerce.purchase.transaction_id'
+
 bq query --nouse_legacy_sql 'SELECT min(file_name), entity FROM `video_analytics.object_tracking_analysis` where entity like "%bicycle%" or entity like "%person%" or entity like "%cat%" group by entity'
 bq query --nouse_legacy_sql 'SELECT  file_name, entity, max(frame.confidence) max_confidence FROM `video_analytics.object_tracking_analysis`, UNNEST(frame_data) as frame group by file_name,entity order by file_name,entity;'
 bq query --nouse_legacy_sql 'SELECT  entity, min(frame.processing_timestamp) as processing_timestamp, frame.timeOffset, frame.confidence as confidence, max(frame.left) as `left`, max(frame.top) top,max(frame.right) as `right`, max(frame.bottom) as bottom FROM `video_analytics.object_tracking_analysis`, UNNEST(frame_data) as frame group by entity, frame.timeOffset,frame.confidence order by frame.timeOffset asc;'

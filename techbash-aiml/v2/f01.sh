@@ -14,9 +14,10 @@ gcloud pubsub subscriptions create object-detection-subscription --topic=object-
 gcloud pubsub topics create error-topic
 gcloud pubsub subscriptions create error-subscription --topic=error-topic
 
-gsutil mb gs://$(gcloud config get-value project)_videos
-gsutil mb gs://$(gcloud config get-value project)_videos_dftemplate
-gsutil mb gs://$(gcloud config get-value project)_dataflow_template_config
+gsutil mb -c standard -l us-central1 gs://$(gcloud config get-value project)_videos
+gsutil mb -c standard -l us-central1 gs://$(gcloud config get-value project)_videos_dftemplate
+gsutil mb -c standard -l us-central1 gs://$(gcloud config get-value project)_dataflow_template_config
+gsutil notification create -f json -t gcs-notification-topic gs://$(gcloud config get-value project)_videos
         
 export TT='{"image": "gcr.io/PROJECT_ID/dataflow-video-analytics","sdk_info":{"language": "JAVA"}}' 
 echo  ${TT/PROJECT_ID/$PROJECT}> dynamic_template_video_analytics.json
