@@ -246,12 +246,17 @@ git clone https://github.com/anandj123/gcptest.git
 sh ~/gcptest/techbash-aiml/v2/init.sh
 
 
+
+
 sh ~/gcptest/techbash-aiml/init.sh
 
 
 gcloud services enable run.googleapis.com
 gcloud services enable videointelligence.googleapis.com
 gcloud services enable cloudbuild.googleapis.com
+
+bq query --nouse_legacy_sql 'SELECT event_datetime, event, user_id FROM `retail_dataset.ecommerce_events`'
+bq query --nouse_legacy_sql 'SELECT  min(event) as event ,count(event) as transactions, sum(ecommerce.purchase.value) as revenue FROM `retail_dataset.ecommerce_events` where event="purchase" group by ecommerce.purchase.transaction_id'
 
 bq query --nouse_legacy_sql 'SELECT min(file_name), entity FROM `video_analytics.object_tracking_analysis` where entity like "%bicycle%" or entity like "%person%" or entity like "%cat%" group by entity'
 bq query --nouse_legacy_sql 'SELECT  file_name, entity, max(frame.confidence) max_confidence FROM `video_analytics.object_tracking_analysis`, UNNEST(frame_data) as frame group by file_name,entity order by file_name,entity;'
@@ -271,3 +276,13 @@ bq query --nouse_legacy_sql 'SELECT distinct entity, frame.processing_timestamp,
 export SRC_DIR="$HOME/gcptest/techbash-aiml/v2"
 export PROJECT=$(gcloud config get-value project)
 sh ~/gcptest/techbash-aiml/v2/f05.sh
+
+
+
+
+
+
+
+
+gcloud services disable run.googleapis.com
+yes |sudo apt-get autoremove ffmpeg
