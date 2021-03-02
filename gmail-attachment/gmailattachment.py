@@ -47,7 +47,7 @@ ATTACHMENT_ID='ANGjdJ-MvhHmvbpGYPpgy3t4mfPEL-wLapjRrv4Bp40pqwEu2R24CvLqaXQLNGnTo
 GSUITE_ADMIN_USER = 'test-anand-1@anand-1-291314.iam.gserviceaccount.com'
 
 #SA_JSON=<INSERT_SA_JSON_HERE_AS_DICTIONARY_ENTRY_NO_QUOTES_ETC>
-SA_JSON= ""
+SA_JSON= "" 
 
 class WriteAttachmentToGCS(beam.DoFn):
     def __init__(self, output_path):
