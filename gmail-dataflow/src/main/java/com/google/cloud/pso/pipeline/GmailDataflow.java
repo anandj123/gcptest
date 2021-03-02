@@ -63,7 +63,7 @@ mvn compile exec:java \
 --outputTopic=projects/$PROJECT_ID/topics/$OUTPUT_TOPIC \
 --output=gs://$BUCKET_NAME/samples/output \
 --windowSize=2 \
---truncateSize=6 \
+--truncateSize=4000 \
 --defaultWorkerLogLevel=DEBUG"
 
 // Run locally
