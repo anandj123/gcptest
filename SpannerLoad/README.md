@@ -25,6 +25,8 @@ mvn package -DskipTests=true
 gcloud auth application-default login; ./bin/ycsb load cloudspanner -P cloudspanner/conf/cloudspanner.properties -P workloads/workloada -p recordcount=10000000 -p cloudspanner.batchinserts=1000 -threads 100 -s
 
 
+gcloud auth application-default login; ./bin/ycsb load cloudspanner -P cloudspanner/conf/cloudspanner.properties -P workloads/workloada -p recordcount=10 -p cloudspanner.batchinserts=1000 -threads 10 -s
+
 ```
 
 # Spanner Admin client demo in Golang
