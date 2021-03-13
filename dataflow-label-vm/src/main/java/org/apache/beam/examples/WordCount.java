@@ -39,7 +39,11 @@ import org.apache.beam.sdk.values.PCollection;
 
 /*
 
+TODO:
 mvn -Pdataflow-runner compile exec:java -Dexec.mainClass=org.apache.beam.examples.WordCount -Dexec.args='--project=anand-bq-test-2 --stagingLocation=gs://anand-bq-test-2/staging/ --output=gs://anand-bq-test-2/output --runner=DataflowRunner --region=us-east1 --labels="{name:anand,project:dev}" '
+
+
+
 
 mvn -Pdataflow-runner compile exec:java \
 -Dexec.mainClass=org.apache.beam.examples.WordCount \
@@ -159,7 +163,7 @@ public class WordCount {
       return wordCounts;
     }
   }
-
+ 
   /**
    * Options supported by {@link WordCount}.
    *

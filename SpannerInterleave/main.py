@@ -67,7 +67,6 @@ def query_b(instance_id, database_id, query):
     
     print("Total Time (seconds) : %s \n" % (time.time() - t_start))
 
-
 def insert_data(instance_id, database_id,num_batches):
     """Inserts sample data into the given database.
 
@@ -171,17 +170,25 @@ def insert_data2(instance_id, database_id,num_batches):
         print("Inserted batch : " + str(j))
 
 if __name__ == '__main__':
+    # TODO: 
     # To call the program 
     # gcloud auth application-default login
-    # python main.py test-1 test
+    # python3 main.py test-1 test
     #insert_data(*sys.argv[1:])
     #insert_data2(*sys.argv[1:])
 
-    query_a(*sys.argv[1:],"SELECT SingerId FROM Singers inner join Album using(SingerId) WHERE LastName = @lastName")
-    query_a(*sys.argv[1:],"SELECT SingerId FROM Singers2 inner join Album2 using(SingerId) WHERE LastName = @lastName")
-    query_b(*sys.argv[1:],"SELECT SingerId FROM Singers inner join Album using(SingerId) WHERE SingerId = @SingerId")
-    query_b(*sys.argv[1:],"SELECT SingerId FROM Singers2 inner join Album2 using(SingerId) WHERE SingerId = @SingerId")
+    # TODO:
+    # To alter the database to use the optimizer_version=2 use the following
+    '''
+     gcloud spanner databases ddl update test --instance=test-1 --ddl='ALTER DATABASE test SET OPTIONS ( optimizer_version = 2 )'
+
+    '''
+    query_a(*sys.argv[1:],"SELECT AlbumTitle FROM Singers inner join Album using(SingerId) WHERE LastName = @lastName")
+    query_a(*sys.argv[1:],"SELECT AlbumTitle FROM Singers2 inner join Album2 using(SingerId) WHERE LastName = @lastName")
+    query_b(*sys.argv[1:],"SELECT AlbumTitle FROM Singers inner join Album using(SingerId) WHERE SingerId = @SingerId")
+    query_b(*sys.argv[1:],"SELECT AlbumTitle FROM Singers2 inner join Album2 using(SingerId) WHERE SingerId = @SingerId")
 
     query_b(*sys.argv[1:],"SELECT s.FirstName, s.LastName, array(SELECT a1.AlbumTitle FROM Singers s1 JOIN Albums a1 ON s1.SingerId = a1.SingerId WHERE s.SingerId = s1.SingerId) FROM Singers s WHERE EXISTS(SELECT a2.AlbumTitle FROM Albums a2 WHERE a2.SingerId = s.SingerId) AND s.SingerId = @SingerId")
+
     query_b(*sys.argv[1:],"SELECT s.FirstName, s.LastName, array(SELECT a1.AlbumTitle FROM Singers2 s1 JOIN Albums2 a1 ON s1.SingerId = a1.SingerId WHERE s.SingerId = s1.SingerId) FROM Singers2 s WHERE EXISTS(SELECT a2.AlbumTitle FROM Albums2 a2 WHERE a2.SingerId = s.SingerId) AND s.SingerId = @SingerId")
 
