@@ -1,3 +1,13 @@
+#setup gist in local (https://github.com/defunkt/gist)
+brew install gist
+gist --login
+gist gcp-gist1.sh
+
+gist -l
+
+#update the gist
+
+
 #set gcloud config
 python3 -V
 
