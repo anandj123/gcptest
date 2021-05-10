@@ -1,4 +1,9 @@
-# Cloud Dataflow template for running a TTL (time to live) to delete expired documents in Cloud Firestore
+# Overview
+Cloud Dataflow template for running a TTL (time to live) to delete expired documents in Cloud Firestore
+
+# Architecture
+![Architecture Diagram](./img/Firestore-TTL-architecture.png)
+# Compile and run
 
 The following code is used for testing purposes:
 
