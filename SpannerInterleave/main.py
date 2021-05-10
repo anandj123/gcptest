@@ -15,25 +15,30 @@ def query_a(instance_id, database_id, query):
             param_types={"lastName": spanner.param_types.STRING},
         )
 
-    t_start = time.time()
-    print("Query (Non-primary key): Iteration Time (seconds)")
-    print("--------------------------------------------------")
-    for i in range(100):
-        i_start = time.time()
-        
-        with database.snapshot() as snapshot:
-            r = random.randrange(1000000)
-            results = snapshot.execute_sql(
-                query,
-                params={"lastName": "last " + str(r)},
-                param_types={"lastName": spanner.param_types.STRING},
-            )
+    # print("Query (Non-primary key): Iteration Time (seconds)")
+    # print("--------------------------------------------------")
 
-        #for row in results:
-        #    print(u"SingerId: {}, FirstName: {}, LastName: {}".format(*row))
-        #print("%s" % (time.time() - i_start))
-    
-    print("Total Time (seconds) : %s \n" % (time.time() - t_start))
+    t = []
+    for j in range(10):
+        t_start = time.time()
+        for i in range(100):
+            i_start = time.time()
+            
+            with database.snapshot() as snapshot:
+                r = random.randrange(1000000)
+                results = snapshot.execute_sql(
+                    query,
+                    params={"lastName": "last " + str(r)},
+                    param_types={"lastName": spanner.param_types.STRING},
+                )
+
+            #for row in results:
+            #    print(u"SingerId: {}, FirstName: {}, LastName: {}".format(*row))
+            #print("%s" % (time.time() - i_start))
+        
+        # print("Total Time (seconds) : %s \n" % (time.time() - t_start))
+        t.append(time.time() - t_start)
+    print(t)
     
 
 def query_b(instance_id, database_id, query):
@@ -47,25 +52,30 @@ def query_b(instance_id, database_id, query):
             param_types={"SingerId": spanner.param_types.INT64},
         )
 
-    t_start = time.time()
-    print("Query (primary key): Iteration Time (seconds)")
-    print("----------------------------------------------")
-    for i in range(100):
-        i_start = time.time()
-        
-        with database.snapshot() as snapshot:
-            r = random.randrange(1000000)
-            results = snapshot.execute_sql(
-                query,
-                params={"SingerId": r},
-                param_types={"SingerId": spanner.param_types.INT64},
-            )
+    t = []
+    # print("Query (primary key): Iteration Time (seconds)")
+    # print("----------------------------------------------")
+    for j in range(10):
+        t_start = time.time()
+        for i in range(100):
+            i_start = time.time()
+            
+            with database.snapshot() as snapshot:
+                r = random.randrange(1000000)
+                results = snapshot.execute_sql(
+                    query,
+                    params={"SingerId": r},
+                    param_types={"SingerId": spanner.param_types.INT64},
+                )
 
-        #for row in results:
-        #    print(u"SingerId: {}, FirstName: {}, LastName: {}".format(*row))
-        #print("%s" % (time.time() - i_start))
+            #for row in results:
+            #    print(u"SingerId: {}, FirstName: {}, LastName: {}".format(*row))
+            #print("%s" % (time.time() - i_start))
+        
+        # print("Total Time (seconds) : %s \n" % (time.time() - t_start))
+        t.append(time.time() - t_start)
+    print(t)
     
-    print("Total Time (seconds) : %s \n" % (time.time() - t_start))
 
 def insert_data(instance_id, database_id,num_batches):
     """Inserts sample data into the given database.
@@ -173,6 +183,7 @@ if __name__ == '__main__':
     # TODO: 
     # To call the program 
     # gcloud auth application-default login
+    # python3 main.py test-1 test 10
     # python3 main.py test-1 test
     #insert_data(*sys.argv[1:])
     #insert_data2(*sys.argv[1:])
@@ -183,12 +194,12 @@ if __name__ == '__main__':
      gcloud spanner databases ddl update test --instance=test-1 --ddl='ALTER DATABASE test SET OPTIONS ( optimizer_version = 2 )'
 
     '''
-    query_a(*sys.argv[1:],"SELECT AlbumTitle FROM Singers inner join Album using(SingerId) WHERE LastName = @lastName")
-    query_a(*sys.argv[1:],"SELECT AlbumTitle FROM Singers2 inner join Album2 using(SingerId) WHERE LastName = @lastName")
-    query_b(*sys.argv[1:],"SELECT AlbumTitle FROM Singers inner join Album using(SingerId) WHERE SingerId = @SingerId")
-    query_b(*sys.argv[1:],"SELECT AlbumTitle FROM Singers2 inner join Album2 using(SingerId) WHERE SingerId = @SingerId")
+    
+    query_b(*sys.argv[1:],"SELECT s.FirstName, s.LastName, a.AlbumTitle from Singers s join Albums a on s.SingerId = a.SingerId WHERE s.SingerId = @SingerId")
+    query_b(*sys.argv[1:],"SELECT s.FirstName, s.LastName, a.AlbumTitle from Singers2 s join Albums2 a on s.SingerId = a.SingerId WHERE s.SingerId = @SingerId")
 
+    query_a(*sys.argv[1:],"SELECT s.FirstName, s.LastName, a.AlbumTitle FROM Singers inner join Album using(SingerId) WHERE LastName = @lastName")
+    query_a(*sys.argv[1:],"SELECT s.FirstName, s.LastName, a.AlbumTitle FROM Singers2 inner join Album2 using(SingerId) WHERE LastName = @lastName")
+    
     query_b(*sys.argv[1:],"SELECT s.FirstName, s.LastName, array(SELECT a1.AlbumTitle FROM Singers s1 JOIN Albums a1 ON s1.SingerId = a1.SingerId WHERE s.SingerId = s1.SingerId) FROM Singers s WHERE EXISTS(SELECT a2.AlbumTitle FROM Albums a2 WHERE a2.SingerId = s.SingerId) AND s.SingerId = @SingerId")
-
     query_b(*sys.argv[1:],"SELECT s.FirstName, s.LastName, array(SELECT a1.AlbumTitle FROM Singers2 s1 JOIN Albums2 a1 ON s1.SingerId = a1.SingerId WHERE s.SingerId = s1.SingerId) FROM Singers2 s WHERE EXISTS(SELECT a2.AlbumTitle FROM Albums2 a2 WHERE a2.SingerId = s.SingerId) AND s.SingerId = @SingerId")
-

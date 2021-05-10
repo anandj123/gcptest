@@ -27,7 +27,7 @@ export GOOGLE_APPLICATION_CREDENTIALS=/Users/anandjain/Documents/GitHub/gcptest/
 gcloud auth activate-service-account --key-file=/Users/anandjain/Documents/GitHub/gcptest/gmail-dataflow/src/main/java/com/google/cloud/pso/pipeline/anand-1-sa.json
 
 
-python gmailattachment.py
+python3 gmailattachment.py --input_topic="projects/anand-1-291314/topics/gmail-messages" --output_path="gs://anand-1/gmailattachment/attachments/test.data/"
 
 To run dataflow:
 
