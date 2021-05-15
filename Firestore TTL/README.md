@@ -17,7 +17,7 @@ For using documnent snapshot create_date (internal)
 python3 read.py --collection test-create-date --ttl 1
 
 For user defined column scan
-python3 read.py --collection test-create-date --ttl 1 --ttl_column create_date
+python3 read.py --collection test-create-date --ttl 1 --ttlcolumn create_date
 ```
 
 To run in dataflow first export variables for PROJECT, REGION and BUCKET
@@ -43,8 +43,8 @@ python3 read.py \
 Then you can use the following gcloud command to kick start the job or you can use the console UI also.
 
 ```sh
-gcloud dataflow jobs run ttl_run_time_param_1 \
+gcloud dataflow jobs run firestore_ttl_$(date +"%Y-%m-%d_%H:%M:%S") \
   --gcs-location gs://$BUCKET/template/firestoreTTL \
   --region $REGION \
-  --parameters collection=test-create-date,ttl=20
+  --parameters collection=test-create-date,ttl=20,ttlcolumn=create_date
 ```

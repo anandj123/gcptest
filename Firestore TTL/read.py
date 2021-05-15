@@ -15,14 +15,18 @@ import pytz
 import apache_beam as beam
 
 def run_ttl_job(element):
+      
     collection_name_a, ttl_a, ttlcolumn_a = element
     collection_name = collection_name_a.get()
     ttl = ttl_a.get()
     ttl_column = ttlcolumn_a.get()
+
+    if collection_name == "" or collection_name == None:
+      logging.error('Collection name not provided. Exiting.')
+      return
+    now = datetime.now(pytz.timezone('US/Eastern'))
     if ttl_column == "":
       logging.info('Running Firestore TTL job for collection : %s with TTL: %s seconds',collection_name,ttl)
-      now = datetime.now(pytz.timezone('US/Eastern'))
-      #now = datetime.utcnow()
       
       db = firestore.Client()
       ttl_docs = db.collection(collection_name).stream()
@@ -33,15 +37,11 @@ def run_ttl_job(element):
           doc.reference.delete()
     else:
       logging.info('Running Firestore TTL job for collection : %s with TTL: %s seconds for TTL column: %s',collection_name,ttl, ttl_column)
-      now = datetime.now(pytz.timezone('US/Eastern'))
-      #now = datetime.utcnow()
       
       db = firestore.Client()
       ttl_docs = db.collection(collection_name).where(ttl_column, u"<", now - timedelta(seconds=int(ttl))).stream()
 
       for doc in ttl_docs:   
-      #for doc in ttl_collection.stream():
-          #if (doc.create_time + timedelta(seconds=int(ttl)) < now):
         logging.info('This record is scheduled for deletion: %s time elapsed: %s',doc.id, now - doc.create_time)
         doc.reference.delete()
 
@@ -54,15 +54,14 @@ def run(argv=None, save_main_session=True):
           '--ttl',
           default='10',
           dest='ttl',
-          required=True,
           help='TTL value in seconds')
       parser.add_value_provider_argument(
           '--collection',
           dest='collection',
-          required=True,
+          default='',
           help='Name of collection to apply TTL on')
       parser.add_value_provider_argument(
-          '--ttl_column',
+          '--ttlcolumn',
           dest='ttlcolumn',
           default='',
           required=False,
