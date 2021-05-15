@@ -40,7 +40,7 @@
     <project.test.coverage.targetPercentage>70%</project.test.coverage.targetPercentage>
 
     <!-- Dependency properties -->
-    <checkstyle.version>8.11</checkstyle.version>
+    <checkstyle.version>8.29</checkstyle.version>
     <commons-csv.version>1.5</commons-csv.version>
     <beam.version>2.13.0</beam.version>
     
