@@ -10,9 +10,14 @@ The following code is used for testing purposes:
 ```sh
 Authorize your local with gcloud command:
 gcloud auth application-default login
+gcloud config set project anand-fb-test-1
 
-To run locall: 
+To run locally: 
+For using documnent snapshot create_date (internal)
 python3 read.py --collection test-create-date --ttl 1
+
+For user defined column scan
+python3 read.py --collection test-create-date --ttl 1 --ttl_column create_date
 ```
 
 To run in dataflow first export variables for PROJECT, REGION and BUCKET

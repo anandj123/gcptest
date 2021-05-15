@@ -5,6 +5,10 @@ import java.util.*;
 
 public class test{
     public static void main(String[] args){
+        /**
+         * To run the class use maven
+         * mvn clean compile exec:java -Dexec.mainClass=test
+         */
         try{
             givenPythonScriptEngineIsAvailable_whenScriptInvoked_thenOutputDisplayed();
         } catch (Exception e) {
@@ -19,6 +23,9 @@ public class test{
      
         ScriptEngineManager manager = new ScriptEngineManager();
         List<ScriptEngineFactory> factories = manager.getEngineFactories();
+        System.out.println("-------------------------------------------------------");
+        System.out.println("Currently supported script engines");
+
         for (ScriptEngineFactory factory : factories) {
             System.out.println(factory.getEngineName());
             System.out.println(factory.getEngineVersion());
@@ -27,7 +34,7 @@ public class test{
             System.out.println(factory.getExtensions());
             System.out.println(factory.getMimeTypes());
             System.out.println(factory.getNames());
-            System.out.println("----------------------");
+            System.out.println("-------------------------------------------------------");
         }
         ScriptEngine engine = manager.getEngineByName("python");
         System.out.println(engine);

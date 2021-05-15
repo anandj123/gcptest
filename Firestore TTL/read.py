@@ -15,20 +15,35 @@ import pytz
 import apache_beam as beam
 
 def run_ttl_job(element):
-    coll_name_a, ttl_a = element
-    coll_name = coll_name_a.get()
+    collection_name_a, ttl_a, ttlcolumn_a = element
+    collection_name = collection_name_a.get()
     ttl = ttl_a.get()
-    logging.info('Running TTL job for collection : %s with TTL: %s seconds',coll_name,ttl)
+    ttl_column = ttlcolumn_a.get()
+    if ttl_column == "":
+      logging.info('Running Firestore TTL job for collection : %s with TTL: %s seconds',collection_name,ttl)
+      now = datetime.now(pytz.timezone('US/Eastern'))
+      #now = datetime.utcnow()
+      
+      db = firestore.Client()
+      ttl_docs = db.collection(collection_name).stream()
 
-    db = firestore.Client()
-    ttl_coll = db.collection(coll_name)
+      for doc in ttl_docs:   
+        if (doc.create_time  < now - timedelta(seconds=int(ttl))):
+          logging.info('This record is scheduled for deletion: %s time elapsed: %s',doc.id, now - doc.create_time)
+          doc.reference.delete()
+    else:
+      logging.info('Running Firestore TTL job for collection : %s with TTL: %s seconds for TTL column: %s',collection_name,ttl, ttl_column)
+      now = datetime.now(pytz.timezone('US/Eastern'))
+      #now = datetime.utcnow()
+      
+      db = firestore.Client()
+      ttl_docs = db.collection(collection_name).where(ttl_column, u"<", now - timedelta(seconds=int(ttl))).stream()
 
-    #now = datetime.utcnow()
-    now = datetime.now(pytz.timezone('US/Eastern'))
-    for doc in ttl_coll.stream():
-        if (doc.create_time + timedelta(seconds=int(ttl)) < now):
-            logging.info('This record is scheduled for deletion: %s time elapsed: %s',doc.id, now - doc.create_time)
-            doc.reference.delete()
+      for doc in ttl_docs:   
+      #for doc in ttl_collection.stream():
+          #if (doc.create_time + timedelta(seconds=int(ttl)) < now):
+        logging.info('This record is scheduled for deletion: %s time elapsed: %s',doc.id, now - doc.create_time)
+        doc.reference.delete()
 
 def run(argv=None, save_main_session=True):
 
@@ -39,13 +54,19 @@ def run(argv=None, save_main_session=True):
           '--ttl',
           default='10',
           dest='ttl',
-          #required=True,
-          help='Path of the file to read from')
+          required=True,
+          help='TTL value in seconds')
       parser.add_value_provider_argument(
           '--collection',
           dest='collection',
-          #required=True,
-          help='Output file to write results to.')
+          required=True,
+          help='Name of collection to apply TTL on')
+      parser.add_value_provider_argument(
+          '--ttl_column',
+          dest='ttlcolumn',
+          default='',
+          required=False,
+          help='Column name for reading TTL expiration')
 
   # We use the save_main_session option because one or more DoFn's in this
   # workflow rely on global context (e.g., a module imported at module level).
@@ -56,7 +77,7 @@ def run(argv=None, save_main_session=True):
   # The pipeline will be run on exiting the with block.
   with beam.Pipeline(options=pipeline_options) as p:
     
-    blank_record = p | 'Start' >> beam.Create([(ttl_options.collection, ttl_options.ttl)])
+    blank_record = p | 'Start' >> beam.Create([(ttl_options.collection, ttl_options.ttl, ttl_options.ttlcolumn)])
     ttl_records = blank_record | 'Call TTL' >> beam.FlatMap(run_ttl_job)
     
 if __name__ == '__main__':
