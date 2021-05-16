@@ -14,10 +14,10 @@ gcloud config set project anand-fb-test-1
 
 To run locally: 
 For using documnent snapshot create_date (internal)
-python3 read.py --collection test-create-date --ttl 1
+python3 read.py --collection test-create-date --ttl "1 seconds"
 
 For user defined column scan
-python3 read.py --collection test-create-date --ttl 1 --ttlcolumn create_date
+python3 read.py --collection test-create-date --ttl "1 seconds" --ttlcolumn create_date
 ```
 
 To run in dataflow first export variables for PROJECT, REGION and BUCKET
@@ -46,5 +46,5 @@ Then you can use the following gcloud command to kick start the job or you can u
 gcloud dataflow jobs run firestore_ttl_$(date +"%Y-%m-%d_%H:%M:%S") \
   --gcs-location gs://$BUCKET/template/firestoreTTL \
   --region $REGION \
-  --parameters collection=test-create-date,ttl=20,ttlcolumn=create_date
+  --parameters collection=test-create-date,ttl="2 seconds",ttlcolumn=create_date
 ```

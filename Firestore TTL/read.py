@@ -3,9 +3,9 @@ from __future__ import absolute_import
 from google.cloud import firestore
 from datetime import date
 from datetime import datetime
-from datetime import timedelta
 from apache_beam.options.pipeline_options import PipelineOptions
 from apache_beam.options.pipeline_options import SetupOptions
+from dateutil.relativedelta import relativedelta
 
 import argparse
 import logging
@@ -24,22 +24,52 @@ def run_ttl_job(element):
     if collection_name == "" or collection_name == None:
       logging.error('Collection name not provided. Exiting.')
       return
+    if ttl == "" or ttl == None:
+      logging.error('TTL (Time to live) is not provided. Exiting.')
+      return
+
     now = datetime.now(pytz.timezone('US/Eastern'))
+
+    ttl_array = ttl.split()
+    if (not ttl_array[0].isnumeric()):
+      logging.error('Time to Live (TTL) need numeric value e.g. 2 months, 3 years, 10 seconds etc. ')
+      return
+
+    if (len(ttl_array) < 2) :
+      logging.error('Time to Live (TTL) unit not provided. E.g. 10 seconds, 2 months etc. ')
+      return 
+      
+    unit = ttl_array[1].lower()[0:2]
+    if unit == "se":
+        ttl_time = now - relativedelta(seconds=int(ttl_array[0]))
+    elif unit == "mi":
+        ttl_time = now - relativedelta(minutes=int(ttl_array[0]))
+    elif unit == "ho" or unit == "hr":
+        ttl_time = now - relativedelta(hours=int(ttl_array[0]))
+    elif unit == "da":
+        ttl_time = now - relativedelta(days=int(ttl_array[0]))
+    elif unit == "mo":
+        ttl_time = now - relativedelta(months=int(ttl_array[0]))
+    elif unit == "ye" or unit == "yr":
+        ttl_time = now - relativedelta(years=int(ttl_array[0]))
+    else :
+        logging.error('Time to Live (TTL) unit is not valid e.g. seconds, minutes, hours, days, months, years. ')
+        return
     if ttl_column == "":
-      logging.info('Running Firestore TTL job for collection : %s with TTL: %s seconds',collection_name,ttl)
+      logging.info('Running Firestore TTL job for collection : %s with TTL: %s %s',collection_name,ttl_array[0], ttl_array[1])
       
       db = firestore.Client()
       ttl_docs = db.collection(collection_name).stream()
 
       for doc in ttl_docs:   
-        if (doc.create_time  < now - timedelta(seconds=int(ttl))):
+        if (doc.create_time  < ttl_time):
           logging.info('This record is scheduled for deletion: %s time elapsed: %s',doc.id, now - doc.create_time)
           doc.reference.delete()
     else:
-      logging.info('Running Firestore TTL job for collection : %s with TTL: %s seconds for TTL column: %s',collection_name,ttl, ttl_column)
+      logging.info('Running Firestore TTL job for collection : %s with TTL: %s %s for TTL column: %s',collection_name,ttl_array[0], ttl_array[1], ttl_column)
       
       db = firestore.Client()
-      ttl_docs = db.collection(collection_name).where(ttl_column, u"<", now - timedelta(seconds=int(ttl))).stream()
+      ttl_docs = db.collection(collection_name).where(ttl_column, u"<", ttl_time).stream()
 
       for doc in ttl_docs:   
         logging.info('This record is scheduled for deletion: %s time elapsed: %s',doc.id, now - doc.create_time)
@@ -52,7 +82,6 @@ def run(argv=None, save_main_session=True):
     def _add_argparse_args(cls, parser):
       parser.add_value_provider_argument(
           '--ttl',
-          default='10',
           dest='ttl',
           help='TTL value in seconds')
       parser.add_value_provider_argument(
