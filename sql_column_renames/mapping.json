@@ -1,0 +1,13 @@
+{
+    "table" : "ZZRF04",
+    "columns" : [
+        {
+            "column" : "SKU_KEY",
+            "mapcolumn" : "sku_key"
+        },
+        {
+            "column" : "GODWFLAG6_1",
+            "mapcolumn" : "godwfalg6_1"
+        }
+    ]
+}
