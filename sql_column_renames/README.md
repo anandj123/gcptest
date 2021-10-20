@@ -18,9 +18,13 @@ Currently the format for the mapping sheet assumes the following format:
 4. Fourth column has the EDW column name.
 5. EDW column name is assumed to be of format: `SYSTEM_NAME.SCHEMA_NAME.TABLE_NAME.COLUMN_NAME`
 
-Example:
-col1,col2,col3,col4,col5
-value,`new_column_name`,value,`SYSTEM_NAME.SCHEMA_NAME.TABLE_NAME.COLUMN_NAME`, value
+###Example:
+An example mapping sheet would look like the following:
+
+|col1|col2|col3|col4|col5|
+|----|----|----|----|----|
+NOT_USED|`new_column_name`|NOT_USED|`SYSTEM_NAME.SCHEMA_NAME.TABLE_NAME.COLUMN_NAME`| NOT_USED|
+
 
 
 ### Parameters
