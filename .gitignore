@@ -38,3 +38,4 @@ gmail-dataflow/src/main/java/com/google/cloud/pso/pipeline/anand-1-sa.json
 gmail-dataflow/target/classes/anand-1-sa.json
 gmail-pubsub/src/main/java/com/google/cloud/pso/pipeline/anand-1-sa.json
 gmail-pubsub/target/classes/anand-1-sa.json
+sql_column_renames/rearchitect-sheet.csv.old

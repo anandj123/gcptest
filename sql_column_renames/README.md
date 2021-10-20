@@ -50,3 +50,5 @@ Use python 3.x to execute the script that will convert the input `SQLFILE` to `S
 python3 mapping.py -m rearchitect-sheet.csv -i 1.sql
 
 ```
+
+The above command will produce 2 output files as `1.sql.error` and `1.sql.out`.
