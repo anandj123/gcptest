@@ -13,12 +13,13 @@ While converting an EDW system from Teradata or other on-premise system, usually
 Currently the format for the mapping sheet assumes the following format:
 
 1. Mapping sheets needs to be in [CSV](https://en.wikipedia.org/wiki/Comma-separated_values) format
-2. At least 5 columns are assumed in the mapping sheet.
-3. Second column is the "NEW" column name in Bigquery
-4. Fourth column has the EDW column name.
-5. EDW column name is assumed to be of format: `SYSTEM_NAME.SCHEMA_NAME.TABLE_NAME.COLUMN_NAME`
+2. Mapping sheet have 1 row header (header is ignored)
+3. At least 5 columns are assumed in the mapping sheet.
+4. Second column is the "NEW" column name in Bigquery
+5. Fourth column has the EDW column name.
+6. EDW column name is assumed to be of format: `SYSTEM_NAME.SCHEMA_NAME.TABLE_NAME.COLUMN_NAME`
 
-###Example:
+### Example:
 An example mapping sheet would look like the following:
 
 |col1|col2|col3|col4|col5|
@@ -28,11 +29,12 @@ NOT_USED|`new_column_name`|NOT_USED|`SYSTEM_NAME.SCHEMA_NAME.TABLE_NAME.COLUMN_N
 
 
 ### Parameters
+The script assumes 2 parameters. They are:
 
 | Switch | Description |
 |--------|-------------|
-| -i | Input SQL file that needs to be converted
-| -m | Mapping sheet in CSV format
+| -i | Input SQL file that needs to be converted |
+| -m | Mapping sheet in CSV format |
 
 ### Output
 
