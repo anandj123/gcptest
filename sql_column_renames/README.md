@@ -12,11 +12,16 @@ While converting an EDW system from Teradata or other on-premise system, usually
 
 Currently the format for the mapping sheet assumes the following format:
 
-1. CSV format
-2. 5 columns are assumed.
+1. Mapping sheets needs to be in [CSV](https://en.wikipedia.org/wiki/Comma-separated_values) format
+2. At least 5 columns are assumed in the mapping sheet.
 3. Second column is the "NEW" column name in Bigquery
-4. Column 4 has the EDW column name.
-5. EDW column name is assumed to be of format: SYSTEM_NAME.SCHEMA_NAME.TABLE_NAME.COLUMN_NAME
+4. Fourth column has the EDW column name.
+5. EDW column name is assumed to be of format: `SYSTEM_NAME.SCHEMA_NAME.TABLE_NAME.COLUMN_NAME`
+
+Example:
+col1,col2,col3,col4,col5
+value,`new_column_name`,value,`SYSTEM_NAME.SCHEMA_NAME.TABLE_NAME.COLUMN_NAME`, value
+
 
 ### Parameters
 
@@ -32,7 +37,7 @@ Currently the format for the mapping sheet assumes the following format:
 
 ### Execute
 
-Use python 3.x to execute the script that will convert the input SQL file to 'SQLFILE.out' based on mapping sheet provided.
+Use python 3.x to execute the script that will convert the input `SQLFILE` to `SQLFILE.out` based on mapping sheet provided.
 
 ```python
 
