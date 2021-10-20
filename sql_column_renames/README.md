@@ -8,6 +8,7 @@
 ### Parameters
 
 | Switch | Description |
+|--------|-------------|
 | -i | Input SQL file that needs to be converted
 | -m | Mapping sheet in CSV format
 
