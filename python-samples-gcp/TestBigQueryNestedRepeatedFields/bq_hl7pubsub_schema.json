@@ -1,0 +1,46 @@
+[
+    {
+    "mode": "NULLABLE",
+    "name": "type",
+    "type": "STRING"
+    },
+    {
+    "fields": [
+        {
+        "mode": "NULLABLE",
+        "name": "name",
+        "type": "STRING"
+        },
+        {
+        "mode": "NULLABLE",
+        "name": "phone",
+        "type": "STRING"
+        }
+    ],
+    "mode": "REPEATED",
+    "name": "phone",
+    "type": "RECORD"
+    },
+    {
+    "fields": [
+        {
+        "mode": "NULLABLE",
+        "name": "addr",
+        "type": "STRING"
+        },
+        {
+        "mode": "NULLABLE",
+        "name": "state",
+        "type": "STRING"
+        },
+        {
+        "mode": "NULLABLE",
+        "name": "zip",
+        "type": "STRING"
+        }
+    ],
+    "mode": "REPEATED",
+    "name": "address",
+    "type": "RECORD"
+    }
+]

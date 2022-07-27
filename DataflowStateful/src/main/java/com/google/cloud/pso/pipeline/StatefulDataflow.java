@@ -104,7 +104,7 @@ public class StatefulDataflow {
       lineLenDist.update(element.length());
       if (element.trim().isEmpty()) {
         emptyLines.inc();
-      }
+        }
 
       // Split the line into words.
       //String[] words = element.split(ExampleUtils.TOKENIZER_PATTERN, -1);

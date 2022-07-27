@@ -1,0 +1,12 @@
+[
+    {
+        "mode": "NULLABLE",
+        "name": "message_body",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "publish_time",
+        "type": "TIMESTAMP"
+    }
+]
