@@ -24,7 +24,7 @@ I don't have any particular recommendations for the above 2 topics, but you can 
 
 ### 🐼 Algorithms (Introductory Practice)
 
-If you have not been doing coding for a few years, the above list might be quite challenging and de-motivating. So for ease of transitioning into algorithms I recommend the following:
+If you have not been doing coding for a few years, these questions might seem quite challenging and de-motivating (during preparation and interviews). So for ease of transitioning into algorithms I recommend the following:
 
 - [Codingbat (Introductory logic based)](https://codingbat.com/python)
 
@@ -213,7 +213,7 @@ This book is the bible. It's quite daunting to read it. So have it if you need t
 ##### 📗 SRE best practices:
 SRE best practices is really good preparation for Cloud Infrastructure engineers. This is the gold standard now a days.
 
-[https://landing.google.com/sre/books/](https://landing.google.com/sre/books/)  
+[Google's SRE book](https://landing.google.com/sre/books/)  
    
 ---   
    
