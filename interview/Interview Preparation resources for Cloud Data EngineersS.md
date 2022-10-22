@@ -4,16 +4,16 @@ The interview process is some what different for Cloud Data Engineering roles at
 
 The usual Algorithm and Data Structure is not the only components covered. Other areas of the interview process include:
   
-- 🐼 [Algorithms](https://github.com/anandj123/gcptest/blob/master/interview/Interview%20Preparation%20resources%20for%20Cloud%20Data%20EngineersS.md#-algorithms-introductory-practice)
-- 🖥️ [Linux Troubleshooting](https://github.com/anandj123/gcptest/blob/master/interview/Interview%20Preparation%20resources%20for%20Cloud%20Data%20EngineersS.md#%EF%B8%8F-linux-troubleshooting)
-- ☁️ [System design](https://github.com/anandj123/gcptest/blob/master/interview/Interview%20Preparation%20resources%20for%20Cloud%20Data%20EngineersS.md#%EF%B8%8F-system-design)
-- 🕸️ [Web Technologies](https://github.com/anandj123/gcptest/blob/master/interview/Interview%20Preparation%20resources%20for%20Cloud%20Data%20EngineersS.md#%EF%B8%8F-web-technologies)
-- 🥤 [Object oriented design](https://github.com/anandj123/gcptest/blob/master/interview/Interview%20Preparation%20resources%20for%20Cloud%20Data%20EngineersS.md#-object-oriented-design)
-- 📫[Database design](https://github.com/anandj123/gcptest/blob/master/interview/Interview%20Preparation%20resources%20for%20Cloud%20Data%20EngineersS.md#-database-designs)
-- 📰 [Distributed systems](https://github.com/anandj123/gcptest/blob/master/interview/Interview%20Preparation%20resources%20for%20Cloud%20Data%20EngineersS.md#-distributed-systems-papers)
-- 🧅 [System design topics](https://github.com/anandj123/gcptest/blob/master/interview/Interview%20Preparation%20resources%20for%20Cloud%20Data%20EngineersS.md#-system-design-topics)
-- 🔦 [Leadership lessons](https://github.com/anandj123/gcptest/blob/master/interview/Interview%20Preparation%20resources%20for%20Cloud%20Data%20EngineersS.md#-leadership-lessons)
-
+🐼 [Algorithms](https://github.com/anandj123/gcptest/blob/master/interview/Interview%20Preparation%20resources%20for%20Cloud%20Data%20EngineersS.md#-algorithms-introductory-practice)  
+🖥️ [Linux Troubleshooting](https://github.com/anandj123/gcptest/blob/master/interview/Interview%20Preparation%20resources%20for%20Cloud%20Data%20EngineersS.md#%EF%B8%8F-linux-troubleshooting)  
+☁️ [System design](https://github.com/anandj123/gcptest/blob/master/interview/Interview%20Preparation%20resources%20for%20Cloud%20Data%20EngineersS.md#%EF%B8%8F-system-design)  
+🕸️ [Web Technologies](https://github.com/anandj123/gcptest/blob/master/interview/Interview%20Preparation%20resources%20for%20Cloud%20Data%20EngineersS.md#%EF%B8%8F-web-technologies)  
+🥤 [Object oriented design](https://github.com/anandj123/gcptest/blob/master/interview/Interview%20Preparation%20resources%20for%20Cloud%20Data%20EngineersS.md#-object-oriented-design)  
+📫 [Database design](https://github.com/anandj123/gcptest/blob/master/interview/Interview%20Preparation%20resources%20for%20Cloud%20Data%20EngineersS.md#-database-designs)  
+📰 [Distributed systems](https://github.com/anandj123/gcptest/blob/master/interview/Interview%20Preparation%20resources%20for%20Cloud%20Data%20EngineersS.md#-distributed-systems-papers)  
+🧅 [System design topics](https://github.com/anandj123/gcptest/blob/master/interview/Interview%20Preparation%20resources%20for%20Cloud%20Data%20EngineersS.md#-system-design-topics)  
+🔦 [Leadership lessons](https://github.com/anandj123/gcptest/blob/master/interview/Interview%20Preparation%20resources%20for%20Cloud%20Data%20EngineersS.md#-leadership-lessons)  
+  
 Other topics you should be familiar with are:  
 - Project and program management
 - Stakeholder and expectation management
