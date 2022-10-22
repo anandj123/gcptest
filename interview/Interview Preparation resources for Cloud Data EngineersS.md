@@ -28,14 +28,14 @@ Here are few array-based problems for our practice.
 
 In a given array of numbers, find the
 
-➀ Smallest element
-➁ 2nd Smallest element
-➂ 3rd Smallest element
-➃ kth Smallest element
-➄ Largest element
-➅ 2nd Largest element
-➆ 3rd Largest element
-➇ kth Largest element 
+➀. Smallest element
+➁. 2nd Smallest element
+➂. 3rd Smallest element
+➃. kth Smallest element
+➄. Largest element
+➅. 2nd Largest element
+➆. 3rd Largest element
+➇. kth Largest element 
 
 ➋ Count of Elements
 
