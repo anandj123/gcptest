@@ -280,6 +280,9 @@ Database design is probably the easy one to prepare. Every experienced candidate
 -   [mycli](https://www.mycli.net/) - Command line interface for MySQL, MariaDB, Percona
 -   [poorsql](http://poorsql.com/) - SQL Formatter
 
+---
+
+
 ### 📰 Distributed systems papers:
 These are optional readings to understand how the distributed systems evolved over time. Not required for interview but for own development and understanding.
 
