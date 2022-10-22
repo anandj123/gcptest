@@ -17,6 +17,7 @@ Other topics you should be familiar with are:
 - Behevioral questions
 
 I don't have any particular recommendations for the above 2 topics, but you can find tons of great resources on the web. I myself struggle to find good resources for them.  
+---
 
 ### 🐼 Algorithms (Introductory Practice)
 
@@ -143,6 +144,7 @@ In a given array of numbers,
   
 Congratulations 👋, these should get you off to a great start  
 
+---  
 ### 🤖 Algorithms (Intermediate -> Expert Practice) [Not really needed for Data Engineering interviews you can mostly skip these]
 
 Basic algorithms like:
