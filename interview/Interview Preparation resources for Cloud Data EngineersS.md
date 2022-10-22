@@ -11,6 +11,8 @@ The usual Algorithm and Data Structure is not the only components covered. Other
 - 🥤 [Object oriented design](https://github.com/anandj123/gcptest/blob/master/interview/Interview%20Preparation%20resources%20for%20Cloud%20Data%20EngineersS.md#-object-oriented-design)
 - 📫[Database design](https://github.com/anandj123/gcptest/blob/master/interview/Interview%20Preparation%20resources%20for%20Cloud%20Data%20EngineersS.md#-database-designs)
 - 📰 [Distributed systems](https://github.com/anandj123/gcptest/blob/master/interview/Interview%20Preparation%20resources%20for%20Cloud%20Data%20EngineersS.md#-distributed-systems-papers)
+- 📰 [System design topics](https://github.com/anandj123/gcptest/blob/master/interview/Interview%20Preparation%20resources%20for%20Cloud%20Data%20EngineersS.md#-distributed-systems-papers)
+- 📰 [Leadership lessons](https://github.com/anandj123/gcptest/blob/master/interview/Interview%20Preparation%20resources%20for%20Cloud%20Data%20EngineersS.md#-leadership-lessons)
 
 Other topics you should be familiar with are:  
 - Project and program management
@@ -317,7 +319,7 @@ These are optional readings to understand how the distributed systems evolved ov
 ---   
    
 
-### 🧅 Misc Topics
+### 🧅 System Design Topics
 These topics are deep dive into each individual components of the web technology stack. I would strongly recommend having a good understanding on a few of these especially Load balancers, CDN, DNS etc.
 
 - [Load balancers](https://github.com/donnemartin/donnemartin.github.io/blob/master/content/system-design-load-balancer.md)
