@@ -3,17 +3,20 @@
 The interview process is quite different for Cloud Data Engineering roles at big technology companies for candidates who have several years of experience.
 
 The usual Algorithm and Data Structure is not the only components covered. Other areas of the interview process include:
-
+  
+- Algorithms
 - Linux Troubleshooting
 - System design
-- Database design
-- Project and program management
 - Web Technologies
 - Object oriented design
+- Database design
 - Distributed systems
+
+Other topics you should be familiar with are:  
+- Project and program management
 - Behevioral questions
 
-Here are some resources to get started on these topics.
+I don't have any particular recommendations for the above 2 topics, but you can find tons of great resources on the web. I myself struggle to find good resources for them.  
 
 ### 🐼 Algorithms (Introductory Practice)
 
