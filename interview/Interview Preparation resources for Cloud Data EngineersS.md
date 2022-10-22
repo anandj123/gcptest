@@ -11,8 +11,8 @@ The usual Algorithm and Data Structure is not the only components covered. Other
 - 🥤 [Object oriented design](https://github.com/anandj123/gcptest/blob/master/interview/Interview%20Preparation%20resources%20for%20Cloud%20Data%20EngineersS.md#-object-oriented-design)
 - 📫[Database design](https://github.com/anandj123/gcptest/blob/master/interview/Interview%20Preparation%20resources%20for%20Cloud%20Data%20EngineersS.md#-database-designs)
 - 📰 [Distributed systems](https://github.com/anandj123/gcptest/blob/master/interview/Interview%20Preparation%20resources%20for%20Cloud%20Data%20EngineersS.md#-distributed-systems-papers)
-- 📰 [System design topics](https://github.com/anandj123/gcptest/blob/master/interview/Interview%20Preparation%20resources%20for%20Cloud%20Data%20EngineersS.md#-distributed-systems-papers)
-- 📰 [Leadership lessons](https://github.com/anandj123/gcptest/blob/master/interview/Interview%20Preparation%20resources%20for%20Cloud%20Data%20EngineersS.md#-leadership-lessons)
+- 🧅 [System design topics](https://github.com/anandj123/gcptest/blob/master/interview/Interview%20Preparation%20resources%20for%20Cloud%20Data%20EngineersS.md#-system-design-topics)
+- 🔦 [Leadership lessons](https://github.com/anandj123/gcptest/blob/master/interview/Interview%20Preparation%20resources%20for%20Cloud%20Data%20EngineersS.md#-leadership-lessons)
 
 Other topics you should be familiar with are:  
 - Project and program management
