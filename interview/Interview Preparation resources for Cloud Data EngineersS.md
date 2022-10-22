@@ -1,6 +1,6 @@
-## ☁ Cloud Data Engineer interview preparation resources
+## ☁ Cloud Data Engineer - Interview Preparation Resources
 
-The interview process is quite different for Cloud Data Engineering roles at big technology companies for candidates who have several years of experience.
+The interview process is some what different for Cloud Data Engineering roles at big technology companies for candidates who have several years of experience.
 
 The usual Algorithm and Data Structure is not the only components covered. Other areas of the interview process include:
   
@@ -14,7 +14,9 @@ The usual Algorithm and Data Structure is not the only components covered. Other
 
 Other topics you should be familiar with are:  
 - Project and program management
-- Behevioral questions
+- Stakeholder and expectation management
+- Communication (verbal and written)
+- Behevioral questions (handling conflicts, resource constraints)
   
 I don't have any particular recommendations for the above 2 topics, but you can find tons of great resources on the web. I myself struggle to find good resources for them.    
 
