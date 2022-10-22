@@ -1,4 +1,4 @@
-## Cloud Data Engineer interview preparation resources
+## ☁ Cloud Data Engineer interview preparation resources
 
 The interview process is quite different for Cloud Data Engineering roles at big technology companies for candidates who have several years of experience.
 
@@ -11,15 +11,180 @@ The usual Algorithm and Data Structure is not the only components covered. Other
 - Web Technologies
 - Object oriented design
 - Distributed systems
+- Behevioral questions
 
 Here are some resources to get started on these topics.
 
-### 🤖 Algorithms:
-Basic algorithms like Binary Search, BFS, DFS and some common data structures like Set, Priority Que, Que, Stack etc. should suffice. Solving some 50 easy to medium problems should be good (unless you have been hands off for a few years).
+### 🐼 Algorithms (Introductory Practice)
 
-- [Codingbat (very introductory)](https://codingbat.com/python)
-- [Interviewbit practice site](https://www.interviewbit.com/practice/)
+If you have not been doing coding for a few years, the above list might be quite challenging and de-motivating. So for ease of transitioning into algorithms I recommend the following:
+
+- [Codingbat (Introductory logic based)](https://codingbat.com/python)
+
+Do introductory array based problems to get your thinking flowing.
+Here are few array-based problems for our practice.
+
+➊ Smallest and, Largest
+
+In a given array of numbers, find the
+
+➀ Smallest element
+➁ 2nd Smallest element
+➂ 3rd Smallest element
+➃ kth Smallest element
+➄ Largest element
+➅ 2nd Largest element
+➆ 3rd Largest element
+➇ kth Largest element 
+
+➋ Count of Elements
+
+In a given array of integers, find the number of
+
+➀ Positives
+➁ Negatives
+➂ Odd Numbers
+➃ Even Numbers
+➄ Primary Numbers
+➅ Perfect Squares
+➆ Perfect Cubes 
+
+➌ Statistics
+
+In a given array of numbers, find the
+
+➀ Sum of all elements
+➁ Mean Value
+➂ Median Value
+➃ Mode Value
+➄ RMS (root mean square)
+➅ Product of all elements
+➆ Product of all elements divided by the factorial of number of elements 
+
+➍ Sort an Array
+
+➀ Bubble Sort
+➁ Selection Sort
+➂ Insertion Sort
+➃ Merge Sort
+➄ Quick Sort
+➅ Counting Sort
+➆ Radix Sort
+➇ Bucket Sort
+➈ Heap Sort
+➉ Shell Sort 
+
+➎ Duplicates
+
+In a given array of numbers,
+
+➀ Remove all instances of the given value from the array in-place
+➁ Assume all numbers appear twice, except one. Find that number.
+➂ Assume all the numbers in a series are there except one. Find that missing number. 
+➃ Assume all numbers in a series appears once except one which appears twice. Find that duplicate number.
+➄ Count the frequency of an element
+➅ Find duplicates.
+➆ Remove duplicates 
+
+➏ Sorted Array
+
+⬘ In a sorted array,
+
+➀ Find an element
+➁ Find the position at which the next element will be inserted
+
+⬙ Given a sorted array of a series of integers,
+
+➀ Find the missing number
+➁ Find duplicates
+➂ Remove duplicates 
+
+⬗ Others
+
+➀ Merge 2 sorted arrays
+➁ Find the median of 2 sorted arrays
+➂ Convert a sorted array to a BST (Binary Search Tree) 
+
+➐ Various Operations
+
+❑ Divide
+➀ Divide an array into 2 equal parts
+➁ Divide an array into k equal parts
+➂ Divide an array into k parts where each sub-array contains elements at k-distance
+
+❒ Pick/Drop
+➀ Return a new array by picking each kth element
+➁ Return a new array by dropping each kth element
+
+❑ Merge
+➀ Merge 2 or, more arrays
+➁ Merge 2 sorted arrays to form another sorted array 
+❒ Reverse
+➀ Reverse an array
+➁ Divide an array into k parts and reverse each
+➂ Create a mirror reflection of an array (reverse + merge)
+
+❑ Rotate/Shuffle
+➀ Rotate an array clockwise/anti-clockwise for k times
+➁ Shuffle an array 
+❒ Map/Group
+➀ Return a new array by adding/multiplying each element with some value
+➁ Based on some classifying rule, group elements of an array and form separate arrays 
+
+➑ A few more,
+
+➀ TWO SUM: In an array of integers, return indices of 2 integers such that they add up to a given target value.
+➁ PLUS ONE: Given an array of digits, return a new array of digits by adding one to the number. 
+➂ In an array of integers, given an element, find the next largest number after that index which is present maximum times.
+➃ Given a number, convert it into a stream of binaries (0's and 1's). Check how many times 'k' consecutive 1's exist. 
+
+Congratulations 👋, these should get you off to a great start
+
+### 🤖 Algorithms (Intermediate -> Expert Practice)
+
+Basic algorithms like:
+
+- Binary Search
+- BFS
+- DFS 
+
+and some common data structures like 
+
+- List
+- Map
+- Set
+- Priority Queue
+- Queue
+- Stack
+
+Solving some 50-100 good quality problems should be good. The following links are all curated and validated (by the smartest people) highest quality problems you would find. 
+
+- [Codingbat Recursion I (Highly recommended you solve these)](https://codingbat.com/java/Recursion-1)
+- [Codingbat Recursion (Highly recommended you solve these)](https://codingbat.com/java/Recursion-2)
+- [Grind 75 (at least solve the easy questions if possible)](https://www.techinterviewhandbook.org/grind75)
 - [https://www.youtube.com/results?search_query=google+interview](https://www.youtube.com/results?search_query=google+interview)
+
+Preparing for coding interview is a very deep topic and I cannot write all about it in this page. But if you are up for it, I highly recommend the educative.io course 
+- [Grokking the coding interview patterns](https://www.educative.io/courses/grokking-coding-interview-patterns-python)
+
+They cover all the [14 basic coding interview patterns](https://www.teamblind.com/blog/index.php/2022/06/27/top-leetcode-patterns-coding-interview-questions/) and much more. The 14 patterns to learn are:
+
+1. Sliding Window
+2. Two pointers or iterators
+3. Fast and slow pointers
+4. Merge intervals
+5. Cyclic sort
+6. In-place reversal of linked list
+7. Tree breadth-first search
+8. Tree depth-first search
+9. Two heaps
+10. Subsets
+11. Modified binary search
+12. Top “K” elements
+13. K-way merge
+14. Topological sort
+
+There are some books available also, but I feel these above resources are much more current and comprehensive.
 
 ### 🖥️ Linux Troubleshooting:
 Knowing common troubleshooting commands is very important. These 2 resources I found to be very good to learn about some common troubleshooting commands and how to think about Linux troubleshooting. 
