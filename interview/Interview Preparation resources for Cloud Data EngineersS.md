@@ -144,8 +144,10 @@ In a given array of numbers,
 ➃ Given a number, convert it into a stream of binaries (0's and 1's). Check how many times 'k' consecutive 1's exist.   
   
 Congratulations 👋, these should get you off to a great start  
+   
+---   
+   
 
----  
 ### 🤖 Algorithms (Intermediate -> Expert Practice) [Not really needed for Data Engineering interviews you can mostly skip these]
 
 Basic algorithms like:
@@ -191,6 +193,9 @@ They cover all the [14 basic coding interview patterns](https://www.teamblind.co
 14. Topological sort
 
 There are some books available also, but I feel these above resources are much more current and comprehensive.
+   
+---   
+   
 
 ### 🖥️ Linux Troubleshooting:
 Knowing common troubleshooting commands is very important. These 2 resources I found to be very good to learn about some common troubleshooting commands and how to think about Linux troubleshooting. 
@@ -207,6 +212,9 @@ This book is the bible. It's quite daunting to read it. So have it if you need t
 SRE best practices is really good preparation for Cloud Infrastructure engineers. This is the gold standard now a days.
 
 [https://landing.google.com/sre/books/](https://landing.google.com/sre/books/)  
+   
+---   
+   
 
 ### ☁️ System design:
 Generally the interview process doesn't go too much deep into system design. So I would not spend a lot of time on this topic. Just knowing the terms and what they mean and few concerete examples of each service layer (e.g. Spanner, CloudSQL, Pub/Sub etc. or equivalent services in AWS or Azure) would be good to know. The interview won't be about designing a web-crawler or gmail. Those are for senior software engineer roles.
@@ -222,6 +230,9 @@ These are great books if you have more than a year to prepare. They are gold sta
 - [Real-Time Analytics: Techniques to Analyze and Visualize Streaming Data](http://www.amazon.com/Real-Time-Analytics-Techniques-Visualize-Streaming/dp/1118837916)
 - [Building Microservices: Designing Fine-Grained Systems](http://www.amazon.com/Building-Microservices-Sam-Newman/dp/1491950358)
 - [Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems](https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321)
+   
+---   
+   
 
 ### 🕸️ Web Technologies:
 This is an important topic. So make sure you brush up on this. These 3 links have a very good primer and from there you could dive deeper into each sections if they are not clear.
@@ -229,11 +240,17 @@ This is an important topic. So make sure you brush up on this. These 3 links hav
 - [How the web works 1: A Primer](https://www.freecodecamp.org/news/how-the-web-works-a-primer-for-newcomers-to-web-development-or-anyone-really-b4584e63585c/#.7l3tokoh1)
 - [How the Web works 2: Client server and structure of a web application.](https://medium.com/free-code-camp/how-the-web-works-part-ii-client-server-model-the-structure-of-a-web-application-735b4b6d76e3#.e6tmj8112)
 - [How the web works 3: HTTP and REST](https://www.freecodecamp.org/news/how-the-web-works-part-iii-http-rest-e61bc50fa0a/#.vbrmrnihn)
+   
+---   
+   
 
 ### 🥤 Object oriented design
 This is a very broad topic. It's hard to cover it in a blog post. The easiest way to brush up is using a book. But mostly this topic should be just a brush up.
 
 [Grokking the object oriented design interview](https://github.com/tssovi/grokking-the-object-oriented-design-interview)
+   
+---   
+   
 
 ### 📫 Database designs
 Database design is probably the easy one to prepare. Every experienced candidate already has a good handle on this. So you could skip this section altogether if you feel you have a good handle on this.
@@ -242,6 +259,9 @@ Database design is probably the easy one to prepare. Every experienced candidate
 - [System design database design topics](https://github.com/donnemartin/donnemartin.github.io/blob/master/content/system-design-database.md)
 
 [Learn Database design and SQL](https://gist.github.com/rosswd/88bc2a5c6f666e39d2a5ea89dffaa6ca)
+   
+---   
+   
 
 ##### 📖 Learn Database Design
 -   [Relational Model](https://en.wikipedia.org/wiki/Relational_model)
@@ -288,6 +308,9 @@ These are optional readings to understand how the distributed systems evolved ov
 		- [The Part-Time Parliament](https://lamport.azurewebsites.net/pubs/lamport-paxos.pdf) - Leslie Lamport
 		-   [Paxos Made Simple](https://lamport.azurewebsites.net/pubs/paxos-simple.pdf) - Leslie Lamport
 
+   
+---   
+   
 
 ### 🧅 Misc Topics
 These topics are deep dive into each individual components of the web technology stack. I would strongly recommend having a good understanding on a few of these especially Load balancers, CDN, DNS etc.
@@ -306,7 +329,9 @@ These topics are deep dive into each individual components of the web technology
 - [Cache design](https://github.com/donnemartin/donnemartin.github.io/blob/master/content/system-design-cache.md "system-design-cache.md")
 - [Reverse Proxy](https://github.com/donnemartin/donnemartin.github.io/blob/master/content/system-design-reverse-proxy.md "system-design-reverse-proxy.md")
 - [System design Appendix](https://github.com/donnemartin/donnemartin.github.io/blob/master/content/system_design_appendix.md)
-
+   
+---   
+   
 ### 🔦 Leadership lessons
 Most of the leadership questions are quite self explanatory for a senior and experienced candidate. But I included some foundational readings to brush up.
 
