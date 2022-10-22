@@ -62,85 +62,85 @@ In a given array of numbers, find the
 ➆ Product of all elements divided by the factorial of number of elements   
   
 ➍ Sort an Array  
+    
+➀ Bubble Sort  
+➁ Selection Sort  
+➂ Insertion Sort  
+➃ Merge Sort  
+➄ Quick Sort  
+➅ Counting Sort  
+➆ Radix Sort  
+➇ Bucket Sort  
+➈ Heap Sort  
+➉ Shell Sort   
   
-➀ Bubble Sort
-➁ Selection Sort
-➂ Insertion Sort
-➃ Merge Sort
-➄ Quick Sort
-➅ Counting Sort
-➆ Radix Sort
-➇ Bucket Sort
-➈ Heap Sort
-➉ Shell Sort 
+➎ Duplicates  
+  
+In a given array of numbers,  
+  
+➀ Remove all instances of the given value from the array in-place  
+➁ Assume all numbers appear twice, except one. Find that number.  
+➂ Assume all the numbers in a series are there except one. Find that missing number.   
+➃ Assume all numbers in a series appears once except one which appears twice. Find that duplicate number.  
+➄ Count the frequency of an element  
+➅ Find duplicates.  
+➆ Remove duplicates   
+  
+➏ Sorted Array  
+  
+⬘ In a sorted array,  
+  
+➀ Find an element  
+➁ Find the position at which the next element will be inserted  
+  
+⬙ Given a sorted array of a series of integers,  
+  
+➀ Find the missing number  
+➁ Find duplicates  
+➂ Remove duplicates   
+  
+⬗ Others  
+  
+➀ Merge 2 sorted arrays  
+➁ Find the median of 2 sorted arrays  
+➂ Convert a sorted array to a BST (Binary Search Tree)   
+  
+➐ Various Operations  
+  
+❑ Divide  
+➀ Divide an array into 2 equal parts  
+➁ Divide an array into k equal parts  
+➂ Divide an array into k parts where each sub-array contains elements at k-distance  
+  
+❒ Pick/Drop  
+➀ Return a new array by picking each kth element  
+➁ Return a new array by dropping each kth element  
+  
+❑ Merge  
+➀ Merge 2 or, more arrays  
+➁ Merge 2 sorted arrays to form another sorted array   
+❒ Reverse  
+➀ Reverse an array  
+➁ Divide an array into k parts and reverse each  
+➂ Create a mirror reflection of an array (reverse + merge)  
+  
+❑ Rotate/Shuffle  
+➀ Rotate an array clockwise/anti-clockwise for k times  
+➁ Shuffle an array   
+❒ Map/Group  
+➀ Return a new array by adding/multiplying each element with some value  
+➁ Based on some classifying rule, group elements of an array and form separate arrays   
+  
+➑ A few more,  
+  
+➀ TWO SUM: In an array of integers, return indices of 2 integers such that they add up to a given target value.  
+➁ PLUS ONE: Given an array of digits, return a new array of digits by adding one to the number.   
+➂ In an array of integers, given an element, find the next largest number after that index which is present maximum times.  
+➃ Given a number, convert it into a stream of binaries (0's and 1's). Check how many times 'k' consecutive 1's exist.   
+  
+Congratulations 👋, these should get you off to a great start  
 
-➎ Duplicates
-
-In a given array of numbers,
-
-➀ Remove all instances of the given value from the array in-place
-➁ Assume all numbers appear twice, except one. Find that number.
-➂ Assume all the numbers in a series are there except one. Find that missing number. 
-➃ Assume all numbers in a series appears once except one which appears twice. Find that duplicate number.
-➄ Count the frequency of an element
-➅ Find duplicates.
-➆ Remove duplicates 
-
-➏ Sorted Array
-
-⬘ In a sorted array,
-
-➀ Find an element
-➁ Find the position at which the next element will be inserted
-
-⬙ Given a sorted array of a series of integers,
-
-➀ Find the missing number
-➁ Find duplicates
-➂ Remove duplicates 
-
-⬗ Others
-
-➀ Merge 2 sorted arrays
-➁ Find the median of 2 sorted arrays
-➂ Convert a sorted array to a BST (Binary Search Tree) 
-
-➐ Various Operations
-
-❑ Divide
-➀ Divide an array into 2 equal parts
-➁ Divide an array into k equal parts
-➂ Divide an array into k parts where each sub-array contains elements at k-distance
-
-❒ Pick/Drop
-➀ Return a new array by picking each kth element
-➁ Return a new array by dropping each kth element
-
-❑ Merge
-➀ Merge 2 or, more arrays
-➁ Merge 2 sorted arrays to form another sorted array 
-❒ Reverse
-➀ Reverse an array
-➁ Divide an array into k parts and reverse each
-➂ Create a mirror reflection of an array (reverse + merge)
-
-❑ Rotate/Shuffle
-➀ Rotate an array clockwise/anti-clockwise for k times
-➁ Shuffle an array 
-❒ Map/Group
-➀ Return a new array by adding/multiplying each element with some value
-➁ Based on some classifying rule, group elements of an array and form separate arrays 
-
-➑ A few more,
-
-➀ TWO SUM: In an array of integers, return indices of 2 integers such that they add up to a given target value.
-➁ PLUS ONE: Given an array of digits, return a new array of digits by adding one to the number. 
-➂ In an array of integers, given an element, find the next largest number after that index which is present maximum times.
-➃ Given a number, convert it into a stream of binaries (0's and 1's). Check how many times 'k' consecutive 1's exist. 
-
-Congratulations 👋, these should get you off to a great start
-
-### 🤖 Algorithms (Intermediate -> Expert Practice)
+### 🤖 Algorithms (Intermediate -> Expert Practice) [Not really needed for Data Engineering interviews you can mostly skip these]
 
 Basic algorithms like:
 
@@ -160,7 +160,7 @@ and some common data structures like
 Solving some 50-100 good quality problems should be good. The following links are all curated and validated (by the smartest people) highest quality problems you would find. 
 
 - [Codingbat Recursion I (Highly recommended you solve these)](https://codingbat.com/java/Recursion-1)
-- [Codingbat Recursion (Highly recommended you solve these)](https://codingbat.com/java/Recursion-2)
+- [Codingbat Recursion II (Highly recommended you solve these)](https://codingbat.com/java/Recursion-2)
 - [Grind 75 (at least solve the easy questions if possible)](https://www.techinterviewhandbook.org/grind75)
 - [https://www.youtube.com/results?search_query=google+interview](https://www.youtube.com/results?search_query=google+interview)
 
