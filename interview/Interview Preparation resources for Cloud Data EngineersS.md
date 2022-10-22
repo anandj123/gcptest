@@ -41,28 +41,28 @@ In a given array of numbers, find the
 
 In a given array of integers, find the number of
 
-➀ Positives
-➁ Negatives
-➂ Odd Numbers
-➃ Even Numbers
-➄ Primary Numbers
-➅ Perfect Squares
-➆ Perfect Cubes 
+➀ Positives  
+➁ Negatives  
+➂ Odd Numbers  
+➃ Even Numbers  
+➄ Primary Numbers  
+➅ Perfect Squares  
+➆ Perfect Cubes   
+  
+➌ Statistics  
 
-➌ Statistics
-
-In a given array of numbers, find the
-
-➀ Sum of all elements
-➁ Mean Value
-➂ Median Value
-➃ Mode Value
-➄ RMS (root mean square)
-➅ Product of all elements
-➆ Product of all elements divided by the factorial of number of elements 
-
-➍ Sort an Array
-
+In a given array of numbers, find the  
+  
+➀ Sum of all elements  
+➁ Mean Value  
+➂ Median Value  
+➃ Mode Value  
+➄ RMS (root mean square)  
+➅ Product of all elements  
+➆ Product of all elements divided by the factorial of number of elements   
+  
+➍ Sort an Array  
+  
 ➀ Bubble Sort
 ➁ Selection Sort
 ➂ Insertion Sort
