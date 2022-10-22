@@ -4,19 +4,20 @@ The interview process is quite different for Cloud Data Engineering roles at big
 
 The usual Algorithm and Data Structure is not the only components covered. Other areas of the interview process include:
   
-- Algorithms
-- Linux Troubleshooting
-- System design
-- Web Technologies
-- Object oriented design
-- Database design
-- Distributed systems
+- [Algorithms](https://github.com/anandj123/gcptest/blob/master/interview/Interview%20Preparation%20resources%20for%20Cloud%20Data%20EngineersS.md#-algorithms-introductory-practice)
+- [Linux Troubleshooting](https://github.com/anandj123/gcptest/blob/master/interview/Interview%20Preparation%20resources%20for%20Cloud%20Data%20EngineersS.md#%EF%B8%8F-linux-troubleshooting)
+- [System design](https://github.com/anandj123/gcptest/blob/master/interview/Interview%20Preparation%20resources%20for%20Cloud%20Data%20EngineersS.md#%EF%B8%8F-system-design)
+- [Web Technologies](https://github.com/anandj123/gcptest/blob/master/interview/Interview%20Preparation%20resources%20for%20Cloud%20Data%20EngineersS.md#%EF%B8%8F-web-technologies)
+- [Object oriented design](https://github.com/anandj123/gcptest/blob/master/interview/Interview%20Preparation%20resources%20for%20Cloud%20Data%20EngineersS.md#-object-oriented-design)
+- [Database design](https://github.com/anandj123/gcptest/blob/master/interview/Interview%20Preparation%20resources%20for%20Cloud%20Data%20EngineersS.md#-database-designs)
+- [Distributed systems](https://github.com/anandj123/gcptest/blob/master/interview/Interview%20Preparation%20resources%20for%20Cloud%20Data%20EngineersS.md#-distributed-systems-papers)
 
 Other topics you should be familiar with are:  
 - Project and program management
 - Behevioral questions
+  
+I don't have any particular recommendations for the above 2 topics, but you can find tons of great resources on the web. I myself struggle to find good resources for them.    
 
-I don't have any particular recommendations for the above 2 topics, but you can find tons of great resources on the web. I myself struggle to find good resources for them.  
 ---
 
 ### 🐼 Algorithms (Introductory Practice)
@@ -259,6 +260,35 @@ Database design is probably the easy one to prepare. Every experienced candidate
 -   [mycli](https://www.mycli.net/) - Command line interface for MySQL, MariaDB, Percona
 -   [poorsql](http://poorsql.com/) - SQL Formatter
 
+### 📰 Distributed systems papers:
+These are optional readings to understand how the distributed systems evolved over time. Not required for interview but for own development and understanding.
+
+- [A distributed system reading list - (papers to read) ](https://dancres.github.io/Pages/)
+	- Thought provokers
+		- [On Designing and Deploying Internet Scale Services](https://mvdirona.com/jrh/talksAndPapers/JamesRH_Lisa.pdf) - James Hamilton
+		- [Why Distributed Computing?](https://www.artima.com/weblogs/viewpost.jsp?thread=4247) - Jim Waldo
+		- [A Note on Distributed Computing](https://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.41.7628) - Waldo, Wollrath et al
+	- Latency
+		- [Latency - the new web performance bottleneck](https://www.igvita.com/2012/07/19/latency-the-new-web-performance-bottleneck/) - not at all new (see [Patterson](http://dl.acm.org/citation.cfm?id=1022596)), but noteworthy
+	- Google
+		- [Google File System](https://research.google/pubs/pub51/)
+		- [MapReduce](https://research.google/pubs/pub62/)
+		- [BigTable](https://research.google/pubs/pub27898/)
+		- [Spanner](https://research.google/pubs/pub39966/) - Google's scalable, multi-version, globally-distributed, and synchronously-replicated database.
+	- Consistency models
+		- [CAP Twelve Years Later: How the "Rules" Have Changed](https://www.infoq.com/articles/cap-twelve-years-later-how-the-rules-have-changed) - Eric Brewer expands on the original tradeoff description
+	- Theory
+		- [Rules of thumb in Data engineering](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/ms_tr_99_100_rules_of_thumb_in_data_engineering.pdf)
+		- [Distributed computing economics](https://arxiv.org/ftp/cs/papers/0403/0403019.pdf)
+	- Infrastructure
+		- [Principles of Robust Timing over the Internet](https://queue.acm.org/detail.cfm?id=1773943) - Managing clocks is essential for even basics such as debugging
+	- Storage
+		- [Consistent Hashing and Random Trees](https://www.akamai.com/us/en/multimedia/documents/technical-publication/consistent-hashing-and-random-trees-distributed-caching-protocols-for-relieving-hot-spots-on-the-world-wide-web-technical-publication.pdf)
+	- Paxos census
+		- [The Part-Time Parliament](https://lamport.azurewebsites.net/pubs/lamport-paxos.pdf) - Leslie Lamport
+		-   [Paxos Made Simple](https://lamport.azurewebsites.net/pubs/paxos-simple.pdf) - Leslie Lamport
+
+
 ### 🧅 Misc Topics
 These topics are deep dive into each individual components of the web technology stack. I would strongly recommend having a good understanding on a few of these especially Load balancers, CDN, DNS etc.
 
@@ -297,30 +327,3 @@ Most of the leadership questions are quite self explanatory for a senior and exp
 	- [the replay](https://leaddev.com/leaddev-live/so-youre-staff-now-what)
 - [Top recommended books for Engineering managers](https://www.managersclub.com/top-recommended-books-for-engineering-managers/)
 
-### 📰 Distributed systems papers:
-These are optional readings to understand how the distributed systems evolved over time. Not required for interview but for own development and understanding.
-
-- [A distributed system reading list - (papers to read) ](https://dancres.github.io/Pages/)
-	- Thought provokers
-		- [On Designing and Deploying Internet Scale Services](https://mvdirona.com/jrh/talksAndPapers/JamesRH_Lisa.pdf) - James Hamilton
-		- [Why Distributed Computing?](https://www.artima.com/weblogs/viewpost.jsp?thread=4247) - Jim Waldo
-		- [A Note on Distributed Computing](https://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.41.7628) - Waldo, Wollrath et al
-	- Latency
-		- [Latency - the new web performance bottleneck](https://www.igvita.com/2012/07/19/latency-the-new-web-performance-bottleneck/) - not at all new (see [Patterson](http://dl.acm.org/citation.cfm?id=1022596)), but noteworthy
-	- Google
-		- [Google File System](https://research.google/pubs/pub51/)
-		- [MapReduce](https://research.google/pubs/pub62/)
-		- [BigTable](https://research.google/pubs/pub27898/)
-		- [Spanner](https://research.google/pubs/pub39966/) - Google's scalable, multi-version, globally-distributed, and synchronously-replicated database.
-	- Consistency models
-		- [CAP Twelve Years Later: How the "Rules" Have Changed](https://www.infoq.com/articles/cap-twelve-years-later-how-the-rules-have-changed) - Eric Brewer expands on the original tradeoff description
-	- Theory
-		- [Rules of thumb in Data engineering](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/ms_tr_99_100_rules_of_thumb_in_data_engineering.pdf)
-		- [Distributed computing economics](https://arxiv.org/ftp/cs/papers/0403/0403019.pdf)
-	- Infrastructure
-		- [Principles of Robust Timing over the Internet](https://queue.acm.org/detail.cfm?id=1773943) - Managing clocks is essential for even basics such as debugging
-	- Storage
-		- [Consistent Hashing and Random Trees](https://www.akamai.com/us/en/multimedia/documents/technical-publication/consistent-hashing-and-random-trees-distributed-caching-protocols-for-relieving-hot-spots-on-the-world-wide-web-technical-publication.pdf)
-	- Paxos census
-		- [The Part-Time Parliament](https://lamport.azurewebsites.net/pubs/lamport-paxos.pdf) - Leslie Lamport
-		-   [Paxos Made Simple](https://lamport.azurewebsites.net/pubs/paxos-simple.pdf) - Leslie Lamport
